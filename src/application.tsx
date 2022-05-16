@@ -10,7 +10,7 @@ import { Shell } from "./shell";
 export const Application = () => {
     return (
         <Routes>
-            <Route element={ <Shell/> }>
+            <Route element={ ( <Shell/> ) }>
                 <Route element={ ( <Home/> ) } index/>
                 <Route element={ ( <Settings/> ) } path={ "settings" }/>
                 <Route element={ ( <Mobile/> ) } path={ "mobile-preview" }/>

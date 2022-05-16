@@ -4,9 +4,9 @@ import Styles from "./index.module.scss";
 
 import { Link } from "react-router-dom";
 
-const Component = ( { path = "/", prefix, title } ) => {
+export const Global = ( { reload = false, path = "/", prefix, title } ) => {
     return (
-        <Link to={ path } className={ Styles.global } reloadDocument={ true }>
+        <Link to={ path } className={ Styles.global } reloadDocument={ reload }>
             <span>
                 <span className={ Styles.prefix }>
                     {
@@ -21,6 +21,4 @@ const Component = ( { path = "/", prefix, title } ) => {
     );
 };
 
-export default Component;
-
-export { Component as Global };
+export default Global;

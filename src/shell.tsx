@@ -31,7 +31,7 @@ export const Shell = () => {
             </Container>
             <Footer/>
         </>
-    );
+);
 };
 
 export default Shell;

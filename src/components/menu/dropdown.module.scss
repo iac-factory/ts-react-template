@@ -1,0 +1,14 @@
+.dropdown {
+  background: white;
+  border-radius: 4px;
+  box-shadow: black;
+  margin-top: 8px;
+  max-height: calc(100vh - 300%);
+  overflow-y: auto;
+  padding: 12px 24px 0;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  width: 256px;
+  z-index: 1;
+}
