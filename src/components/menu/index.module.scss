@@ -1,9 +1,11 @@
 @use "../imports" as *;
 
+$font-size: 0.92865rem;
+
 .component {
   position: fixed;
 
-  font-size: 0.92865rem;
+  font-size: $font-size;
 
   top: 0;
   right: 0;
@@ -115,7 +117,7 @@
     cursor: pointer;
 
     span {
-      font-size: 0.92865rem;
+      font-size: $font-size;
       margin-top: auto;
       margin-bottom: auto;
     }
