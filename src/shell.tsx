@@ -1,10 +1,11 @@
 import { Outlet } from "react-router-dom";
 
-import { Page }   from "./pages";
+import { Page } from "./pages";
 
-import { Menu }      from "./components/menu";
-import { Container } from "./components/container";
-import { Footer }    from "./components/footer";
+import { Menu } from "./components";
+import { Footer } from "./components";
+import { Container } from "./components";
+
 
 /***
  * Shell - UI Application Wrapper around `<Outlet>`
@@ -19,7 +20,7 @@ import { Footer }    from "./components/footer";
  *
  * @constructor
  */
-const Shell = () => {
+export const Shell = () => {
     return (
         <>
             <Menu/>
@@ -34,5 +35,3 @@ const Shell = () => {
 };
 
 export default Shell;
-
-export { Shell };

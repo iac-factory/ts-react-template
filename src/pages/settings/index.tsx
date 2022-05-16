@@ -1,21 +1,13 @@
-import React, { Suspense, lazy as Split } from "react";
+import { lazy, Suspense } from "react";
 
-type Import = React.LazyExoticComponent<typeof import("./../../components/page").default>;
+export const Settings = ( properties?: { name?: string } ) => {
+    const Text = lazy( () => import("./../../components/text") );
 
-const Content: Import = Split( () => import("./../../components/page") );
-
-interface Properties {
-    name?: string;
-}
-
-const Page = ( properties: Properties = { name: "settings" } ) => {
     return (
         <Suspense fallback={ null }>
-            <Content name={properties.name}/>
+            <Text input={ properties.name ?? "Settings" } center={ true }/>
         </Suspense>
     );
 };
 
-export default Page;
-
-export { Page as Settings };
+export default Settings;

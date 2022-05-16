@@ -1,4 +1,5 @@
 import "./index.scss";
+
 import React from "react";
 
 import Styles from "./index.module.scss";
@@ -10,7 +11,7 @@ interface Properties {
     children?: JSX.Element | JSX.Element[];
 }
 
-const Component = ( properties: Properties ) => {
+export const Component = ( properties: Properties ) => {
     return (
         <div id={ Strings.normalize( properties.name, "Page", "Wrapper" ) } className={ Styles.component }>
             {
@@ -21,5 +22,3 @@ const Component = ( properties: Properties ) => {
 };
 
 export default Component;
-
-export { Component };

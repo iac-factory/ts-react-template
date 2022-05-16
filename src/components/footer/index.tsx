@@ -2,16 +2,14 @@ import "./index.scss";
 
 import Styles from "./index.module.scss";
 
-import { Text } from "../text";
+import { Text } from "..";
 
-const Component = () => {
+export const Footer = () => {
     return (
         <footer className={ Styles.component }>
-            <Text center={true} input={["©", new Date().getFullYear(), "Vusion"].join(" ")}/>
+            <Text center={ true } input={ [ "©", new Date().getFullYear(), "Vusion" ].join( " " ) }/>
         </footer>
-    )
+    );
 };
 
-export default Component;
-
-export { Component as Footer };
+export default Footer;

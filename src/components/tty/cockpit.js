@@ -22,7 +22,7 @@
  * Newer code should not include cockpit.css, but our examples still do
  */
 import "../lib/patternfly/patternfly-cockpit.scss";
-import "../lib/page.scss";
+import "../lib/template.scss";
 import "@patternfly/patternfly/components/Button/button.css";
 import "../lib/table.css";
 

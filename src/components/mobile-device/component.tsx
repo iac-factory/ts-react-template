@@ -1,10 +1,6 @@
 import "./index.scss";
 
-import Styles from "./index.module.scss";
-
-import Properties from "prop-types";
-
-const Component = ( { children } ) => {
+export const Mobile = ( { children } ) => {
     return (
         <section className={ "io-nexus-mobile-device-container" }>
             <div className="nexus-device iphone-x">
@@ -40,12 +36,4 @@ const Component = ( { children } ) => {
     );
 };
 
-Component.propTypes = {
-    children: Properties.node
-};
-
-Component.defaultProps = {};
-
-export { Component };
-
-export default Component;
+export default Mobile;

@@ -1,10 +1,10 @@
 import "./index.scss";
 
-import { Navigator } from "./navigation";
-import { Global } from "./title";
-import { Item } from "./item";
+import Navigator from "./navigation";
+import Global from "./title";
+import Item from "./item";
 
-const Component = () => {
+export const Menu = () => {
     return (
         <Navigator>
             <Global prefix={ "Vusion" } title={ "LLC" }/>
@@ -14,6 +14,4 @@ const Component = () => {
     );
 };
 
-export default Component;
-
-export { Component as Menu };
+export default Menu;

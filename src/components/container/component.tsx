@@ -1,19 +1,9 @@
-import "./index.scss";
-
 import Styles from "./index.module.scss";
 
-import Properties from "prop-types";
-
-const Component = ( { children } ) => {
+export const Container = ( { children } ) => {
     return (
-        <main className={ Styles.component }>
-            {
-                children
-            }
-        </main>
-    )
+        <main className={ Styles.component } children={ children }/>
+    );
 };
 
-export default Component;
-
-export { Component };
+export default Container;

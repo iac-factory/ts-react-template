@@ -454,7 +454,7 @@
 //    }
 //
 //    onBeforeUnload(event) {
-//        // Firefox requires this when the page is in an iframe
+//        // Firefox requires this when the template is in an iframe
 //        event.preventDefault();
 //
 //        // see "an almost cross-browser solution" at

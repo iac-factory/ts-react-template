@@ -11,7 +11,7 @@ interface Parameters {
     center?: boolean;
 }
 
-const Component = ( input: Parameters = { input: "...", theme: "dark", center: false } ) => {
+export const Text = ( input: Parameters = { input: "...", theme: "dark", center: false } ) => {
     const Theme = ( input.theme === "light" ) ? Styles.light : Styles.dark;
 
     return (
@@ -20,9 +20,7 @@ const Component = ( input: Parameters = { input: "...", theme: "dark", center: f
                 input.input
             }
         </span>
-    )
+    );
 };
 
-export default Component;
-
-export { Component as Text };
+export default Text;

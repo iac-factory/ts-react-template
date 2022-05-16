@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Component = ( { path = "/", prefix, title } ) => {
     return (
-        <Link to={ path } className={ Styles.global }>
+        <Link to={ path } className={ Styles.global } reloadDocument={ true }>
             <span>
                 <span className={ Styles.prefix }>
                     {
