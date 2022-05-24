@@ -1,4 +1,5 @@
-import { lazy, Suspense } from "react";
+import { lazy } from "react";
+import { Suspense } from "react";
 
 const Form = () => {
     return (
