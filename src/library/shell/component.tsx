@@ -1,10 +1,12 @@
 import { Outlet } from "react-router-dom";
 
-import { Page } from "./pages";
+import { Page } from "./page";
 
-import { Menu } from "./components";
-import { Footer } from "./components";
-import { Container } from "./components";
+import { Menu } from "./menu/index";
+import { Footer } from "./footer";
+import { Container } from "./container";
+
+import * as Grid from "../../components/grid";
 
 
 /***
@@ -24,14 +26,16 @@ export const Shell = () => {
     return (
         <>
             <Menu/>
-            <Container>
-                <Page>
-                    <Outlet/>
-                </Page>
-            </Container>
+            <Grid.CContainer>
+                <Container>
+                    <Page>
+                        <Outlet/>
+                    </Page>
+                </Container>
+            </Grid.CContainer>
             <Footer/>
         </>
-);
+    );
 };
 
 export default Shell;

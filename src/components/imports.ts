@@ -1,3 +1,3 @@
 export * from "./imports";
 
-export { Strings } from "../utilities";
+export { Strings } from "..";

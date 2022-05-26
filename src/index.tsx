@@ -1,58 +1,43 @@
 import "./index.scss";
 
-import React, { lazy as Import, Suspense } from "react";
+import React from "react";
 
-import { createRoot } from "react-dom/client";
-
-import { BrowserRouter as Router, Outlet } from "react-router-dom";
-
-import { Debug } from "./utilities/debug";
-
-import Context from "./context";
+import { Router } from "./library";
+import { Client } from "./library";
+import { Debug } from "./library";
 
 import { Application } from "./application";
 
-function Dashboard() {
-    return (
-        <div>
-            <h1>Dashboard</h1>
-
-            {/* This element will render either <DashboardMessages> when the URL is
-          "/messages", <DashboardTasks> at "/tasks", or null if it is "/"
-      */ }
-            <Outlet/>
-        </div>
-    );
-}
-
 const DOM = () => {
-    const theme = Context();
+    // const theme = Context();
 
     window.matchMedia( "(prefers-color-scheme: dark)" ).addEventListener( "change", ( event ) => {
         const Preference = event.matches ? "dark" : "light";
 
-        theme.theme = (
-            Preference === "dark"
-        ) ? "g100" : "light";
+        // theme.theme = (
+        //     Preference === "dark"
+        // ) ? "g100" : "light";
     } );
 
     return (
-        <React.StrictMode>
-            <Router window={ window }>
+        <React.StrictMode children={(
+            <Router.Browser>
                 <Application/>
-            </Router>
-        </React.StrictMode>
+            </Router.Browser>
+        )}/>
     );
 };
 
-( Debug === true ) && import("./utilities/vitals").then( ( $ ) => {
-    $.Vitals().finally(
+( Debug === true ) && import("./library").then( ( Module ) => {
+    Module.Debugger.Vitals().finally(
         () => {
             // ...
         }
     );
 } );
 
-const $ = createRoot( document.getElementById( "Application" ) );
+const Package = Client.initialize( document.getElementById( "Application" ) );
 
-$.render( <DOM/> );
+Package.render( <DOM/> );
+
+export * from "./library";

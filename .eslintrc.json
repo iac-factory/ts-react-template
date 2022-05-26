@@ -93,7 +93,7 @@
             }
         ],
         "object-property-newline": [
-            "error",
+            "off",
             {
                 "allowAllPropertiesOnSameLine": true
             }
@@ -117,7 +117,7 @@
             "consistent"
         ],
         "@typescript-eslint/member-delimiter-style": [
-            "error"
+            "off"
         ],
         "semi": [
             "error",

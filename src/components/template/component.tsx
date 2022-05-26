@@ -13,7 +13,7 @@ interface Properties {
 
 export const Component = ( properties: Properties ) => {
     return (
-        <div id={ Strings.normalize( properties.name, "Page", "Wrapper" ) } className={ Styles.component }>
+        <div id={ Strings.Normalize( properties.name, "Page", "Wrapper" ) } className={ Styles.component }>
             {
                 properties?.children ?? null
             }
