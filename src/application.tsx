@@ -1,19 +1,26 @@
 import { Router } from "./library";
+
 import { Shell } from "./library";
 
-import { Home } from "./pages";
-import { Mobile } from "./pages";
-import { Settings } from "./pages";
+const Interface = () => {
+    return (
+        <Authorization.Router>
+            <Shell/>
+        </Authorization.Router>
+    );
+};
 
 import { Login } from "./pages";
-
 import { Authorization } from "./authorization";
 
 export const Application = () => {
+    const Home = Router.Dynamic(async () => import("./pages/home"));
+    const Mobile = Router.Dynamic(async () => import("./pages/mobile-preview"));
+    const Settings = Router.Dynamic(async () => import("./pages/settings"));
     return (
         <Authorization.Provider>
             <Router.Routes>
-                <Router.Route element={ ( <Authorization.Router children={ ( <Shell/> ) }/> ) }>
+                <Router.Route element={ ( <Interface/> ) }>
                     <Router.Route element={ ( <Home/> ) } index/>
                     <Router.Route element={ ( <Settings/> ) } path={ "/settings" }/>
                     <Router.Route element={ ( <Mobile/> ) } path={ "/mobile-preview" }/>

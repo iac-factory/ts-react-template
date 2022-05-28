@@ -20,11 +20,11 @@ const DOM = () => {
     } );
 
     return (
-        <React.StrictMode children={(
+        <React.StrictMode children={ (
             <Router.Browser>
                 <Application/>
             </Router.Browser>
-        )}/>
+        ) }/>
     );
 };
 
@@ -36,8 +36,12 @@ const DOM = () => {
     );
 } );
 
-const Package = Client.initialize( document.getElementById( "Application" ) );
-
-Package.render( <DOM/> );
+Client.Interface.render(
+    <React.StrictMode>
+        <Router.Browser>
+            <Application/>
+        </Router.Browser>
+    </React.StrictMode>
+);
 
 export * from "./library";

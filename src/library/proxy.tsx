@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 
 import { Outlet } from "..";
 
-import { Text } from "./text";
+import { Text } from "..";
 
 /*** The Callable Instance of a Stateful Initializer */
 type Dispatch<Generic> = ( $: Generic ) => void;
@@ -27,7 +27,7 @@ const URL = process.env[ "REACT_APP_API_ENDPOINT" ] + [ "/utility/awaitable?dura
  * @constructor
  */
 
-export const Page = (children?) => {
+export const Proxy = ( children?) => {
     const Data: Stateful = useState( null );
     const Throw: Throwable = useState( false );
     const Loading: Loadable = useState( true );
@@ -86,10 +86,10 @@ export const Page = (children?) => {
     }, [] );
 
     const Awaitable = () => ( Loading[ 0 ] ) ? ( <Text input={ "Loading ..." }/> ) : null;
-    const Content = () => ( !Loading[ 0 ] && !Throw[ 0 ] ) ? ( <Outlet/> ) : null;
+    const Content = () => ( !Loading[ 0 ] && !Throw[ 0 ] ) ? ( <Suspense fallback={ (<Text input={ "Loading ..." }/>) }><Outlet/></Suspense> ) : null;
     const Trace = () => ( Throw[ 0 ] && !Loading[ 0 ] ) ? (<Text input={"[Error]" + " " + Throw[0]}/>) : null;
 
     return ( Loading[ 0 ] === true ) ? ( <Awaitable/> ) : ( ( Throw[ 0 ] ) ? ( <Trace/> ) : ( <Content/> ) );
 };
 
-export default Page;
+export default Proxy;

@@ -1,8 +1,10 @@
+@forward "variables";
 @forward "spacing";
 @forward "colors";
 @forward "fonts";
 
 @use "globals" as *;
+@use "variables" as *;
 
 @use "spacing" as *;
 @use "colors" as *;
@@ -35,7 +37,7 @@
     --global-black-hover: #{$black-hover};
     --global-black-layer: #{$black-layer};
     --global-white: #{$white};
-    --global-white-100: #{$white-0};
+    --global-white-100: #{$white-100};
     --global-white-hover: #{$white-hover};
     --global-blue-10: #{$blue-10};
     --global-blue-20: #{$blue-20};
@@ -267,11 +269,12 @@
     --global-yellow-80-hover: #{$yellow-80-hover};
     --global-yellow-90-hover: #{$yellow-90-hover};
     --global-yellow-100-hover: #{$yellow-100-hover};
+
     --global-background: #{$background};
     --global-background-inverse: #{$background-inverse};
     --global-background-brand: #{$background-brand};
     --global-background-active: #{$background-active};
-    --global-background-focus: #{$background-focus};
+    // --global-background-focus: #{$background-focus};
     --global-background-hover: #{$background-hover};
     --global-background-inverse-hover: #{$background-inverse-hover};
     --global-background-selected: #{$background-selected};
@@ -291,7 +294,7 @@
     --global-layer-hover-03: #{$layer-hover-03};
     --global-layer-selected-03: #{$layer-selected-03};
     --global-layer-selected-hover-03: #{$layer-selected-hover-03};
-    --global-layer-disabled: #{$layer-disabled};
+    // --global-layer-disabled: #{$layer-disabled};
     --global-layer-selected-inverse: #{$layer-selected-inverse};
     --global-layer-selected-disabled: #{$layer-selected-disabled};
     --global-layer-accent-01: #{$layer-accent-01};
@@ -303,13 +306,16 @@
     --global-layer-accent-03: #{$layer-accent-03};
     --global-layer-accent-active-03: #{$layer-accent-active-03};
     --global-layer-accent-hover-03: #{$layer-accent-hover-03};
+    --global-field: #{$field-01};
     --global-field-01: #{$field-01};
     --global-field-hover-01: #{$field-hover-01};
     --global-field-02: #{$field-02};
     --global-field-hover-02: #{$field-hover-02};
     --global-field-03: #{$field-03};
     --global-field-hover-03: #{$field-hover-03};
-    --global-field-disabled: #{$field-disabled};
+    --global-field-active-hover-01: #{$field-active-hover-01};
+
+    // --global-field-disabled: #{$field-disabled};
     --global-border-subtle-00: #{$border-subtle-00};
     --global-border-subtle-01: #{$border-subtle-01};
     --global-border-subtle-selected-01: #{$border-subtle-selected-01};

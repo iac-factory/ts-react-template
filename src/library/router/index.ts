@@ -1,3 +1,5 @@
+import React from "react";
+
 /*** @private */
 import * as Routing from "react-router-dom";
 
@@ -6,6 +8,10 @@ import * as Historical from "history";
 import Redirect from "./redirect";
 
 export module Router {
+    export const Dynamic = React.lazy;
+    export const Suspense = React.Suspense;
+    export const Fragment = React.Fragment;
+
     /*** @type {import("react-router-dom").Browser} */
     export const Browser = Routing.BrowserRouter;
 

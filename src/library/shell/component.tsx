@@ -1,8 +1,10 @@
 import { Outlet } from "react-router-dom";
 
-import { Page } from "./page";
+import { Suspense } from "react";
 
-import { Menu } from "./menu/index";
+import { Proxy } from "..";
+
+import { Menu } from "./menu";
 import { Footer } from "./footer";
 import { Container } from "./container";
 
@@ -19,18 +21,28 @@ import { Container } from "./container";
  *
  * @constructor
  */
-export const Shell = () => {
+export const Shell = ( context? ) => {
+    console.log(context);
     return (
-        <>
+        <Suspense fallback={"Loading ..."}>
             <Menu/>
             <Container>
-                <Page>
-                    <Outlet/>
-                </Page>
+                <Proxy>
+                    <Outlet context={
+                        (
+                            <Suspense fallback={"Loading ..."}>
+                                {
+                                    context
+                                }
+                            </Suspense>
+                        )
+                    }/>
+                </Proxy>
             </Container>
             <Footer/>
-        </>
+        </Suspense>
     );
 };
 
 export default Shell;
+

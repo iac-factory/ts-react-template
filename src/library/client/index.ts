@@ -1,8 +1,10 @@
 import * as DOM from "react-dom/client";
 
 export module Client {
-    export const initialize = DOM.createRoot;
-    export const Hydrate = DOM.hydrateRoot;
+    const initialize = DOM.createRoot;
+    const Hydrate = DOM.hydrateRoot;
+
+    export const Interface = initialize( document.getElementById( "Application" ) );
 }
 
 export default Client;
