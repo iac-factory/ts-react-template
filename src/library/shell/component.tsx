@@ -6,9 +6,6 @@ import { Menu } from "./menu/index";
 import { Footer } from "./footer";
 import { Container } from "./container";
 
-import * as Grid from "../../components/grid";
-
-
 /***
  * Shell - UI Application Wrapper around `<Outlet>`
  *
@@ -26,13 +23,11 @@ export const Shell = () => {
     return (
         <>
             <Menu/>
-            <Grid.CContainer>
-                <Container>
-                    <Page>
-                        <Outlet/>
-                    </Page>
-                </Container>
-            </Grid.CContainer>
+            <Container>
+                <Page>
+                    <Outlet/>
+                </Page>
+            </Container>
             <Footer/>
         </>
     );

@@ -1,17 +1,15 @@
 const Application = (async () => {
     console.info("[Log] (HTML-Document)", "Establishing IO-Application Callable.");
 
-    async function $() {
-        const IO = new HTMLElement();
+    void await (async () => {
+        const IO = new Proxy(HTMLElement, Object.create({}));
 
         IO.disabledFeatures = [ "shadow" ];
 
-        window.customElements.define(IO.name, IO.constructor(), { extends: "div" });
-    }
+        window.customElements.define("io-application", IO);
+    })();
 
     console.info("[Log] (HTML-Document)", "Callable was Initialized. Instantiating Tag Definition.");
-
-    await $();
 
     console.info("[Log] (HTML-Document)", "Successfully Established IO-Application HTML Element.");
 })();
