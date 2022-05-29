@@ -7,10 +7,10 @@
   flex-direction: column;
 
   /* @todo -- declare global variable */
-  font-size: var(--cds-body-compact-01-font-size, .875rem);
-  font-weight: var(--cds-body-compact-01-font-weight, 400);
-  letter-spacing: var(--cds-body-compact-01-letter-spacing, 0.16px);
-  line-height: var(--cds-body-compact-01-line-height, 1.28572);
+  font-size: var(--global-body-compact-01-font-size, .875rem);
+  font-weight: var(--global-body-compact-01-font-weight, 400);
+  letter-spacing: var(--global-body-compact-01-letter-spacing, 0.16px);
+  line-height: var(--global-body-compact-01-line-height, 1.28572);
 
   &:not(:first-of-type) {
     margin-top: 0.5rem;
@@ -71,6 +71,45 @@
   line-height: var(--global-body-compact-01-line-height, 1.28572);
   font-size: var(--global-body-compact-01-font-size, 1.0rem);
   font-weight: var(--global-body-compact-01-font-weight, 400);
+
+  &:active, &:focus {
+    outline: 2px solid var(--global-focus, #0f62fe);
+    outline-offset: -2px;
+  }
+
+  &:hover {
+    background-color: var(--global-field-hover-01);
+  }
+
+  &:active:hover, &:focus:hover { /* ... */ }
+
+  &:active:focus:hover {
+    background-color: var(--global-field-active-hover-01);
+  }
+}
+
+.area {
+  background-color: var(--global-field);
+  border: none;
+  color: var(--global-text-primary, #161616);
+  font-family: inherit;
+  height: 100%;
+  min-height: 2.5rem;
+  min-width: 10rem;
+  outline: 2px solid #0000;
+  outline-offset: -2px;
+  padding: 0.6875rem 1rem;
+  resize: vertical;
+  transition: background-color 70ms cubic-bezier(.2,0,.38,.9),outline 70ms cubic-bezier(.2,0,.38,.9);
+  width: 100%;
+
+  /* @todo -- declare global variable */
+  // border-bottom: 1px solid var(--global-border-strong);
+  border-bottom: 1px solid var(--global-white-100);
+  font-size: var(--global-body-01-font-size, 0.875rem);
+  font-weight: var(--global-body-01-font-weight, 400);
+  letter-spacing: var(--global-body-01-letter-spacing, 0.16px);
+  line-height: var(--global-body-01-line-height, 1.42857);
 
   &:active, &:focus {
     outline: 2px solid var(--global-focus, #0f62fe);
