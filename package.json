@@ -1,6 +1,6 @@
 {
     "name": "@cloud-technology/ts-config-template",
-    "version": "0.1.116",
+    "version": "0.1.117",
     "type": "commonjs",
     "scripts": {
         "start": "node scripts/start.js",

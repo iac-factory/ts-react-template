@@ -4,10 +4,19 @@
 - [documentation](https://reactjsexample.com/docit-a-simple-and-rapid-react-documentation/)
    [Webauthn](https://github.com/IamSAL/webauthn?ref=reactjsexample.com)
 - [READMEs](https://reactjsexample.com/readme-generator-a-fully-featured-editor-with-drag-and-drop-interface-to-easily-build-readmes/)
-## Build Testing ##
+
+## Release Tagging ##
+
+**Example**
 
 ```bash
-serve --single --listen 12500 ./build
+git tag --annotate "0.1.117" --message "Basic Form + Proof of Concept Example"
+```
+
+### Pushing Tags to VCS ###
+
+```bash
+git push --follow-tags
 ```
 
 ## Available Scripts
