@@ -1,0 +1,32 @@
+.root {
+  display: flex;
+  align-items: center;
+  width: 25em;
+}
+
+.linkContainer {
+  display: flex;
+  padding: 2px 0;
+  align-items: center;
+  composes: g-type-code from global;
+  line-height: 28px;
+  margin-right: 8px;
+}
+
+.repoLabel {
+  margin-left: 8px;
+  color: var(--gray-2);
+
+  &[data-not-used='true'] {
+    color: var(--gray-3);
+  }
+
+  &[data-hovered='true'] {
+    color: var(--brand);
+  }
+}
+
+.error {
+  margin-left: 8px;
+  color: var(--danger);
+}

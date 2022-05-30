@@ -21,11 +21,19 @@
   letter-spacing: var(--global-body-compact-01-letter-spacing, 0.16px);
   line-height: var(--global-body-compact-01-line-height, 1.28572);
 
-  margin: 0.5rem;
+  //margin: 0.5rem;
+
+  &:first-of-type {
+    margin-right: 0.5rem;
+  }
 
   &:focus {
     outline: 2px solid var(--global-focus, #0f62fe);
     outline-offset: -2px;
+  }
+
+  &:not(:first-of-type) {
+    margin-left: 0.5rem;
   }
 }
 

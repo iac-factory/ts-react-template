@@ -156,7 +156,7 @@ import { Container, Row, Col } from 'react-grid-system';
 export const Form = () => {
     return (
         <Suspense fallback={ <span> Loading ... </span> }>
-            <Container fluid>
+            <Container lg={true} md={true} sm={true}>
                 <Row justify="start">
                     <Col>
                         <Input label={ "Field-1" } name={ "field-1" } autofill={ false } help={ { text: "Optional Help Context (1)" } } focus={ true }/>
@@ -165,9 +165,16 @@ export const Form = () => {
                         <Input label={ "Field-2" } name={ "field-2" } autofill={ false } help={ { text: "Optional Help Context (2)" } } focus={ false }/>
                     </Col>
                 </Row>
+                <Row justify="start">
+                    <Col lg={16}>
+                        <Input label={ "Username" } name={ "username" } help={ { text: "Optional Help Context (3)" } } focus={false}/>
+                    </Col>
+                    <Col lg={16}>
+                        <Password label={ "Password" } name={ "password" } help={ { text: "Optional Help Context (4)" } }/>
+                    </Col>
+                </Row>
+                <Area label={ "Field-3" } name={ "field-3" } autofill={ false } help={ { text: "Optional Help Context (5)" } } focus={ false }/>
             </Container>
-            <Password label={ "Password-Field" } name={ "password" } help={ { text: "Optional Help Context (3)" } }/>
-            <Area label={ "Field-3" } name={ "field-3" } autofill={ false } help={ { text: "Optional Help Context (4)" } } focus={ false }/>
         </Suspense>
     );
 };

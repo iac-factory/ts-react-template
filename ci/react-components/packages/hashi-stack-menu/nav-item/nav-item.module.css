@@ -1,0 +1,55 @@
+.navItem {
+  display: flex;
+  flex-direction: column;
+  color: var(--brand);
+  list-style: none;
+  position: relative;
+  white-space: nowrap;
+  & + .navItem {
+    margin-left: 24px;
+  }
+}
+
+.buttonReset {
+  background-color: transparent;
+  border-style: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.link {
+  composes: g-type-body-small-strong from global;
+  position: relative;
+  color: var(--gray-3);
+  padding: 1rem 0;
+  transition: color 0.1s;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    color: var(--gray-1);
+  }
+
+  & .dropdownCarat {
+    margin: 4px 0 0 8px;
+    transition: 0.3s transform;
+  }
+}
+
+.buttonActive {
+  color: var(--gray-1);
+  & .dropdownCarat {
+    transform: rotate(-180deg);
+  }
+}
+
+.visuallyHidden {
+  /* .visuallyHidden courtesy of https://www.a11yproject.com/posts/2013-01-11-how-to-hide-content/ */
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}

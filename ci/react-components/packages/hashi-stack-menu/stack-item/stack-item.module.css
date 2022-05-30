@@ -1,0 +1,63 @@
+.stackItem {
+  list-style: none;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.25rem;
+
+  & svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.itemLink {
+  display: flex;
+  justify-content: space-between;
+  color: var(--gray-1);
+  align-items: center;
+  position: relative;
+}
+
+.itemName {
+  composes: g-type-body-small-strong from global;
+}
+.productName {
+  composes: itemName;
+  text-transform: capitalize;
+}
+
+.productIcon {
+  margin-right: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.badge {
+  position: absolute;
+  text-align: center;
+  left: calc(100% + 10px);
+  top: 4px;
+  padding: 1.5px 4px 1.5px 6px;
+  border-radius: 2px;
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 10px;
+  line-height: 1.272727273em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: var(--white);
+  color: var(--gray-3);
+  border: 1px solid var(--gray-4);
+}
+
+.badgeTypeNew {
+  composes: badge;
+  background: var(--gray-2);
+  color: var(--white);
+  border-color: var(--gray-2);
+}

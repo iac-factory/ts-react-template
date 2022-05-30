@@ -2,22 +2,25 @@ import { Router } from "../..";
 import { Strings } from "../..";
 
 import styles from "./index.module.scss";
+
 export module Component {
     export const Item = ( input: Input ) => {
-        const Path = ( input.paths ) ? Strings.Formalize(input.title, (typeof input.paths !== "string") ? input.paths.join() : input.paths) : Strings.Formalize(input.title);
+        const Path = ( input.paths ) ? Strings.Formalize( input.title, ( typeof input.paths !== "string" ) ? input.paths.join() : input.paths ) : Strings.Formalize( input.title );
 
         return (
-            <Router.Active reloadDocument={ input.reload ?? false } to={ (input?.overwrite ) ? input.overwrite : Path } className={ styles.item } style={({ isActive }) =>
-                (isActive) ? {
-                    color: "whitesmoke"
-                } : undefined
-            }>
-            <span>
-                {
-                    input.title
-                }
-            </span>
-            </Router.Active>
+            <li>
+                <Router.Active
+                    reloadDocument={ input.reload ?? false }
+                    to={ ( input?.overwrite ) ? input.overwrite : Path }
+                    className={ styles.item }
+                    style={ ( { isActive } ) => {
+                        return ( isActive ) ? {
+                            color: "whitesmoke"
+                        } : undefined;
+                    } }>
+                    <span>{ input.title }</span>
+                </Router.Active>
+            </li>
         );
     };
 
