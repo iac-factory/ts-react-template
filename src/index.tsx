@@ -8,6 +8,8 @@ import { Debug } from "./library";
 
 import { Application } from "./application";
 
+import { createRoot } from "react-dom/client";
+
 const DOM = () => {
     // const theme = Context();
 
@@ -36,12 +38,10 @@ const DOM = () => {
     );
 } );
 
-Client.Interface.render(
-    <React.StrictMode>
-        <Router.Browser>
-            <Application/>
-        </Router.Browser>
-    </React.StrictMode>
-);
+const container = document.getElementById("Application");
+
+const root = createRoot(container!);
+
+root.render(<DOM/>);
 
 export * from "./library";

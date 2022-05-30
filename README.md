@@ -1,10 +1,10 @@
-- [Sidebars](https://github.com/davidde/sidebars)
-- [Sidenav](https://trendmicro-frontend.github.io/react-sidenav/)
-- [Sidebar](https://paulusschoutsen.nl/react-sidebar/example/index.html)
-- [documentation](https://reactjsexample.com/docit-a-simple-and-rapid-react-documentation/)
-   [Webauthn](https://github.com/IamSAL/webauthn?ref=reactjsexample.com)
-- [READMEs](https://reactjsexample.com/readme-generator-a-fully-featured-editor-with-drag-and-drop-interface-to-easily-build-readmes/)
-
+- [ Tabs ](https://react-headless-tabs.pierluc.io/#documentation)
+- [ Sidebars ](https://github.com/davidde/sidebars)
+- [Drowndown Menu](https://codepen.io/remilaudanski/pen/gbBGyN)
+- [Login Form](https://codepen.io/fghty/pen/PojKNEG)
+- [500 Error](https://codepen.io/quinlo/pen/aajEyb)
+- [Skeleton Loading](https://freefrontend.com/css-skeleton-loadings/)
+- 
 ## Release Tagging ##
 
 **Example**

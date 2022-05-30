@@ -1,6 +1,4 @@
 .item {
-  transition:all 500ms ease-in-out;
-
   align-items: flex-start;
   display: flex;
   flex: 1 1 auto;
@@ -62,6 +60,8 @@
   outline-offset: -2px;
   padding: 0 1rem;
   width: 100%;
+
+  transition: background-color 70ms cubic-bezier(.2,0,.38,.9),outline 70ms cubic-bezier(.2,0,.38,.9);
 
   /* @todo -- declare global variable */
   border-bottom: 1px solid var(--global-white-100);

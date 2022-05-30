@@ -44,6 +44,7 @@
     "exclude": [
         "*/**/node_modules",
         "*/**/unit-testing",
-        "*/**/__tests__"
+        "*/**/__tests__",
+        "ci"
     ]
 }

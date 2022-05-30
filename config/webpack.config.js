@@ -19,9 +19,9 @@ const modules = require("./modules");
 const getClientEnvironment = require("./env");
 const ModuleNotFoundPlugin = require("react-dev-utils/ModuleNotFoundPlugin");
 const ForkTsCheckerWebpackPlugin =
-          process.env.TSC_COMPILE_ON_ERROR === "true"
-              ? require("react-dev-utils/ForkTsCheckerWarningWebpackPlugin")
-              : require("react-dev-utils/ForkTsCheckerWebpackPlugin");
+    process.env.TSC_COMPILE_ON_ERROR === "true"
+        ? require("react-dev-utils/ForkTsCheckerWarningWebpackPlugin")
+        : require("react-dev-utils/ForkTsCheckerWebpackPlugin");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
 
 const createEnvironmentHash = require("./webpack/persistentCache/createEnvironmentHash");
@@ -70,18 +70,18 @@ const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
-const hasJsxRuntime = ( () => {
-    if ( process.env.DISABLE_NEW_JSX_TRANSFORM === "true" ) {
+const hasJsxRuntime = (() => {
+    if (process.env.DISABLE_NEW_JSX_TRANSFORM === "true") {
         return false;
     }
 
     try {
         require.resolve("react/jsx-runtime");
         return true;
-    } catch ( e ) {
+    } catch (e) {
         return false;
     }
-} )();
+})();
 
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
@@ -92,7 +92,7 @@ module.exports = function (webpackEnv) {
     // Variable used for enabling profiling in Production
     // passed into alias object. Uses a flag if passed into the build command
     const isEnvProductionProfile =
-              isEnvProduction && process.argv.includes("--profile");
+        isEnvProduction && process.argv.includes("--profile");
 
     // We will provide `paths.publicUrlOrPath` to our app
     // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
@@ -164,7 +164,7 @@ module.exports = function (webpackEnv) {
                 }
             }
         ].filter(Boolean);
-        if ( preProcessor ) {
+        if (preProcessor) {
             loaders.push(
                 {
                     loader: require.resolve("resolve-url-loader"),
@@ -223,7 +223,7 @@ module.exports = function (webpackEnv) {
                         .relative(paths.appSrc, info.absoluteResourcePath)
                         .replace(/\\/g, "/")
                 : isEnvDevelopment &&
-                ( info => path.resolve(info.absoluteResourcePath).replace(/\\/g, "/") )
+                (info => path.resolve(info.absoluteResourcePath).replace(/\\/g, "/"))
         },
         cache: {
             type: "filesystem",
@@ -303,18 +303,18 @@ module.exports = function (webpackEnv) {
             // `web` extension prefixes have been added for better support
             // for React Native Web.
             extensions: paths.moduleFileExtensions
-                .map(ext => `.${ ext }`)
+                .map(ext => `.${ext}`)
                 .filter(ext => useTypeScript || !ext.includes("ts")),
             alias: {
                 // Support React Native Web
                 // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
                 "react-native": "react-native-web",
                 // Allows for better profiling with ReactDevTools
-                ...( isEnvProductionProfile && {
+                ...(isEnvProductionProfile && {
                     "react-dom$": "react-dom/profiling",
                     "scheduler/tracing": "scheduler/tracing-profiling"
-                } ),
-                ...( modules.webpackAliases || {} )
+                }),
+                ...(modules.webpackAliases || {})
             },
             plugins: [
                 // Prevents users from importing files from outside of src/ (or node_modules/).
@@ -335,6 +335,16 @@ module.exports = function (webpackEnv) {
         module: {
             strictExportPresence: true,
             rules: [
+                {
+                    test: /\.mdx?$/,
+                    use: [
+                        {
+                            loader: '@mdx-js/loader',
+                            /** @type {import('@mdx-js/loader').Options} */
+                            options: {}
+                        }
+                    ]
+                },
                 // Handle node_modules packages that contain sourcemaps
                 shouldUseSourceMap && {
                     enforce: "pre",
@@ -635,7 +645,7 @@ module.exports = function (webpackEnv) {
                 publicPath: paths.publicUrlOrPath,
                 generate: (seed, files, entrypoints) => {
                     const manifestFiles = files.reduce((manifest, file) => {
-                        manifest[ file.name ] = file.path;
+                        manifest[file.name] = file.path;
                         return manifest;
                     }, seed);
                     const entrypointFiles = entrypoints.main.filter(
@@ -724,7 +734,7 @@ module.exports = function (webpackEnv) {
                 extensions: [ "js", "mjs", "jsx", "ts", "tsx" ],
                 formatter: require.resolve("react-dev-utils/eslintFormatter"),
                 eslintPath: require.resolve("eslint"),
-                failOnError: !( isEnvDevelopment && emitErrorsAsWarnings ),
+                failOnError: !(isEnvDevelopment && emitErrorsAsWarnings),
                 context: paths.appSrc,
                 cache: true,
                 cacheLocation: path.resolve(
@@ -737,9 +747,9 @@ module.exports = function (webpackEnv) {
                 baseConfig: {
                     extends: [ require.resolve("eslint-config-react-app/base") ],
                     rules: {
-                        ...( !hasJsxRuntime && {
+                        ...(!hasJsxRuntime && {
                             "react/react-in-jsx-scope": "error"
-                        } )
+                        })
                     }
                 }
             })

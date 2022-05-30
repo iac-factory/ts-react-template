@@ -1,0 +1,167 @@
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+
+  text-align: start;
+}
+
+thead {
+  background-color: var(--global-layer-accent-01);
+  font-size: var(--global-heading-compact-01-font-size, 0.875rem);
+  font-weight: var(--global-heading-compact-01-font-weight, 600);
+  letter-spacing: var(--global-heading-compact-01-letter-spacing, 0.16px);
+  line-height: var(--global-heading-compact-01-line-height, 1.28572);
+}
+
+tbody {
+  transition: background-color 70ms cubic-bezier(0,0,.38,.9);
+  background-color: var(--global-layer);
+  font-size: var(--global-body-compact-01-font-size,.875rem);
+  font-weight: var(--global-body-compact-01-font-weight,400);
+  letter-spacing: var(--global-body-compact-01-letter-spacing,.16px);
+  line-height: var(--global-body-compact-01-line-height,1.28572);
+  width: 100%;
+}
+
+tr {
+  border: 1px solid white;
+  height: 3rem;
+  width: 100%;
+}
+
+thead {
+  padding-left: 1rem;
+  padding-right: 0.25rem;
+  width: 2.5rem;
+}
+
+th {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  min-width: 0;
+
+  text-align: start;
+  border: 1px solid white;
+}
+
+td {
+  border: 1px solid white;
+
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  min-width: 0;
+}
+
+td > .table-column-checkbox {
+  min-width: 0;
+  padding-right: 0.25rem;
+}
+
+.table-inline-checkbox {
+  position: relative;
+}
+
+.table-checkbox {
+  clip: rect(0,0,0,0);
+  border: 0;
+  height: 1px;
+  left: 0.7rem;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  top: 1.25rem;
+  visibility: inherit;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.table-column-checkbox-label {
+  cursor: pointer;
+  display: flex;
+  font-size: var(--global-body-compact-01-font-size,.875rem);
+  font-weight: var(--global-body-compact-01-font-weight,400);
+  letter-spacing: var(--global-body-compact-01-letter-spacing,.16px);
+  line-height: var(--global-body-compact-01-line-height,1.28572);
+  min-height: 1.5rem;
+  padding-left: 1.25rem;
+  padding-top: 0.1875rem;
+  position: relative;
+  -webkit-user-select: none;
+  user-select: none;
+
+  &:before {
+    background-color: initial;
+    border: 1px solid var(--global-icon-primary,#161616);
+    border-radius: 1px;
+    content: "";
+    height: 1rem;
+    left: 0;
+    margin: 0.125rem 0.125rem 0.125rem 0.1875rem;
+    position: absolute;
+    top: 0.125rem;
+    width: 1rem;
+  }
+
+  &:after {
+    background: none;
+    border-bottom: 2px solid var(--global-icon-inverse,#fff);
+    border-left: 2px solid var(--global-icon-inverse,#fff);
+    content: "";
+    height: 0.3125rem;
+    left: 0.4375rem;
+    margin-top: -0.1875rem;
+    position: absolute;
+    top: 0.5rem;
+    transform: scale(0) rotate(-45deg);
+    transform-origin: bottom right;
+    width: 0.5625rem;
+  }
+}
+
+.table-column-indeterminate-checkbox-label-selected {
+  cursor: pointer;
+  display: flex;
+  font-size: var(--global-body-compact-01-font-size,.875rem);
+  font-weight: var(--global-body-compact-01-font-weight,400);
+  letter-spacing: var(--global-body-compact-01-letter-spacing,.16px);
+  line-height: var(--global-body-compact-01-line-height,1.28572);
+  min-height: 1.5rem;
+  padding-left: 1.25rem;
+  padding-top: 0.1875rem;
+  position: relative;
+  -webkit-user-select: none;
+  user-select: none;
+
+  &:before {
+    background-color: initial;
+    border: 1px solid var(--global-icon-primary,#161616);
+    border-radius: 1px;
+    content: "";
+    height: 1rem;
+    left: 0;
+    margin: 0.125rem 0.125rem 0.125rem 0.1875rem;
+    position: absolute;
+    top: 0.125rem;
+    width: 1rem;
+  }
+
+  &:after {
+    background: none;
+    border-bottom: 2px solid var(--global-icon-inverse,#fff);
+    border-left: 2px solid var(--global-icon-inverse,#fff);
+    content: "";
+    height: 0.3125rem;
+    left: 0.4375rem;
+    margin-top: -0.1875rem;
+    position: absolute;
+    transform-origin: bottom right;
+
+    border-bottom: 2px solid var(--cds-icon-inverse,#fff);
+    border-left: 0 solid var(--cds-icon-inverse,#fff);
+    top: 0.625rem;
+    transform: scale(1) rotate(0deg);
+    width: 0.625rem;
+  }
+}

@@ -17,10 +17,7 @@ export const Application = () => {
     const Home = Router.Dynamic(async () => import("./pages/home"));
     const Mobile = Router.Dynamic(async () => import("./pages/mobile-preview"));
     const Settings = Router.Dynamic(async () => import("./pages/settings"));
-    const Form = {
-        Default: Router.Dynamic(async () => import("./pages/form")),
-        Example: Router.Dynamic(async () => import("./pages/form/example"))
-    };
+    const Form = Router.Dynamic(async () => import("./pages/form"));
 
     return (
         <Authorization.Provider>
@@ -29,9 +26,7 @@ export const Application = () => {
                     <Router.Route element={ ( <Home/> ) } index/>
                     <Router.Route element={ ( <Settings/> ) } path={ "/settings" }/>
                     <Router.Route element={ ( <Mobile/> ) } path={ "/mobile-preview" }/>
-                    <Router.Route element={ ( <Form.Example/> ) } path={ "/forms" }>
-                        <Router.Route element={ ( <Form.Example/> ) } path={ "/forms/example" }/>
-                    </Router.Route>
+                    <Router.Route element={ ( <Form/> ) } path={ "/forms" }/>
                     <Router.Route path={ "*" } element={ ( <Router.Redirection.Home/> ) }/>
                 </Router.Route>
                 <Router.Route element={ <Login/> } path="/login"/>

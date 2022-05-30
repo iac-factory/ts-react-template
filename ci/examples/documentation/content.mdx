@@ -1,0 +1,33 @@
+# The `npm` Configuration Object #
+
+## Overview ##
+
+A *configuration* object can be used to set configuration parameters used in package scripts that persist across upgrades.
+
+Settings are found in the root of any given project's `package.json`.
+
+`package.json`
+
+```json
+{
+    "name": "foo",
+    "config": {
+        "port": "8080"
+    }
+}
+```
+
+Programmatically, the *configuration* object can then be referenced.
+
+`index.js`
+
+```js
+import HTTP from "http";
+...
+
+HTTP.createServer(...).listen(process.env.npm_package_config_port)
+```
+
+## References ##
+
+- [**Official `npm` Documentation**](https://docs.npmjs.com/cli/v6/using-npm/config)

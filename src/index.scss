@@ -43,3 +43,97 @@ html {
         }
     }
 }
+
+/* -------------------
+ --> Functional Mixins
+*//*-----------------*/
+
+// @Unselectable, Highlightable Element(s)
+
+@mixin disable-selection { /*** Supported by Chrome, Edge, Opera and Firefox */
+    // - [] @Task: Test on Mobile
+    // >>> -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    // - [] @Task: Test on Mobile
+    // >>> -webkit-touch-callout: none; /* iOS Safari */
+
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select:  none; /* Konqueror HTML */
+    -moz-user-select:    none; /* Old versions of Firefox */
+    -ms-user-select:     none; /* Internet Explorer/Edge */
+
+    user-select:         none;
+}
+
+@mixin enable-selection-auto { /*** Supported by Chrome, Edge, Opera and Firefox */
+    // - [] @Task: Test on Mobile
+    // >>> -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    // - [] @Task: Test on Mobile
+    // >>> -webkit-touch-callout: none; /* iOS Safari */
+
+    -webkit-user-select: auto; /* Safari */
+    -khtml-user-select:  auto; /* Konqueror HTML */
+    -moz-user-select:    auto; /* Old versions of Firefox */
+    -ms-user-select:     auto; /* Internet Explorer/Edge */
+
+    user-select:         auto;
+}
+
+@mixin enable-selection-all { /*** Supported by Chrome, Edge, Opera and Firefox */
+    // - [] @Task: Test on Mobile
+    // >>> -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    // - [] @Task: Test on Mobile
+    // >>> -webkit-touch-callout: none; /* iOS Safari */
+
+    -webkit-user-select: all; /* Safari */
+    -khtml-user-select:  all; /* Konqueror HTML */
+    -moz-user-select:    all; /* Old versions of Firefox */
+    -ms-user-select:     all; /* Internet Explorer/Edge */
+
+    user-select:         all;
+}
+
+/* -------------------
+ --> Utility Selectors
+*//*-----------------*/
+
+.no-select {
+    @include disable-selection();
+}
+
+.unselectable {
+    @include disable-selection();
+}
+
+.no-highlight {
+    @include disable-selection();
+}
+
+.select-all {
+    @include enable-selection-all();
+}
+
+.enable-select-all {
+    @include enable-selection-all();
+}
+
+/*
+    @Task -- Theme
+    @media (prefers-color-scheme: dark) {
+        [data-color-mode=auto][data-dark-theme=dark] {
+            --color-example-1: red;
+            --color-example-2: red;
+            --color-example-3: red;
+        }
+    }
+
+    @media (prefers-color-scheme: dark) {
+        [data-color-mode=auto][data-dark-theme=dark] {
+            --color-example-1: red;
+            --color-example-2: red;
+            --color-example-3: red;
+        }
+    }
+*/

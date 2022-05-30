@@ -38,18 +38,18 @@ const Input = ( properties: Input ) => {
             <div className={ styles.outer }>
                 <div className={ styles.wrapper }>
                     <input
-                        type={"text"}
+                        type={ "text" }
                         className={ styles.input }
                         title={ properties.name[ 0 ].toUpperCase() + properties.name.slice( 1 ) }
                         id={ ( properties.id ) ? properties.id : [ properties.name, "identifier" ].join( "-" ) }
                         name={ properties.name }
                         autoComplete={ ( properties.autofill ) ? "on" : "off" }
-                        autoFocus={ (properties.focus) ? properties.focus : false }
-                        placeholder={ (properties.placeholder) ? properties.placeholder : properties.label }>
-                        {/*  ...  */}
+                        autoFocus={ ( properties.focus ) ? properties.focus : false }
+                        placeholder={ ( properties.placeholder ) ? properties.placeholder : properties.label }>
+                        {/*  ...  */ }
                     </input>
                 </div>
-                <Help text={ properties.help.text } />
+                <Help text={ properties.help.text }/>
             </div>
         </div>
     );
@@ -89,15 +89,15 @@ const Password = ( properties: Password ) => {
             <div className={ styles.outer }>
                 <div className={ styles.wrapper }>
                     <input
-                        type={"password"}
+                        type={ "password" }
                         className={ styles.input }
                         title={ properties.name[ 0 ].toUpperCase() + properties.name.slice( 1 ) }
                         id={ ( properties.id ) ? properties.id : [ properties.name, "identifier" ].join( "-" ) }
                         name={ properties.name }
                         autoComplete={ "new-password" }
                         autoFocus={ false }
-                        placeholder={ (properties.placeholder) ? properties.placeholder : "Password" }>
-                        {/*  ...  */}
+                        placeholder={ ( properties.placeholder ) ? properties.placeholder : "Password" }>
+                        {/*  ...  */ }
                     </input>
                 </div>
                 <Help text={ properties.help.text }/>
@@ -134,9 +134,9 @@ const Area = ( properties: Area ) => {
                         name={ properties.name }
                         autoComplete={ "new-password" }
                         autoFocus={ properties.focus }
-                        rows={5}
-                        placeholder={ (properties.placeholder) ? properties.placeholder : "Placeholder Text" }>
-                        {/*  ...  */}
+                        rows={ 5 }
+                        placeholder={ ( properties.placeholder ) ? properties.placeholder : "Placeholder Text" }>
+                        {/*  ...  */ }
                     </textarea>
                 </div>
                 <Help text={ properties.help.text }/>
@@ -144,6 +144,8 @@ const Area = ( properties: Area ) => {
         </div>
     );
 };
+
+import { Container, Row, Col } from 'react-grid-system';
 
 /***
  * ...
@@ -154,8 +156,16 @@ const Area = ( properties: Area ) => {
 export const Form = () => {
     return (
         <Suspense fallback={ <span> Loading ... </span> }>
-            <Input label={ "Field-1" } name={ "field-1" } autofill={ false } help={ { text: "Optional Help Context (1)" } } focus={ true }/>
-            <Input label={ "Field-2" } name={ "field-2" } autofill={ false } help={ { text: "Optional Help Context (2)" } } focus={ false }/>
+            <Container fluid>
+                <Row justify="start">
+                    <Col>
+                        <Input label={ "Field-1" } name={ "field-1" } autofill={ false } help={ { text: "Optional Help Context (1)" } } focus={ true }/>
+                    </Col>
+                    <Col>
+                        <Input label={ "Field-2" } name={ "field-2" } autofill={ false } help={ { text: "Optional Help Context (2)" } } focus={ false }/>
+                    </Col>
+                </Row>
+            </Container>
             <Password label={ "Password-Field" } name={ "password" } help={ { text: "Optional Help Context (3)" } }/>
             <Area label={ "Field-3" } name={ "field-3" } autofill={ false } help={ { text: "Optional Help Context (4)" } } focus={ false }/>
         </Suspense>

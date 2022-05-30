@@ -41,9 +41,15 @@ export const Handler = ( event: Event, session: Session ) => {
             ( status === 200 ) && sessionStorage.setItem( "JWT", value );
             ( status === 200 ) && localStorage.setItem( "IO.IaC-Factory.JWT", value );
 
-            session.authorization.login( username, () => {
-                session.navigate( session.location.state.from ?? "/", { replace: true } );
-            } );
+            try {
+                session.authorization.login( username, () => {
+                    session.navigate( session.location.state.from ?? "/", { replace: true } );
+                } );
+            } catch (exception) {
+                session.authorization.login( username, () => {
+                    session.navigate("/", { replace: false } );
+                } );
+            }
         } );
     } catch ( exception ) {
         console.warn( exception );
