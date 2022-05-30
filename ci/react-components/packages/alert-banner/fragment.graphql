@@ -1,8 +1,0 @@
-fragment alertBannerFields on AlertBannerRecord {
-  tag
-  theme
-  text
-  linkText
-  url
-  expirationDate
-}

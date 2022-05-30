@@ -1,9 +1,0 @@
-.root {
-  @media only percy {
-    display: none;
-  }
-
-  @media print {
-    display: none;
-  }
-}

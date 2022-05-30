@@ -1,5 +1,0 @@
-fragment sectionHeaderFields on SbcSectionHeaderRecord {
-  headline
-  description(markdown: true)
-  useH1
-}
