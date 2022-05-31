@@ -5,7 +5,11 @@
     "homepage": ".",
     "scripts": {
         "start": "node scripts/start.js",
-        "build": "node scripts/build.js"
+        "build": "node scripts/build.js",
+        "pre-clean": "docker rmi --force frontend && docker rmi --force production",
+        "clean": "docker-compose down && docker-compose rm",
+        "pre-compose": "npm install && npm run build",
+        "compose": "npm run pre-clean && npm run pre-compose && npm run clean && docker-compose up --build --force-recreate --always-recreate-deps --remove-orphans"
     },
     "dependencies": {
         "@carbon/icons-react": "^11.2.0",

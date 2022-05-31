@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+    webserver:
+        image:          "web:latest"
+        container_name: "frontend"
+        working_dir:    /Application
+        build:          .
+        command: ["serve", "--single", ".", "--listen", "8080", "--no-clipboard"]
+        ports:
+            - "8080:8080"
+
+networks:
+    default:
+        name: react-network
