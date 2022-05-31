@@ -1,0 +1,52 @@
+.form {
+    & .fields {
+        margin-bottom: 1.0rem;
+    }
+
+    & .normalized label {
+        margin-top: auto;
+    }
+
+    & label {
+        margin-top: 1.0rem;
+    }
+
+    & .field[readonly] {
+        color: var(--cds-icon-disabled);
+        outline: 2px solid var(--cds-border-disabled);
+    }
+
+    & .footer {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        flex-flow: row wrap;
+
+        justify-content: flex-start;
+        align-items: flex-start;
+        align-content: center;
+
+        row-gap: 1.0rem;
+        column-gap: 1.0rem;
+
+        & .button {
+            flex: 1 max-content;
+
+        }
+
+        & .notification {
+            flex: 1 auto;
+            margin: 0.0rem;
+            width: 100%;
+        }
+
+        & .notification[hidden] {
+            display: none;
+        }
+
+        & .container {
+            flex: 1 auto;
+            margin: auto;
+        }
+    }
+}

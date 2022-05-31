@@ -1,7 +1,3 @@
-import { Outlet } from "react-router-dom";
-
-import { Suspense } from "react";
-
 import { Proxy } from "..";
 
 import { Menu } from "./menu";
@@ -21,26 +17,15 @@ import { Container } from "./container";
  *
  * @constructor
  */
-export const Shell = ( context? ) => {
-    console.log(context);
+export const Shell = () => {
     return (
-        <Suspense fallback={"Loading ..."}>
+        <>
             <Menu/>
             <Container>
-                <Proxy>
-                    <Outlet context={
-                        (
-                            <Suspense fallback={"Loading ..."}>
-                                {
-                                    context
-                                }
-                            </Suspense>
-                        )
-                    }/>
-                </Proxy>
+                <Proxy/>
             </Container>
             <Footer/>
-        </Suspense>
+        </>
     );
 };
 

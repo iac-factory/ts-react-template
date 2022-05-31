@@ -1,0 +1,18 @@
+.c4p--notifications-panel__notification.c4p--notifications-panel__notification-previous {
+    &::before {
+        top: 5px;
+    }
+}
+
+.c4p--notifications-panel__dismiss-single-button.cds--btn.cds--btn--sm.cds--btn--ghost {
+    top:   0.25rem;
+    right: 0.25rem;
+}
+
+.c4p--notifications-panel {
+    border-width:  1px;
+    border-style:  solid;
+    border-color:  var(--cds-border-subtle-00);
+    border-radius: 0.0rem;
+    border-top:    none;
+}

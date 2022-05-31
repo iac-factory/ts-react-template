@@ -1,0 +1,8 @@
+.activity {
+    min-width: 110px;
+
+    & .paragraph {
+        display: inline-flex;
+        min-width: max-content;
+    }
+}

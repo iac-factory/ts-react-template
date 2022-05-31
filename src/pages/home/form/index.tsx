@@ -1,5 +1,8 @@
 import React, { Suspense, useEffect } from "react";
 
+import { Container, Row, Col } from 'react-grid-system';
+
+
 import styles from "./index.module.scss";
 
 interface Help {
@@ -145,8 +148,6 @@ const Area = ( properties: Area ) => {
     );
 };
 
-import { Container, Row, Col } from 'react-grid-system';
-
 /***
  * ...
  * ---
@@ -156,7 +157,7 @@ import { Container, Row, Col } from 'react-grid-system';
 export const Form = () => {
     return (
         <Suspense fallback={ <span> Loading ... </span> }>
-            <Container lg={true} md={true} sm={true}>
+            <Container lg={ true } md={ true } sm={ true }>
                 <Row justify="start">
                     <Col>
                         <Input label={ "Field-1" } name={ "field-1" } autofill={ false } help={ { text: "Optional Help Context (1)" } } focus={ true }/>
@@ -166,10 +167,10 @@ export const Form = () => {
                     </Col>
                 </Row>
                 <Row justify="start">
-                    <Col lg={16}>
-                        <Input label={ "Username" } name={ "username" } help={ { text: "Optional Help Context (3)" } } focus={false}/>
+                    <Col lg={ 16 }>
+                        <Input label={ "Username" } name={ "username" } help={ { text: "Optional Help Context (3)" } } focus={ false }/>
                     </Col>
-                    <Col lg={16}>
+                    <Col lg={ 16 }>
                         <Password label={ "Password" } name={ "password" } help={ { text: "Optional Help Context (4)" } }/>
                     </Col>
                 </Row>

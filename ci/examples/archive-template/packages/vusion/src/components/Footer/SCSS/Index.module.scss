@@ -1,0 +1,40 @@
+@use "@carbon/react/scss/type" as *;
+@use "@carbon/react/scss/spacing" as *;
+@use "@carbon/react/scss/breakpoint" as *;
+
+footer.ui-footer {
+    background-color: black;
+
+    border-top: solid 1px var(--cds-border-subtle);
+
+    .cds--col-span-4 {
+        padding: 0;
+
+        display: grid;
+
+        width: 100vw;
+
+        max-width: 100vw;
+
+        .cds--col {
+            text-align: center;
+
+            padding-top: $spacing-07;
+            padding-bottom: $spacing-07;
+
+            margin-top: $spacing-07;
+            margin-bottom: $spacing-07;
+
+            margin-left: auto;
+            margin-right: auto;
+
+            .column-container {
+                .unordered-list {
+                    .unordered-list-item {
+                        position: initial
+                    }
+                }
+            }
+        }
+    }
+}

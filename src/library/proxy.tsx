@@ -27,7 +27,7 @@ const URL = process.env[ "REACT_APP_API_ENDPOINT" ] + [ "/utility/awaitable?dura
  * @constructor
  */
 
-export const Proxy = ( children?) => {
+export const Proxy = ( children? ) => {
     const Data: Stateful = useState( null );
     const Throw: Throwable = useState( false );
     const Loading: Loadable = useState( true );
@@ -39,11 +39,11 @@ export const Proxy = ( children?) => {
             try {
                 const request = await fetch( URL ).then( async ( response ) => {
                     return response.json();
-                } ).catch((error) => {
+                } ).catch( ( error ) => {
                     Throw[ 1 ]( error );
 
                     throw error;
-                });
+                } );
 
                 Data[ 1 ]( request );
 
@@ -51,6 +51,8 @@ export const Proxy = ( children?) => {
 
                 Throw[ 1 ]( false );
             } catch ( error ) {
+                console.warn("[Warning] Caught Error Exception", error);
+
                 const Expression = /((.*)+(:) + ?(.*))/gm;
 
                 const $ = new Error( error );
@@ -62,11 +64,13 @@ export const Proxy = ( children?) => {
 
                 if ( Type === "TypeError" ) {
                     Throw[ 1 ]( {
-                        Type: "API-Error", Message: "API Server Unreachable"
+                        Type: "API-Error",
+                        Message: "API Server Unreachable"
                     } );
                 } else {
                     Throw[ 1 ]( {
-                        Type, Message
+                        Type,
+                        Message
                     } );
                 }
 
@@ -81,15 +85,23 @@ export const Proxy = ( children?) => {
         console.debug( "[Debug] (Page-Loading-Wrapper)", "Successfully Initialized Callable(s)." );
 
         return () => {
-            return void ( async () => Health().catch( ( error ) => null ) )();
+            return void ( async () => Health().catch( ( error ) => {
+                console.warn("[Warning] Caught Error Exception During Closure", error);
+            } ) )();
         };
     }, [] );
 
-    const Awaitable = () => ( Loading[ 0 ] ) ? ( <Text input={ "Loading ..." }/> ) : null;
-    const Content = () => ( !Loading[ 0 ] && !Throw[ 0 ] ) ? ( <Suspense fallback={ (<Text input={ "Loading ..." }/>) }><Outlet/></Suspense> ) : null;
-    const Trace = () => ( Throw[ 0 ] && !Loading[ 0 ] ) ? (<Text input={"[Error]" + " " + Throw[0]}/>) : null;
+    // const Awaitable = () => ( Loading[ 0 ] ) ? ( <Text input={ "Loading ..." }/> ) : null;
+    // const Content = () => ( !Loading[ 0 ] && !Throw[ 0 ] ) ? ( <Suspense fallback={ ( <Text input={ "Loading ..." }/> ) }><Outlet/></Suspense> ) : null;
+    // const Trace = () => ( Throw[ 0 ] && !Loading[ 0 ] ) ? ( <Text input={ "[Error]" + " " + Throw[ 0 ] }/> ) : null;
+    //
+    // return ( Loading[ 0 ] === true ) ? ( <Awaitable/> ) : ( ( Throw[ 0 ] ) ? ( <Trace/> ) : ( <Content/> ) );
 
-    return ( Loading[ 0 ] === true ) ? ( <Awaitable/> ) : ( ( Throw[ 0 ] ) ? ( <Trace/> ) : ( <Content/> ) );
+    return (
+        <Suspense fallback={( null )}>
+            <Outlet/>
+        </Suspense>
+    );
 };
 
 export default Proxy;

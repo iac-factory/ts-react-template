@@ -1,0 +1,8 @@
+@use "./../../../../Application" as *;
+
+.snippet {
+    pre {
+        width: 100%;
+        @include enable-selection-auto();
+    }
+}

@@ -1,0 +1,92 @@
+@use "../imports" as *;
+
+.component {
+    position:         fixed;
+
+    font-size:        0.92865rem;
+
+    top:              0;
+    right:            0;
+    left:             0;
+
+    bottom:           0;
+
+    z-index:          1000;
+
+    display:          flex;
+    align-items:      center;
+    justify-content: left;
+    background-color: var(--global-background);
+
+    user-select:      none;
+
+    height:           var(--global-navigation-menu-height);
+    border-top:       0;
+    border-bottom:    var(--global-border-pixel-width) solid var(--global-border-strong-01);
+
+    line-height:      1.5;
+    letter-spacing:   0.25px;
+    font-weight:      400;
+    outline:          none;
+    text-decoration:  none;
+
+    .global {
+        color:           white;
+        text-decoration: none;
+        height:          100%;
+        display:         flex;
+        padding-left:    1.0rem;
+        padding-right:   1.0rem;
+
+        transition:      background-color 250ms, border-color 250ms, color 250ms;
+
+        .prefix {
+            font-weight:  600;
+            color:        white;
+            margin-right: 0.235rem;
+        }
+
+        span {
+            margin-top:    auto;
+            margin-bottom: auto;
+        }
+    }
+
+    .global:hover {
+        background-color: var(--global-background-hover);
+    }
+
+    .global:active {
+        background-color: var(--global-background-focus);
+    }
+
+    .item {
+        color:           white;
+        text-decoration: none;
+        margin:          0;
+        height:          100%;
+
+        display:         flex;
+
+        align-items:     center;
+
+        border:          2px solid rgba(0, 0, 0, 0);
+        border-radius:   0;
+        padding:         0 1.0rem;
+
+        transition:      background-color 250ms, border-color 250ms, color 250ms;
+
+        span {
+            margin-top:    auto;
+            margin-bottom: auto;
+        }
+    }
+
+    .item:hover {
+        background-color: var(--global-background-hover);
+    }
+
+    .item:active {
+        background-color: var(--global-background-focus);
+    }
+}

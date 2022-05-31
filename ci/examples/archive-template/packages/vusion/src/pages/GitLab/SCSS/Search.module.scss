@@ -1,0 +1,14 @@
+.search {
+    width: 3.0rem;
+    will-change: width;
+
+    transition: transform 150ms cubic-bezier(0.2, 0, 0.38, 0.9), -webkit-transform 150ms cubic-bezier(0.2, 0, 0.38, 0.9)
+}
+
+.search[expanded="true"] {
+    width: 100%;
+}
+
+.search:hover {
+    outline: 2px white;
+}

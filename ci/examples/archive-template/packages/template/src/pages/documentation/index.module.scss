@@ -1,0 +1,81 @@
+@mixin enable-selection() {
+    -webkit-user-select: text; /* Safari */
+    -khtml-user-select:  text; /* Konqueror HTML */
+    -moz-user-select:    text; /* Old versions of Firefox */
+    -ms-user-select:     text; /* Internet Explorer/Edge */
+
+    user-select:         text;
+}
+
+@mixin disable-selection() {
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select:  none; /* Konqueror HTML */
+    -moz-user-select:    none; /* Old versions of Firefox */
+    -ms-user-select:     none; /* Internet Explorer/Edge */
+
+    user-select:         none;
+}
+
+@mixin inline-code() {
+    padding:          0.2em 0.4em;
+    margin:           0;
+    font-size:        87.5%;
+    background-color: rgba(110, 118, 129, 0.4);
+    border-radius:    6px;
+}
+
+.content {
+    @include disable-selection();
+
+    code {
+        @include enable-selection();
+    }
+
+    h1 {
+        display:       block;
+        font-size:     2.625rem;
+        margin-top:    0.0rem;
+        margin-bottom: 1.0rem;
+
+        code {
+            @include inline-code();
+
+            font-weight: bold;
+        }
+    }
+
+    h2 {
+        display:       block;
+        font-size:     1.895rem;
+        margin-top:    1.0rem;
+        margin-bottom: 1.0rem;
+    }
+
+    li {
+        padding-left:        1.0rem;
+        list-style-type:     circle;
+        list-style-position: inside;
+    }
+
+    p {
+        code {
+            @include inline-code();
+        }
+    }
+
+    p:not(:first-of-type) {
+        margin-top: 0.5rem;
+    }
+
+    pre {
+        border-radius:    2.5px;
+        background-color: black;
+        padding:          0.5rem;
+        margin-top:       0.75rem;
+        margin-bottom:    0.75rem;
+
+        line-height:      1.315rem;
+    }
+
+    a {}
+}

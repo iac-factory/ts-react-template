@@ -1,0 +1,59 @@
+$prefix:        "cds";
+$prefix-carbon: "cds";
+
+@use "@carbon/styles/scss/config" with ($prefix: "cds");
+
+// APIKeyModal uses the following Carbon components:
+// ComposedModal, ModalHeader, ModalFooter, ModalBody, TextInput,
+// InlineLoading, Form, Button
+
+@use "@carbon/styles/scss/type" as *;
+@use "@carbon/styles/scss/spacing" as *;
+@use "@carbon/styles/scss/components/modal/index" as *;
+@use "@carbon/styles/scss/components/text-input/index" as *;
+@use "@carbon/styles/scss/components/inline-loading/inline-loading" as *;
+
+@mixin apikey-modal {
+    $block-class: #{$prefix}--apikey-modal;
+
+    .cds--modal-close {
+        display: none;
+    }
+
+    .#{$block-class} .#{$prefix-carbon}--modal-close {
+        display: none;
+    }
+
+    .#{$block-class} .#{$prefix-carbon}--inline-loading {
+        min-height: 3rem; // increasing the height from 2 to 3 resolves an issue where the scroll bar bounces
+    }
+
+    .#{$block-class} .#{$prefix-carbon}--modal-content {
+        padding-right: $spacing-05;
+    }
+
+    .#{$block-class}__body {
+        padding-right: calc(20% - #{$spacing-05});
+        margin-bottom: $spacing-05;
+    }
+
+    .#{$block-class}__messaging {
+        display:       flex;
+        padding-right: calc(20% - #{$spacing-05});
+        margin-top:    $spacing-03;
+    }
+
+    .#{$block-class}__messaging-text {
+        flex:        1;
+        margin-left: $spacing-03;
+        @include type-style("label-01");
+    }
+
+    .#{$block-class}__messaging-text > * {
+        font: inherit;
+    }
+
+    .#{$block-class}__error-icon svg {
+        fill: var(--cds-danger-01)
+    }
+}

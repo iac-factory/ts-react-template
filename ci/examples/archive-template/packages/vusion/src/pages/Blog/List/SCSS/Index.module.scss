@@ -1,0 +1,74 @@
+@use "@carbon/styles/scss/spacing" as Spacing;
+
+.body {
+    & .article {
+        .title {
+            border: none;
+
+            h3 {
+                margin-top:    0rem;
+                margin-bottom: Spacing.$spacing-03;
+
+                margin-left:   0rem;
+                padding-left:  0rem;
+            }
+
+            .author {
+                display:       inline-flex;
+                margin-top:    Spacing.$spacing-01;
+                margin-bottom: Spacing.$spacing-01;
+
+                margin-left:   0rem;
+                padding-left:  0rem;
+
+                svg {
+                    height:       18px;
+                    width:        18px;
+
+                    margin:       auto;
+                    margin-right: 0.25rem;
+
+                }
+            }
+
+            .time {
+                display:       inline-flex;
+                margin-top:    Spacing.$spacing-01;
+                margin-bottom: Spacing.$spacing-01;
+
+                margin-left:   0rem;
+                padding-left:  0rem;
+
+                svg {
+                    height:       18px;
+                    width:        18px;
+
+                    padding:      0.085rem;
+
+                    margin:       auto;
+                    margin-right: 0.25rem;
+
+                }
+            }
+
+            .description {
+                margin-top:    Spacing.$spacing-05;
+                margin-bottom: Spacing.$spacing-05;
+
+                margin-left:   0rem;
+                padding-left:  0rem;
+            }
+
+            .button {
+                margin-top:    Spacing.$spacing-03;
+                margin-bottom: 0rem;
+
+                margin-left:   0rem;
+            }
+        }
+
+        .tag {
+            margin: 0.25rem;
+        }
+    }
+}

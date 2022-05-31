@@ -1,0 +1,283 @@
+@use "sass:color";
+
+$prefix:                           "io";
+
+$button-background:                #0F62FEFF;
+$button-background-hover:          #0247C9FF;
+$button-background-active:         #002D9CFF;
+
+$button-text-on-color:             rgb(255, 255, 255);
+
+$default-button-background:        $button-background;
+$default-button-background-hover:  $button-background-hover;
+$default-button-background-active: $button-background-active;
+
+$default-button-text-on-color:     $button-text-on-color;
+
+/// ---
+
+$primary-button-background:        #0F62FEFF;
+$primary-button-background-hover:  #0247C9FF;
+$primary-button-background-active: #002D9CFF;
+
+$primary-button-text-on-color:     rgb(255, 255, 255);
+
+/// ---
+
+$ghost-button-background:          #696D77FF;
+$ghost-button-background-hover:    #4D4F58FF;
+$ghost-button-background-active:   #34363FFF;
+
+$ghost-button-text-on-color:       rgb(255, 255, 255);
+
+:root {
+    --#{$prefix}-primary-button:                #{$primary-button-background};
+    --#{$prefix}-primary-button-hover:          #{$primary-button-background-hover};
+    --#{$prefix}-primary-button-active:         #{$primary-button-background-active};
+    --#{$prefix}-primary-button-text-on-color:  #{$primary-button-text-on-color};
+    /* // --> Legacy Support */
+    --#{$prefix}--primary-button:               #{$primary-button-background};
+    --#{$prefix}--primary-button-hover:         #{$primary-button-background-hover};
+    --#{$prefix}--primary-button-active:        #{$primary-button-background-active};
+    --#{$prefix}--primary-button-text-on-color: #{$primary-button-text-on-color};
+
+    /* --- */
+
+    --#{$prefix}-default-button:                #{$default-button-background};
+    --#{$prefix}-default-button-hover:          #{$default-button-background-hover};
+    --#{$prefix}-default-button-active:         #{$default-button-background-active};
+    --#{$prefix}-default-button-text-on-color:  #{$default-button-text-on-color};
+    /* // --> Legacy Support */
+    --#{$prefix}--default-button:               #{$default-button-background};
+    --#{$prefix}--default-button-hover:         #{$default-button-background-hover};
+    --#{$prefix}--default-button-active:        #{$default-button-background-active};
+    --#{$prefix}--default-button-text-on-color: #{$default-button-text-on-color};
+
+    /* --- */
+
+    --#{$prefix}-ghost-button:                  #{$ghost-button-background};
+    --#{$prefix}-ghost-button-hover:            #{$ghost-button-background-hover};
+    --#{$prefix}-ghost-button-active:           #{$ghost-button-background-active};
+    --#{$prefix}-ghost-button-text-on-color:    #{$ghost-button-text-on-color};
+    /* // --> Legacy Support */
+    --#{$prefix}--ghost-button:                 #{$ghost-button-background};
+    --#{$prefix}--ghost-button-hover:           #{$ghost-button-background-hover};
+    --#{$prefix}--ghost-button-active:          #{$ghost-button-background-active};
+    --#{$prefix}--ghost-button-text-on-color:   #{$ghost-button-text-on-color};
+}
+
+/*
+    CSS Variable Usage in Javascript
+
+        // Get variable from inline style
+        $ element.style.getPropertyValue("--my-var");
+
+        // Get variable from wherever
+        $ getComputedStyle(element).getPropertyValue("--my-var");
+
+        // Set variable on inline style
+        $ element.style.setProperty("--my-var", jsVar + 4);
+*/
+
+/*
+    @Selector :hover
+        The :hover pseudo-class, also called the “pointer hover pseudo-class”, applies
+        when a pointing device interacts with an element without necessarily activating it.
+
+        A typical example of this is when a mouse hovers over an element.
+
+    @Selector :focus
+        The :focus pseudo-class applies when an element is in a state that is ready to
+        be interacted with, i.e. it has the focus of the input device. When this
+        applies differs quite greatly between the different input devices.
+
+        When using a mouse or similar pointing device, the :focus pseudo-class will apply
+        once the user has begun activating the element and, importantly, it will continue
+        to stay in focus until the user activates another element.
+
+        State only returns back to normal once another element becomes the new focus.
+
+        Keyboards
+            For Keyboard users, :focus essentially is a pseudo :hover.
+
+        Mobile
+            :focus for mobile users (except for safari), also applies itself
+            once tapped.
+
+    @Selector :active
+        Finally, the :active pseudo-class applies during the period in which the element is being activated.
+        For example, if using a mouse, it would be the time between when the mouse button is clicked and when
+        it is released.
+
+        Keyboards
+            The :active pseudo-class works in the same way for mouse and keyboard interactions.
+
+        Mobile
+            On mobile devices, like the :focus pseudo-class, the :active pseudo-class applies on the
+            tap of the element. And again, it doesn’t apply at all in the mobile Safari browser.
+
+    @Documentation - Order of Styling
+        Order of styles - :hover then :focus then :active
+
+        Due to the fact that these conditions can and frequently are applied at the same time, the order
+        in which we add these styles is important.
+*/
+
+.#{$prefix}-button {
+    display:                    inline-flex;
+    align-items:                center;
+    justify-content:            space-between;
+
+    border:                     0;
+    border-radius:              0;
+
+    border-width:               1px;
+    border-style:               solid;
+    border-color:               transparent;
+
+    flex-shrink:                0;
+
+    max-width:                  20rem;
+    min-height:                 3rem;
+
+    margin:                     0;
+    padding:                    calc(0.925rem - 3px) 63px calc(0.925rem - 3px) 15px;
+
+    position:                   relative;
+
+    letter-spacing:             0.1585px;
+    line-height:                1.28575;
+
+    font-size:                  0.925rem;
+    font-weight:                500;
+    font-family:                inherit;
+
+    outline:                    2px solid transparent;
+
+    transition-property:        background-color, outline, border;
+    transition-duration:        150ms;
+    transition-timing-function: cubic-bezier(0.1, 0.25, 0.5, 0.925);
+
+    transition:                 background 150ms cubic-bezier(0.1, 0.25, 0.5, 0.925), box-shadow 150ms cubic-bezier(0.1, 0.25, 0.5, 0.925), border-color 150ms cubic-bezier(0.1, 0.25, 0.5, 0.925), outline 150ms cubic-bezier(0.1, 0.25, 0.5, 0.925);
+
+    box-sizing:                 border-box;
+
+    &:active {
+        outline:          2px solid white;
+        background-color: var(--#{$prefix}-primary-button-active, $default-button-background-active)
+    }
+
+    &:focus {
+        outline:      2px solid white;
+        box-shadow:   unset;
+        border-color: transparent;
+    }
+
+    &:focus-visible {
+        outline:      2px solid transparent;
+        box-shadow:   unset;
+        border-color: transparent;
+    }
+
+    &:hover {
+        background-color: var(--#{$prefix}-primary-button-hover, $default-button-background-hover);
+    }
+
+    &:active:hover {
+        background-color: var(--#{$prefix}-primary-button-active, $default-button-background-active);
+    }
+
+    &:active:focus:hover {
+        outline:          2px solid transparent;
+        background-color: var(--#{$prefix}-primary-button-active, $default-button-background-active)
+    }
+
+    &:active:not(:hover):not(:focus) {
+        outline:          2px solid white;
+        background-color: var(--#{$prefix}-primary-button, $default-button-background)
+    }
+}
+
+// ---
+
+.#{$prefix}-button-primary {
+    background-color: var(--#{$prefix}-primary-button, $primary-button-background);
+    color:            var(--#{$prefix}-primary-button-text-on-color, $primary-button-text-on-color);
+
+    &:active {
+        outline:          2px solid white;
+        background-color: var(--#{$prefix}-primary-button-active, $primary-button-background-active)
+    }
+
+    &:focus {
+        outline:      2px solid white;
+        box-shadow:   unset;
+        border-color: transparent;
+    }
+
+    &:focus-visible {
+        outline:      2px solid transparent;
+        box-shadow:   unset;
+        border-color: transparent;
+    }
+
+    &:hover {
+        background-color: var(--#{$prefix}-primary-button-hover, $primary-button-background-hover);
+    }
+
+    &:active:hover {
+        background-color: var(--#{$prefix}-primary-button-active, $primary-button-background-active);
+    }
+
+    &:active:focus:hover {
+        outline:          2px solid transparent;
+        background-color: var(--#{$prefix}-primary-button-active, $primary-button-background-active)
+    }
+
+    &:active:not(:hover):not(:focus) {
+        outline:          2px solid white;
+        background-color: var(--#{$prefix}-primary-button, $primary-button-background)
+    }
+}
+
+// ---
+
+.#{$prefix}-button-ghost {
+    background-color: var(--#{$prefix}-ghost-button, $ghost-button-background);
+    color:            var(--#{$prefix}-ghost-button-text-on-color, $ghost-button-text-on-color);
+
+    &:active {
+        outline:          2px solid white;
+        background-color: var(--#{$prefix}-ghost-button-active, $ghost-button-background-active)
+    }
+
+    &:focus {
+        outline:      2px solid white;
+        box-shadow:   unset;
+        border-color: transparent;
+    }
+
+    &:focus-visible {
+        outline:      2px solid transparent;
+        box-shadow:   unset;
+        border-color: transparent;
+    }
+
+    &:hover {
+        background-color: var(--#{$prefix}-ghost-button-hover, $ghost-button-background-hover);
+    }
+
+    &:active:hover {
+        background-color: var(--#{$prefix}-ghost-button-active, $ghost-button-background-active);
+    }
+
+    &:active:focus:hover {
+        outline:          2px solid transparent;
+        background-color: var(--#{$prefix}-ghost-button-active, $ghost-button-background-active)
+    }
+
+    &:active:not(:hover):not(:focus) {
+        outline:          2px solid white;
+        background-color: var(--#{$prefix}-ghost-button, $ghost-button-background)
+    }
+}

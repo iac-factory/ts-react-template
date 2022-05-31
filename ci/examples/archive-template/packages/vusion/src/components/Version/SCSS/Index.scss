@@ -1,0 +1,22 @@
+.cds--modal-container {
+    overflow:   scroll;
+    overflow-x: hidden;
+    color:      var(--cds-text-on-color);
+    background: var(--cds-background);
+}
+
+.exp--about-modal__legal-text {
+    color: var(--cds-text-on-color);
+}
+
+.exp--about-modal__copyright-text {
+    color: var(--cds-text-on-color);
+}
+
+.exp--about-modal__legal-text {
+    color: var(--cds-text-on-color);
+}
+
+.exp--about-modal__logo {
+    display: none;
+}

@@ -1,0 +1,121 @@
+//.bx--data-table thead th.bx--table-column-checkbox, .bx--data-table tbody td.bx--table-column-checkbox {
+//    min-width: calc(48px + 0.25rem);
+//}
+//
+//.bx--overflow-menu--flip.bx--overflow-menu-options[data-floating-menu-direction=top]::after,
+//.bx--overflow-menu--flip.bx--overflow-menu-options[data-floating-menu-direction=bottom]::after {
+//    right: 0;
+//    left: auto;
+//    background: transparent;
+//}
+//
+//.bx--overflow-menu-options[data-floating-menu-direction=bottom]::after {
+//    top: 0.0rem;
+//    left: 0;
+//    width: 2.5rem;
+//    height: 0.1875rem;
+//}
+//
+//.bx--tile {
+//    margin-bottom: 1.0rem;
+//}
+//
+//.bx--search-input:focus {
+//    outline: none;
+//    outline-offset: 0;
+//}
+//
+//.bx--pagination-nav {
+//    outline: unset;
+//}
+//
+//.io--middle-aligned-column {
+//    margin-top: auto;
+//    margin-bottom: auto;
+//}
+//
+//.io--tile-card {
+//    border-width: 1px;
+//    border-color: blue;
+//    border-style: solid;
+//}
+//
+//.io--dashboard.io--tile-card--header-2 {
+//    margin-left: 1.0rem;
+//}
+//
+//// @Tile
+//
+//.bx--tile {
+//    border: 2px solid transparent;
+//
+//    transition-duration: 250ms;
+//    transition-property: all;
+//    transition-timing-function: cubic-bezier(0.4, 0.1, 0.4, 0.9);
+//}
+//
+//.bx--tile.io--tile-card {
+//    background: white;
+//
+//    box-shadow: 0px 0px 0px rgb(200, 200, 200), 0px 1px 12.5px rgba(100, 100, 100, 0.15);
+//
+//    border: 2px solid transparent;
+//
+//    transition-duration: 250ms;
+//    transition-property: all;
+//    transition-timing-function: cubic-bezier(0.4, 0.1, 0.4, 0.9);
+//}
+//
+//.bx--tile-input + .bx--tile {
+//    border: 2px solid transparent;
+//
+//    transition-duration: 250ms;
+//    transition-property: all;
+//    transition-timing-function: cubic-bezier(0.4, 0.1, 0.4, 0.9);
+//
+//    .bx--tile--is-selected {
+//        .bx--tile__checkmark {
+//            svg {
+//                fill: black;
+//            }
+//        }
+//    }
+//}
+//
+//.bx--tile-input:hover + .bx--tile {
+//    border: 2px solid rgba(75, 75, 75, 1.0);
+//}
+//
+//.bx--tile-input:active + .bx--tile {
+//    border: 2px solid rgba(75, 75, 75, 1.0);
+//}
+//
+//.bx--tile-input:focus + .bx--tile {
+//    border: 2px solid rgba(75, 75, 75, 1.0);
+//    outline: 2px solid transparent;
+//    outline-offset: -2px;
+//}
+//
+//.bx--tile-input:hover:focus + .bx--tile {
+//    border: 2px solid rgba(75, 75, 75, 1.0);
+//    outline: 2px solid transparent;
+//    outline-offset: -2px;
+//}
+//
+//.bx--tile-input:hover:active + .bx--tile {
+//    border: 2px solid rgba(75, 75, 75, 0.5);
+//    outline: 2px solid transparent;
+//    outline-offset: -2px;
+//}
+//
+//.bx--tile--is-selected:active {
+//    .bx--tile__checkmark {
+//        svg {
+//            fill: rgba(0, 0, 0, 0.5);
+//
+//            transition-duration: 250ms;
+//            transition-property: all;
+//            transition-timing-function: cubic-bezier(0.4, 0.1, 0.4, 0.9);
+//        }
+//    }
+//}

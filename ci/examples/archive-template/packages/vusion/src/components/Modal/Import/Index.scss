@@ -1,0 +1,17 @@
+$io-import-modal-dashboard-label-left-margin: 0.5825rem;
+
+.io-import-modal {
+    #Import-Field-ID {
+        margin-right: 0.725rem;
+    }
+
+    .exp--import-modal__label {
+        margin-top: 0.75rem;
+        margin-left: $io-import-modal-dashboard-label-left-margin;
+    }
+
+    .exp--import-modal__input-group {
+        width: 100%;
+        display: inline-flex;
+    }
+}

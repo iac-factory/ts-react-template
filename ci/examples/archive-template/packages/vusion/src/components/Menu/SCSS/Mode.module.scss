@@ -1,0 +1,30 @@
+.tag {
+    span {
+        text-align: center;
+        width:      max-content;
+    }
+}
+
+@media (min-width: 66.0rem) {
+    .tag {
+        margin-left: 1.0rem;
+    }
+}
+
+@media (max-width: 65.98rem) {
+    .tag:first-of-type {
+        border-left: 1px solid var(--cds-border-subtle);
+    }
+}
+
+@media (max-width: 65.98rem) {
+    .tag {
+        padding-left: 1.75rem;
+    }
+}
+
+@media (max-width: 42rem) {
+    .tag {
+        display: none;
+    }
+}

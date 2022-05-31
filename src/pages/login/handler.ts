@@ -46,6 +46,7 @@ export const Handler = ( event: Event, session: Session ) => {
                     session.navigate( session.location.state.from ?? "/", { replace: true } );
                 } );
             } catch (exception) {
+                console.debug("[Debug] Exception Caught in Authorization Handler", exception);
                 session.authorization.login( username, () => {
                     session.navigate("/", { replace: false } );
                 } );

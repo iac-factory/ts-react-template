@@ -1,0 +1,185 @@
+@use "@carbon/react/scss/type" as *;
+@use "@carbon/react/scss/spacing" as *;
+@use "@carbon/react/scss/breakpoint" as *;
+
+@use "@carbon/styles/scss/utilities/convert" as *;
+
+@mixin disable-selection { /*** Supported by Chrome, Edge, Opera and Firefox */
+    // - [] @Task: Test on Mobile
+    // >>> -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    // - [] @Task: Test on Mobile
+    // >>> -webkit-touch-callout: none; /* iOS Safari */
+
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select:  none; /* Konqueror HTML */
+    -moz-user-select:    none; /* Old versions of Firefox */
+    -ms-user-select:     none; /* Internet Explorer/Edge */
+
+    user-select:         none;
+}
+
+.page {
+    #{&}-heading {
+        @include type-style("productive-heading-07");
+    }
+
+    #{&}-subheading {
+        @include type-style("productive-heading-03");
+
+        font-weight: 600;
+    }
+
+    #{&}-primary-image {
+        max-width: 100%;
+    }
+
+    #{&}-call-to-action {
+        min-height: 100vh;
+    }
+
+    #{&}-page-banner {
+        padding-top:    $spacing-05;
+        padding-bottom: $spacing-07 * 4;
+        padding-left:   $spacing-06;
+
+        position:       relative;
+    }
+
+    #{&}-paragraph {
+        @include type-style("productive-heading-03");
+        margin-top:    $spacing-05;
+        margin-bottom: $spacing-08;
+
+        @include breakpoint-between((320px + 1), md) {
+            max-width: 75%;
+        }
+    }
+
+    #{&}-row-2 {
+        margin-top:      var(--cds-spacing-01);
+        transform:       translateZ(0);
+        justify-content: flex-end;
+
+        .navigators {
+            padding-top:      $spacing-05;
+            padding-bottom:   $spacing-05;
+
+            background-color: transparent;
+            border-color:     transparent;
+            outline-color:    transparent;
+
+            box-shadow:       none;
+        }
+
+        .navigation {
+            background-color:    transparent;
+            border-color:        transparent;
+            outline-color:       transparent;
+
+            box-shadow:          none;
+
+            transition-property: all;
+
+            button {
+                background-color: transparent;
+                box-shadow:       none;
+                margin-left:      1.0rem;
+            }
+        }
+
+        .navigation:first-child {
+            button {
+                background-color: transparent;
+                box-shadow:       none;
+                margin-left:      0.0rem;
+            }
+        }
+    }
+
+    #{&}-row-3 {
+        background:   black;
+        margin-left:  -1.5rem;
+        margin-right: -1.5rem;
+
+        padding:      $spacing-09 $spacing-06;
+        position:     relative;
+    }
+
+    #{&}-info-section-heading {
+        @include type-style("heading-03");
+    }
+
+    #{&}-info-card {
+        margin-top:     $spacing-09;
+        display:        flex;
+        flex-direction: column;
+        padding-left:   1rem;
+
+        svg {
+            margin-top: $spacing-09;
+        }
+
+        // top border in only small breakpoints to prevent overrides
+        @include breakpoint-down(md) {
+            &:not(:nth-child(2)) {
+                padding-top: $spacing-09;
+
+                border-top:  1px solid var(--cds-border-inverse);
+            }
+        }
+
+        // left border in just the 2nd column items
+        @include breakpoint(md) {
+            border-left: 1px solid var(--cds-border-inverse);
+        }
+
+        // left border in all items
+        @include breakpoint(lg) {
+            margin-top:  0;
+
+            border-left: 1px solid var(--cds-border-inverse);
+
+            svg {
+                margin-top: $spacing-12;
+            }
+        }
+    }
+
+    #{&}-info-card-heading {
+        @include type-style("productive-heading-03");
+    }
+
+    #{&}-info-card-body {
+        margin-top: $spacing-06;
+
+        flex-grow:  1; // fill space so icons are bottom aligned
+
+        @include type-style("body-long-01");
+
+        // prevent large line lengths between small and medium viewports
+        @include breakpoint-between(321px, md) {
+            max-width: 75%;
+        }
+    }
+
+    @media (max-width: 60.0rem) {
+        #{&}-primary-image {
+            display: none;
+        }
+
+    }
+}
+
+.component {
+    @include disable-selection();
+}
+
+.heading {
+    @include type-style("productive-heading-07");
+}
+
+.subheading {
+    @include type-style("productive-heading-03");
+    margin: $spacing-03 $spacing-06;
+}

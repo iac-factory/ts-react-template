@@ -1,0 +1,20 @@
+div.io-divider-container {
+    display: flex;
+    align-items: center;
+    margin-top: 2.0rem;
+    margin-bottom: 2rem;
+}
+
+.io-divider-border {
+    border-bottom: 1px solid black;
+    width: 100%;
+}
+
+span.io-divider-content {
+    text-align: center;
+    h3 {
+        padding: 0 10px 0 10px;
+        max-width: 10rem;
+        width: max-content;
+    }
+}

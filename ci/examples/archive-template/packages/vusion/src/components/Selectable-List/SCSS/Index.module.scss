@@ -1,0 +1,9 @@
+.body {
+    .row {
+        /* ... */
+    }
+
+    .row:hover {
+        background-color: var(--cds-background-hover) !important;
+    }
+}

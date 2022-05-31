@@ -1,0 +1,7 @@
+$Prefix: "cds";
+
+@use "@carbon/react/scss/spacing" as *;
+
+.#{$Prefix}--sm\:col-span-4 {
+    margin-bottom: $spacing-05;
+}
