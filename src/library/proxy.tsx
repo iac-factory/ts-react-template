@@ -91,17 +91,25 @@ export const Proxy = ( children? ) => {
         };
     }, [] );
 
-    // const Awaitable = () => ( Loading[ 0 ] ) ? ( <Text input={ "Loading ..." }/> ) : null;
-    // const Content = () => ( !Loading[ 0 ] && !Throw[ 0 ] ) ? ( <Suspense fallback={ ( <Text input={ "Loading ..." }/> ) }><Outlet/></Suspense> ) : null;
-    // const Trace = () => ( Throw[ 0 ] && !Loading[ 0 ] ) ? ( <Text input={ "[Error]" + " " + Throw[ 0 ] }/> ) : null;
-    //
-    // return ( Loading[ 0 ] === true ) ? ( <Awaitable/> ) : ( ( Throw[ 0 ] ) ? ( <Trace/> ) : ( <Content/> ) );
+    const Page = () => {
+        const Awaitable = () => ( Loading[ 0 ] ) ? ( /* <Text input={ "Loading ..." }/> */ null ) : null;
+        const Content = () => ( !Loading[ 0 ] && !Throw[ 0 ] ) ? ( <Outlet/> ) : null;
+        const Trace = () => ( Throw[ 0 ] && !Loading[ 0 ] ) ? ( <Text input={ "[Error]" + " " + Throw[ 0 ] }/> ) : null;
+
+        return ( Loading[ 0 ] === true ) ? ( <Awaitable/> ) : ( ( Throw[ 0 ] ) ? ( <Trace/> ) : ( <Content/> ) );
+    };
 
     return (
-        <Suspense fallback={( null )}>
-            <Outlet/>
+        <Suspense fallback={(null)}>
+            <Page/>
         </Suspense>
-    );
+    )
+
+    // return (
+    //     <Suspense fallback={( null )}>
+    //         <Outlet/>
+    //     </Suspense>
+    // );
 };
 
 export default Proxy;

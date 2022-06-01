@@ -8,7 +8,7 @@ export const Home = () => {
     const Tile = lazy( async () => import("./../../components/tile"));
 
     return (
-        <Suspense fallback={ <span> Loading ... </span> }>
+        <Suspense fallback={ ( null ) }>
             <Form/>
 
             <br/>

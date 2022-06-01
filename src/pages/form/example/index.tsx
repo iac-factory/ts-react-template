@@ -153,7 +153,7 @@ export const Area = ( properties: Area ) => {
  */
 export const Form = () => {
     return (
-        <Suspense fallback={ <span> Loading ... </span> }>
+        <Suspense fallback={ (null) }>
             <Input label={ "Field-1" } name={ "field-1" } autofill={ false } help={ { text: "Optional Help Context (1)" } } focus={ true }/>
             <Input label={ "Field-2" } name={ "field-2" } autofill={ false } help={ { text: "Optional Help Context (2)" } } focus={ false }/>
             <Password label={ "Password-Field" } name={ "password" } help={ { text: "Optional Help Context (3)" } }/>
