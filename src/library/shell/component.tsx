@@ -22,7 +22,6 @@ export const Shell = () => {
         <>
             <Menu/>
             <Container>
-
                 <Proxy/>
             </Container>
             <Footer/>

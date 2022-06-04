@@ -333,13 +333,12 @@ module.exports = function (webpackEnv) {
             ]
         },
         module: {
-            strictExportPresence: true,
             rules: [
                 {
-                    test: /\.mdx?$/,
+                    test: /\.(mdx|md)$/,
                     use: [
                         {
-                            loader: '@mdx-js/loader',
+                            loader: require.resolve('@mdx-js/loader'),
                             /** @type {import('@mdx-js/loader').Options} */
                             options: {}
                         }
@@ -559,7 +558,7 @@ module.exports = function (webpackEnv) {
                             // its runtime that would otherwise be processed through "file" loader.
                             // Also exclude `html` and `json` extensions so they get processed
                             // by webpacks internal loaders.
-                            exclude: [ /^$/, /\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/ ],
+                            exclude: [ /^$/, /\.(js|mjs|jsx|ts|tsx|mdx|md)$/, /\.html$/, /\.json$/ ],
                             type: "asset/resource"
                         }
                         // ** STOP ** Are you adding a new loader?

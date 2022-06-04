@@ -1,6 +1,4 @@
-import React, { Suspense, lazy } from "react";
-
-import styles from "./index.module.scss";
+import React, { lazy } from "react";
 
 export enum Type {
     clickable = "clickable",

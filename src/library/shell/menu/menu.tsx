@@ -37,6 +37,7 @@ export module Component {
                     </section>
                 </Panel>
                 <Item title={ "Mobile-Preview" } overwrite={ "mobile-preview" } reload={ false }/>
+                <Item title={ "Documentation" } reload={ false }/>
             </Navigator>
         );
     };

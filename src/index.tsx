@@ -6,7 +6,7 @@ import { Router } from "./library";
 import { Client } from "./library";
 // import { Debug } from "./library";
 
-import { Application } from "./application";
+import { UI } from "./application";
 
 // const DOM = () => {
 //     // const theme = Context();
@@ -39,7 +39,7 @@ import { Application } from "./application";
 Client.Interface.render(
     <React.StrictMode>
         <Router.Browser>
-            <Application/>
+            <UI.Application/>
         </Router.Browser>
     </React.StrictMode>
 );
