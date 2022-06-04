@@ -1,8 +1,0 @@
-@import "../Link/index";
-
-@import "../Component/mixins";
-@import "mixins";
-
-@include security--component($name: error-page) {
-    @include error-page;
-}

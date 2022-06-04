@@ -1,5 +1,0 @@
-@use "./../../../../Application" as *;
-
-.component {
-    @include disable-selection();
-}

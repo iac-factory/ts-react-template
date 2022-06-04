@@ -1,5 +1,0 @@
-import "./SCSS/Index.scss";
-
-export { default as Grid } from "./Grid";
-export { default as Row } from "./Row";
-export { default as Column } from "./Column";

@@ -1,5 +1,0 @@
-@use "./Selectables" as *;
-
-.component {
-    @include disable-selection();
-}
