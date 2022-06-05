@@ -37,11 +37,9 @@ import { UI } from "./application";
 // } );
 
 Client.Interface.render(
-    <React.StrictMode>
-        <Router.Browser>
-            <UI.Application/>
-        </Router.Browser>
-    </React.StrictMode>
+    <Router.Browser>
+        <UI.Application/>
+    </Router.Browser>
 );
 
 export * from "./library";

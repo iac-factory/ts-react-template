@@ -40,9 +40,8 @@ export const Proxy = ( children? ) => {
                 const request = await fetch( URL ).then( async ( response ) => {
                     return response.json();
                 } ).catch( ( error ) => {
+                    console.warn("[Warning]", error);
                     Throw[ 1 ]( error );
-
-                    throw error;
                 } );
 
                 Data[ 1 ]( request );
@@ -55,18 +54,13 @@ export const Proxy = ( children? ) => {
 
                 const Expression = /((.*)+(:) + ?(.*))/gm;
 
-                const $ = new Error( error );
-
-                const Partials = Expression.exec( $?.message );
+                const Partials = Expression.exec( error?.message );
 
                 const Message = Partials[ Partials.length - 1 ] || error;
                 const Type = Partials[ Partials.length - 3 ] || error;
 
                 if ( Type === "TypeError" ) {
-                    Throw[ 1 ]( {
-                        Type: "API-Error",
-                        Message: "API Server Unreachable"
-                    } );
+                    Throw[ 1 ]( { Type: "API-Error", Message: "API Server Unreachable" } );
                 } else {
                     Throw[ 1 ]( {
                         Type,
@@ -75,14 +69,12 @@ export const Proxy = ( children? ) => {
                 }
 
                 console.warn( "[Warning] (Page-API-Waiter)", Type === "TypeError" ? "API-Connection-Error" : error );
-
-                Data[ 1 ]( null );
-            } finally {
-                Loading[ 1 ]( false );
             }
         };
 
         console.debug( "[Debug] (Page-Loading-Wrapper)", "Successfully Initialized Callable(s)." );
+
+        Loading[ 1 ]( false );
 
         return () => {
             return void ( async () => Health().catch( ( error ) => {
@@ -92,7 +84,7 @@ export const Proxy = ( children? ) => {
     }, [] );
 
     const Page = () => {
-        const Awaitable = () => ( Loading[ 0 ] ) ? ( /* <Text input={ "Loading ..." }/> */ null ) : null;
+        const Awaitable = () => ( Loading[ 0 ] ) ? ( <Text input={ "Loading ..." }/> ) : null;
         const Content = () => ( !Loading[ 0 ] && !Throw[ 0 ] ) ? ( <Outlet/> ) : null;
         const Trace = () => ( Throw[ 0 ] && !Loading[ 0 ] ) ? ( <Text input={ "[Error]" + " " + Throw[ 0 ] }/> ) : null;
 

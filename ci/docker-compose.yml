@@ -4,7 +4,7 @@ services:
         image:          "web:latest"
         container_name: "frontend"
         working_dir:    /Application
-        build:          .
+        build:          ..
         command: ["serve", "--single", ".", "--listen", "8080", "--no-clipboard"]
         ports:
             - "8080:8080"
