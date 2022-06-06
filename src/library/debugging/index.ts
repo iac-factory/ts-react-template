@@ -11,6 +11,8 @@ export module Debugger {
         name: "FCP" | "CLS" | "LCP" | "TTFB" | "FID";
     }
 
+    export const enable = Mode.Debug;
+
     export const Logger = ( $: Logger ) => {
         switch ($.name) {
             case "FCP":
@@ -32,6 +34,7 @@ export module Debugger {
     };
 
     export const Vitals = () => {
+        (Mode.Debug) && console.info("[Important]", "Current mode is set to \"Development\". If React's Strict-Mode is Enabled, API Render(s) & Awaitable State(s) Will Invoke Twice -- Re-Invocation is Not A Client-Side Bug. Flickering Should be Expected. Please see https://reactjs.org/docs/strict-mode.html for more details.")
         try {
             return ( Mode.Debug ) ? import("web-vitals").then(
                 ( { getCLS, getFID, getFCP, getLCP, getTTFB } ) => {
@@ -57,3 +60,5 @@ export const { Logger } = Debugger;
 export const { Vitals } = Debugger;
 
 export const { Debug } = Mode;
+
+export default Mode;

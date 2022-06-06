@@ -1,7 +1,7 @@
-import { Extractor } from ".";
+import { Extractor } from "./extractor";
 
-import type { Event } from ".";
-import type { Session } from ".";
+import type { Event } from "./form";
+import type { Session } from "./provider";
 
 /***
  * Login Form Submit Event Handler

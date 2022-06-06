@@ -1,8 +1,11 @@
-import { Proxy } from "..";
+import React, { Suspense } from "react";
 
-import { Menu } from "./menu";
-import { Footer } from "./footer";
-import { Container } from "./container";
+import { Spinner, Text, Outlet, Grid, Container } from "..";
+
+import { Menu } from "..";
+import { Footer } from "..";
+
+const Awaitable = () => ( <Spinner children={ ( <Text input={ "Loading ..." }/> ) }/> );
 
 /***
  * Shell - UI Application Wrapper around `<Outlet>`
@@ -17,17 +20,25 @@ import { Container } from "./container";
  *
  * @constructor
  */
-export const Shell = () => {
+export const Shell = ( { children }: Interface ): JSX.Element => {
+    const Proxy = () => children ?? ( <Outlet/> );
+
     return (
         <>
             <Menu/>
             <Container>
-                <Proxy/>
+                <Grid>
+                    <Suspense fallback={ ( <Awaitable/> ) }>
+                        <Proxy/>
+                    </Suspense>
+                </Grid>
             </Container>
-            <Footer/>
+            <Footer.Component/>
         </>
     );
+
 };
 
-export default Shell;
+export type Interface = { children?: JSX.Element | undefined | null };
 
+export default Shell;

@@ -1,2 +1,3 @@
-export * from "./text";
 export * from "./component";
+
+export { Shell as default } from "./component";

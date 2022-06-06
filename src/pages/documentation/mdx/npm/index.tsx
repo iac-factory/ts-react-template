@@ -1,7 +1,5 @@
-import { lazy } from "react";
-
 import { Content } from "..";
-import { Mutators } from "..";
+import { Component } from "./configuration-object";
 
 /***
  * A 2nd Level Abstraction for MDX Component(s) relating to `npm` Imports/Exports
@@ -12,8 +10,7 @@ import { Mutators } from "..";
  * @returns {JSX.Element}
  * @constructor
  */
-const Configuration = () => {
-    const Component = lazy(() => import("./configuration-object"));
+export const Configuration = () => {
     return (
         <Content>
             <Component/>
@@ -21,11 +18,6 @@ const Configuration = () => {
     );
 };
 
-const NPM = {
-    Configuration
-};
+// export { Mutators };
 
-export { NPM };
-export { Mutators };
-
-export default NPM;
+export default Configuration;

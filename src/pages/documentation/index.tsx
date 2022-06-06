@@ -1,9 +1,10 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense } from "react";
 
 export const Documentation = () => {
-    const Page = lazy(async () => import("./mdx"));
+    const Page = React.lazy(async () => import("./mdx"));
+    
     return (
-        <Suspense fallback={ ( null ) }>
+        <Suspense>
             <Page/>
         </Suspense>
     );

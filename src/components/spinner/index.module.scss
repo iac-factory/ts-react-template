@@ -1,0 +1,81 @@
+.ring {
+    display: inline-block;
+}
+
+.ring:after {
+    content: " ";
+    display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 5px solid var(--global-border-subtle-00);
+    border-color: var(--global-border-subtle-01) var(--global-border-subtle-00) var(--global-border-strong-01);
+    animation: ring 0.75s linear infinite;
+}
+
+@keyframes ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.double {
+    display: inline-block;
+}
+
+.double:after {
+    content: " ";
+    display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 5px solid var(--global-border-subtle-00);
+    border-color: var(--global-border-subtle-01) transparent var(--global-border-strong-01);
+    animation: double 0.75s linear infinite;
+}
+
+@keyframes double {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.row {
+    margin-left: -15px;
+    margin-right: -15px;
+    width: 10rem;
+    display: inline-flex;
+    flex-grow: 0;
+    flex-shrink: 0;
+    align-items: normal;
+    justify-content: flex-start;
+    flex-flow: row wrap;
+}
+
+.column {
+    box-sizing: border-box;
+    min-height: 1px;
+    position: relative;
+    width: 100%;
+    flex: 1 0 0px;
+    margin-left: 0%;
+    right: auto;
+    left: auto;
+}
+
+.circle {
+    max-width: fit-content;
+    margin-right: 1.0rem;
+}
+
+//.column:first-of-type {
+//    margin-left: 1.0rem;
+//}

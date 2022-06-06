@@ -1,6 +1,4 @@
 import { MDXProvider } from "@mdx-js/react";
-import { Mutators } from "..";
-
 import Content from "./content.mdx";
 
 /***
@@ -10,13 +8,12 @@ import Content from "./content.mdx";
  * @returns {JSX.Element}
  * @constructor
  */
-const Component = () => {
+export const Component = () => {
     return (
-        <MDXProvider components={ Mutators }>
+        <MDXProvider components={ {} }>
             <Content/>
         </MDXProvider>
     );
 };
 
-export { Component as Configuration };
 export default Component;

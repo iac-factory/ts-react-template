@@ -1,14 +1,13 @@
-import React from "react";
+import React, { Suspense } from "react";
 
-export * from "./form";
-
-export * from "./provider";
-export * from "./extractor";
-export * from "./handler";
-
-import { Form } from "./form";
 export const Login = () => {
-    return (<Form/>);
+    const Page = React.lazy(async () => import("./form"));
+
+    return (
+        <Suspense>
+            <Page/>
+        </Suspense>
+    );
 };
 
 export default Login;

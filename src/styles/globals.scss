@@ -1,9 +1,9 @@
 $prefix: "io" !default;
 
-$global-prefix: $prefix;
-
-$global-line-height: 1.0;
-$global-page-padding: 1.0rem;
-$global-footer-height: 3.0rem;
-$global-base-font-size: 1.15rem;
-$global-navigation-menu-height: 3.0rem;
+$global-prefix: $prefix !default;
+$global-font-size: 16px !default;
+$global-line-height: 1.0 !default;
+$global-page-padding: 1.0rem !default;
+$global-footer-height: 3.0rem !default;
+$global-base-font-size: 1.15rem !default;
+$global-navigation-menu-height: 3.0rem !default;

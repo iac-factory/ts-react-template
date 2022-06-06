@@ -1,43 +1,37 @@
 import { Router } from "./library";
 
-import { Shell } from "./library";
-
-import { Login } from "./pages";
-
 import { Authorization } from "./authorization";
 
-export module UI {
-    const Interface = () => {
-        return (
-            <Authorization.Router>
-                <Shell/>
-            </Authorization.Router>
-        );
-    };
+import { Shell } from "./library";
 
-    export const Application = () => {
-        const Home = Router.Dynamic(async () => import("./pages/home"));
-        const Mobile = Router.Dynamic(async () => import("./pages/mobile-preview"));
-        const Settings = Router.Dynamic(async () => import("./pages/settings"));
-        const Form = Router.Dynamic(async () => import("./pages/form"));
-        const Documentation = Router.Dynamic(async () => import("./pages/documentation"));
+const { Provider } = Authorization;
+const { Consumer } = Authorization;
 
-        return (
-            <Authorization.Provider>
-                <Router.Routes>
-                    <Router.Route element={ ( <Interface/> ) }>
+export const Application = () => {
+    const Home = Router.Dynamic( async () => import("./pages/home") );
+    const Testing = Router.Dynamic( async () => import("./pages/testing") );
+    const Documentation = Router.Dynamic( async () => import("./pages/documentation") );
+
+    const Login = Router.Dynamic( async () => import("./pages/login") );
+
+    return (
+        <Provider>
+            <Router.Routes>
+                <Router.Route element={ ( <Shell/> ) }>
+                    <Router.Route element={ ( <Consumer/> ) }>
                         <Router.Route element={ ( <Home/> ) } index/>
-                        <Router.Route element={ ( <Settings/> ) } path={ "/settings" }/>
-                        <Router.Route element={ ( <Mobile/> ) } path={ "/mobile-preview" }/>
-                        <Router.Route element={ ( <Form/> ) } path={ "/forms" }/>
+                        <Router.Route element={ ( <Testing/> ) } path={ "/testing" }/>
                         <Router.Route element={ ( <Documentation/> ) } path={ "/documentation" }/>
+
                         <Router.Route path={ "*" } element={ ( <Router.Redirection.Home/> ) }/>
                     </Router.Route>
+                </Router.Route>
+                <Router.Route element={ ( <Shell/> ) }>
                     <Router.Route element={ <Login/> } path="/login"/>
-                </Router.Routes>
-            </Authorization.Provider>
-        );
-    };
-}
+                </Router.Route>
+            </Router.Routes>
+        </Provider>
+    );
+};
 
-export default UI;
+export default Application;

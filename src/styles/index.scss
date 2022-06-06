@@ -10,7 +10,10 @@
 @use "colors" as *;
 @use "fonts" as *;
 
+@use "utilities";
+
 :root {
+    --global-font-size: #{$global-font-size};
     --global-sans-font: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Avenir Next", Avenir, "Nimbus Sans L", Roboto, Noto, "Segoe UI", Arial, Helvetica, "Helvetica Neue", sans-serif;
     --global-sans-serif-font: "IBM Plex Serif", serif;
     --global-mono-font: "IBM Plex Mono", Consolas, Menlo, Monaco, "Andale Mono", "Ubuntu Mono", monospace;

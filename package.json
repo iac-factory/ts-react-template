@@ -1,14 +1,19 @@
 {
     "name": "@cloud-technology/ts-config-template",
     "version": "0.1.117",
-    "type": "commonjs",
-    "homepage": ".",
+    "license": "BSD-3-Clause",
     "scripts": {
         "start": "node scripts/start.js",
         "build": "node scripts/build.js"
     },
+    "repository": {
+        "url": "https://github.com/iac-factory/front-end",
+        "type": "git",
+        "directory": "."
+    },
     "dependencies": {
         "@carbon/icons-react": "^11.2.0",
+        "@iac-factory/ecma": "^0.2.11",
         "@mdx-js/loader": "^2.1.1",
         "@mdx-js/react": "^2.1.1",
         "buffer": "^6.0.3",
@@ -64,7 +69,6 @@
         "jest": "^28.1.0",
         "jest-resolve": "^28.1.0",
         "jest-watch-typeahead": "^1.1.0",
-        "lerna": "4.0.0",
         "mini-css-extract-plugin": "^2.4.5",
         "postcss": "^8.4.14",
         "postcss-flexbugs-fixes": "^5.0.2",
