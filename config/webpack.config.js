@@ -11,6 +11,7 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin");
 const WorkboxWebpackPlugin = require("workbox-webpack-plugin");
+
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
 const getCSSModuleLocalIdent = require("react-dev-utils/getCSSModuleLocalIdent");
 const ESLintPlugin = require("eslint-webpack-plugin");
@@ -101,6 +102,8 @@ module.exports = function (webpackEnv) {
     const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
 
     const shouldUseReactRefresh = env.raw.FAST_REFRESH;
+
+    const Remark = import("remark-frontmatter").then(($) => $.default);
 
     // common function to get style loaders
     const getStyleLoaders = (cssOptions, preProcessor) => {
@@ -340,7 +343,9 @@ module.exports = function (webpackEnv) {
                         {
                             loader: require.resolve('@mdx-js/loader'),
                             /** @type {import('@mdx-js/loader').Options} */
-                            options: {}
+                            options: {
+                                remarkPlugins: []
+                            }
                         }
                     ]
                 },
@@ -677,7 +682,7 @@ module.exports = function (webpackEnv) {
                 // Bump up the default maximum size (2mb) that's precached,
                 // to make lazy-loading failure scenarios less likely.
                 // See https://github.com/cra-template/pwa/issues/13#issuecomment-722667270
-                maximumFileSizeToCacheInBytes: 5 * 1024 * 1024
+                maximumFileSizeToCacheInBytes: 50 * 1024 * 1024
             }),
             // TypeScript type checking
             useTypeScript &&

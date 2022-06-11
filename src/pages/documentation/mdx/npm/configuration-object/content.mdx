@@ -4,13 +4,12 @@
 
 A *configuration* object can be used to set configuration parameters used in package scripts that persist across upgrades.
 
-Settings are found in the root of any given project's `package.json`.
+Settings are found in the root of any given project's `package.json`:
 
-`package.json`
-
-```json
+```json5
 {
     "name": "foo",
+    "version": "0.0.1",
     "config": {
         "port": "8080"
     }
@@ -19,13 +18,27 @@ Settings are found in the root of any given project's `package.json`.
 
 Programmatically, the *configuration* object can then be referenced.
 
-`index.js`
-
 ```js
 import HTTP from "http";
-...
 
-HTTP.createServer(...).listen(process.env.npm_package_config_port)
+async function get (request: Request, response: Outbound, url: URL) {
+    ( request.method !== "GET" ) && response.writeHead( 405 );
+    ( request.method !== "GET" ) && response.end();
+
+    response.writeHead( 200 );
+
+    response.end(() => void null);
+}
+
+const server = HTTP.createServer(async (request, response) => {
+    const url = new URL( String( request.url ), "http://127.0.0.1/" );
+
+    void await get( request, response, url );
+});
+
+/*** Usage Example of `npm_package_config_port` */
+
+server.listen(process.env.npm_package_config_port);
 ```
 
 ## References ##

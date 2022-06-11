@@ -51,7 +51,7 @@ export module Input {
     };
 
     export interface Properties {
-        label: string,
+        label?: string,
         name: string,
         focus: boolean,
         help?: Help.Properties,
@@ -163,8 +163,8 @@ export module Area {
  */
 export const Form = () => {
     return (
-        <Suspense /* fallback={ <span> Loading ... </span> } */ fallback={(null)}>
-            <Row justify="start">
+        <Suspense fallback={(null)}>
+            <Row align="end">
                 <Col>
                     <Input.Component label={ "Field-1" } name={ "field-1" } autofill={ false } help={ { text: "Optional Help Context (1)" } } focus={ true }/>
                 </Col>
@@ -172,7 +172,7 @@ export const Form = () => {
                     <Input.Component label={ "Field-2" } name={ "field-2" } autofill={ false } help={ { text: "Optional Help Context (2)" } } focus={ false }/>
                 </Col>
             </Row>
-            <Row justify="start">
+            <Row align="end">
                 <Col lg={ 16 }>
                     <Input.Component label={ "Username" } name={ "username" } help={ { text: "Optional Help Context (3)" } } focus={ false }/>
                 </Col>

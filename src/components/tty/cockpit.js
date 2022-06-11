@@ -3328,7 +3328,7 @@ var mock = mock || { }; // eslint-disable-line no-use-before-define
                         if (!props)
                             cache.remove(path, iface);
                         else
-                            cache.update(path, iface, props);
+                            cache.loading(path, () => void setAwaiting(false));
                     }
                 }
                 self.dispatchEvent("notify", data);

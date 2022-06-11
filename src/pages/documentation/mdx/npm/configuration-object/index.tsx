@@ -1,5 +1,20 @@
+import { useEffect } from "react";
 import { MDXProvider } from "@mdx-js/react";
-import Content from "./content.mdx";
+import * as Content from "./content.mdx";
+
+const Load = async () => {
+    const elements = [ document.getElementsByClassName( "language-js" ), document.getElementsByClassName( "language-json" ), document.getElementsByClassName("language-json5") ];
+    elements.forEach((language) => {
+        for ( const [ _, block ] of Object.entries( language ) ) {
+            const worker = new Worker( [ "", "web-workers", "syntax-highlighting.js" ].join( "/" ) );
+            worker.onmessage = function ( event ) {
+                block.innerHTML = event.data;
+            };
+
+            worker.postMessage( block.textContent );
+        }
+    });
+};
 
 /***
  * The MDX (Markdown) Content + Runtime Injections
@@ -9,9 +24,13 @@ import Content from "./content.mdx";
  * @constructor
  */
 export const Component = () => {
+    useEffect( () => void Load(), []);
+
+    console.log(Content);
+
     return (
         <MDXProvider components={ {} }>
-            <Content/>
+            <Content.default/>
         </MDXProvider>
     );
 };

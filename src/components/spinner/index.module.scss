@@ -1,6 +1,4 @@
-.ring {
-    display: inline-block;
-}
+.ring {}
 
 .ring:after {
     content: " ";
@@ -49,31 +47,18 @@
 }
 
 .row {
-    margin-left: -15px;
-    margin-right: -15px;
-    width: 10rem;
-    display: inline-flex;
-    flex-grow: 0;
-    flex-shrink: 0;
-    align-items: normal;
-    justify-content: flex-start;
-    flex-flow: row wrap;
+    height: 42px;
 }
 
 .column {
-    box-sizing: border-box;
-    min-height: 1px;
+    left: 70px;
     position: relative;
-    width: 100%;
-    flex: 1 0 0px;
-    margin-left: 0%;
-    right: auto;
-    left: auto;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .circle {
-    max-width: fit-content;
-    margin-right: 1.0rem;
+    position: absolute;
 }
 
 //.column:first-of-type {
