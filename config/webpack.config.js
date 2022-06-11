@@ -102,9 +102,6 @@ module.exports = function (webpackEnv) {
     const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
 
     const shouldUseReactRefresh = env.raw.FAST_REFRESH;
-
-    const Remark = import("remark-frontmatter").then(($) => $.default);
-
     // common function to get style loaders
     const getStyleLoaders = (cssOptions, preProcessor) => {
         const loaders = [
