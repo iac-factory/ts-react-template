@@ -4,7 +4,7 @@
     "license": "BSD-3-Clause",
     "scripts": {
         "start": "node scripts/start.js",
-        "build": "node scripts/build.js"
+        "build": "export DISABLE_ESLINT_PLUGIN=true && node scripts/build.js"
     },
     "repository": {
         "url": "https://github.com/iac-factory/front-end",
