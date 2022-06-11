@@ -7,14 +7,12 @@ import { Shell } from "./library";
 const { Provider } = Authorization;
 const { Consumer } = Authorization;
 
+import { Login } from "./pages/login";
+
 export const Application = () => {
     const Home = Router.Dynamic( async () => import("./pages/home") );
     const Testing = Router.Dynamic( async () => import("./pages/testing") );
     const Documentation = Router.Dynamic( async () => import("./pages/documentation") );
-
-    const General = Router.Dynamic(async () => import("./pages/documentation/mdx/general"));
-
-    const Login = Router.Dynamic( async () => import("./pages/login") );
 
     return (
         <Provider>
@@ -25,12 +23,11 @@ export const Application = () => {
                         <Router.Route element={ ( <Testing/> ) } path={ "/testing" }/>
                         <Router.Route element={ ( <Documentation/> ) } path={ "/documentation" }/>
 
-                        <Router.Route path={ "*" } element={ ( <Router.Redirection.Home/> ) }/>
+                        <Router.Route path={ "*" } element={ ( <Login/> ) }/>
                     </Router.Route>
                 </Router.Route>
                 <Router.Route element={ ( <Shell/> ) }>
                     <Router.Route element={ <Login/> } path="/login"/>
-                    <Router.Route element={ ( <General/> ) } path={ "/documentation/general" }/>
                 </Router.Route>
             </Router.Routes>
         </Provider>
