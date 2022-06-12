@@ -3,6 +3,8 @@ import { Extractor } from "./extractor";
 import type { Event } from "./form";
 import type { Session } from "./provider";
 
+import { Local, useLocalStorage } from "../../library";
+
 /***
  * Login Form Submit Event Handler
  * ---
@@ -31,24 +33,28 @@ export const Handler = ( event: Event, session: Session ) => {
     input.set( "password", data.password );
 
     try {
-        void fetch( process.env[ "REACT_APP_API_ENDPOINT" ] + "/login", {
+        void fetch( process.env[ "REACT_APP_API_ENDPOINT" ] + "/authorization/jwt", {
             method: "POST",
             body: input
         } ).then( async ( response ) => {
             const status = response.status;
             const value = await response.text();
 
-            ( status === 200 ) && sessionStorage.setItem( "JWT", value );
-            ( status === 200 ) && localStorage.setItem( "IO.IaC-Factory.JWT", value );
+            ( status === 200 ) && sessionStorage.setItem( process.env[ "REACT_APP_SESSION_STORAGE_JWT_KEY" ], value );
+            ( status === 200 ) && await Local.setItem(process.env["REACT_APP_LOCAL_STORAGE_JWT_KEY"], value, (exception, value) => {
+                if (exception) throw exception;
+
+                console.log("Local Storage JWT Update", { value });
+            });
 
             try {
                 session.authorization.login( username, () => {
                     session.navigate( session.location.state.from ?? "/", { replace: true } );
                 } );
-            } catch (exception) {
-                console.debug("[Debug] Exception Caught in Authorization Handler", exception);
+            } catch ( exception ) {
+                console.debug( "[Debug] Exception Caught in Authorization Handler", exception );
                 session.authorization.login( username, () => {
-                    session.navigate("/", { replace: false } );
+                    session.navigate( "/", { replace: false } );
                 } );
             }
         } );

@@ -1,11 +1,10 @@
-import { React } from ".";
+import type { Location, NavigateFunction } from ".";
+import { Outlet, React, useLocation, useNavigate } from ".";
 
-import { Outlet } from ".";
-import { useLocation } from ".";
-import { useNavigate } from ".";
+import { Spinner, Text } from "../library";
 
-import type { Location } from ".";
-import type { NavigateFunction } from ".";
+import { Local, useLocalStorage } from "../library/storage";
+import { useState } from "react";
 
 export module Authorization {
     /***
@@ -47,29 +46,33 @@ export module Authorization {
     export const Provider = ( { children }: { children?: React.ReactNode } ) => {
         const [ user, setUser ] = React.useState<User>( null );
 
-        const login = ( username: string, callback: (() => void) ) => {
-            console.log(username);
+        const [ jwt, setJWT ] = useLocalStorage( "JWT", null );
 
-            (username) && setUser({
+        const login = ( username: string, callback: ( () => void ) ) => {
+            console.log( "Provider User Login Context", username );
+
+            ( username ) && setUser( {
                 username,
                 expiration: "...",
                 uid: "...",
                 name: "..."
-            });
+            } );
 
-            console.log(user, callback);
+            console.log( user, callback );
 
             return void callback();
         };
 
-        const logout = ( callback: (() => void) ) => {
+        const logout = ( callback: ( () => void ) ) => {
             return void setTimeout( callback, 1000 * 10000 );
         };
 
         const attribution = {
             user,
             login,
-            logout
+            logout,
+            jwt,
+            setJWT
         } as const;
 
         return (
@@ -83,21 +86,82 @@ export module Authorization {
 
     /*** @see {@link Context} */
     export const Consumer = () => {
+        const loading = useState( true );
+
         const location = useLocation();
         const authorization = useAuthorization();
         const navigate = useNavigator();
 
-        React.useEffect(() => {
-            if ( !authorization["user"] ) {
+        const jwt = useLocalStorage( "JWT" );
+
+        React.useEffect( () => {
+            /***
+             * Oddly enough, during the same session where a user may lose both context and localstorage,
+             * the React.useEffect conditional can still pass. Therefore, it's required to, again, try
+             * and pull from localstorage.
+             */
+
+            const update = async () => {
+                const token: string = await Local.getItem( process.env[ "REACT_APP_LOCAL_STORAGE_JWT_KEY" ], ( exception, value ) => {
+                    if ( exception ) throw exception;
+
+                    /***
+                     * If within the following context, the browser session did derive a JWT. However, if a JWT is present,
+                     * but the user context is not, an API call now needs to be made to attempt to get that information. First
+                     * the user authorization object is checked.
+                     */
+
+                    console.log( "Update Post-Validation (Authorization)", authorization[ 0 ] );
+
+                    ( typeof jwt[ 1 ] !== "string" ) && jwt[ 1 ]( value );
+
+                    console.log( "Update Post-Validation (JWT)", value );
+
+                    return value;
+                } );
+
+                if ( token ) {
+                    const input = new URLSearchParams();
+
+                    input.set( "jwt", token );
+
+                    const validation = await fetch( process.env[ "REACT_APP_API_ENDPOINT" ] + "/authorization", {
+                        method: "POST",
+                        mode: "cors",
+                        body: input
+                    } );
+
+                    if (validation.status === 200) {
+                        const data = await validation.json();
+
+                        setTimeout(() => authorization.login(data.username as string, () => loading[1](false)), 1000);
+                    } else {
+                        void await Local.clear( ( exception ) => {
+                            if ( exception ) throw exception;
+                            navigate( "/login", {
+                                state: { from: location },
+                                replace: true
+                            } );
+                        } );
+                    }
+                }
+            };
+
+            if ( !authorization[ "user" ] && !jwt[ 0 ] ) {
                 // Redirect the user to the /login page, but save the current location that
                 // was attempted; such allows the web-application to send them the user back
                 // to the originally attempted page.
 
-                navigate("/login", { state: { from: location }, replace: true } );
-            }
-        });
+                setTimeout( () => {
+                    navigate( "/login", {
+                        state: { from: location },
+                        replace: true
+                    } );
+                }, 1000 );
+            } else return () => void update();
+        }, [] );
 
-        return (<Outlet/>);
+        return ( loading[ 0 ] ) ? <Spinner children={ ( <Text input={ "Authorizing ..." }/> ) }/> : ( <Outlet/> );
     };
 
     /*** @see {@link Context} */
@@ -121,5 +185,6 @@ export module Authorization {
         readonly expiration: string;
     }
 }
+
 
 export default Authorization;

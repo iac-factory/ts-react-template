@@ -3,6 +3,16 @@
     const target = self.hljs.highlightAuto(event.data, [
         "javascript",
         "typescript",
+        "yaml",
+        "sql",
+        "swift",
+        "scss",
+        "rust",
+        "nginx",
+        "markdown",
+        "dockerfile",
+        "c",
+        "bash",
         "json",
         "json5"
     ]);
