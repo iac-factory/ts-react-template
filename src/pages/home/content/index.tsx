@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import React from "react";
 
 import { Component } from "./mdx-component";
 import Styles from "./index.module.scss";
@@ -15,11 +15,9 @@ import Styles from "./index.module.scss";
  */
 const Content = ( { children } ) => {
     return (
-        <Suspense fallback={ ( null ) }>
-            <div className={ Styles.content }>
-                { children }
-            </div>
-        </Suspense>
+        <div className={ Styles.content }>
+            { children }
+        </div>
     );
 };
 
@@ -41,3 +39,5 @@ export const Page = () => {
 };
 
 export default Page;
+
+export { Table } from "./components";

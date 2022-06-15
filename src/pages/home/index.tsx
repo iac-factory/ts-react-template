@@ -1,10 +1,10 @@
 import { lazy as Loader, Suspense } from "react";
 
 export const Home = () => {
-    const Content = Loader( () => import("./content") );
+    const Content = Loader( async () => import("./content") );
 
     return (
-        <Suspense fallback={ null }>
+        <Suspense>
             <Content/>
         </Suspense>
     );

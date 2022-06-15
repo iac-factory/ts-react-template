@@ -42,7 +42,7 @@
         "pretty": true,
         "removeComments": false,
         "skipLibCheck": true,
-        "jsx": "react-jsx",
+        "jsx": "preserve",
         "strict": false,
         "target": "ESNext",
         "sourceRoot": "."

@@ -26,8 +26,6 @@ const Load = async () => {
 export const Component = () => {
     useEffect( () => void Load(), []);
 
-    console.log(Content);
-
     return (
         <MDXProvider components={ {} }>
             <Content.default/>
