@@ -4,7 +4,7 @@ export const Home = () => {
     const Content = Loader( async () => import("./content") );
 
     return (
-        <Suspense>
+        <Suspense fallback={ (<></>) }>
             <Content/>
         </Suspense>
     );

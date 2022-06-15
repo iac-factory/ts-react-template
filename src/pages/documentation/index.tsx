@@ -6,7 +6,7 @@ export const Documentation = () => {
     const Page = React.lazy(async () => import("./mdx"));
     
     return (
-        <Suspense>
+        <Suspense fallback={ (<></>) }>
             <Page/>
         </Suspense>
     );

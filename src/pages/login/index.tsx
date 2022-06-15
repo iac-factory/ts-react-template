@@ -4,7 +4,7 @@ export const Login = () => {
     const Page = React.lazy(async () => import("./form"));
 
     return (
-        <Suspense>
+        <Suspense fallback={ (<></>) }>
             <Page/>
         </Suspense>
     );
