@@ -1,7 +1,6 @@
-.component {
-}
+.component {}
 
-@mixin productive-motion() {
+@mixin productive-motion () {
     // transition: all 150ms cubic-bezier(0.2, 0.2, 0.38, 0.9);
     transition: all 100ms cubic-bezier(.2, 0, .38, .9);
 }
@@ -19,29 +18,12 @@
 @mixin apply-hover($color: var(--global-background-hover)) {
     @include hover();
 
-    thead {
-        text-align: left;
-        vertical-align: middle;
-
-        tr:first-of-type:hover {
-            background-color: var(--global-background-table-header-hover);
-        }
-    }
-
-    tbody {
-        tr:hover {
-            background-color: var(--global-background-hover-subtle-01);
-        }
-    }
-
-    tfoot {
-        tr:hover {
-            background-color: var(--global-background-hover-subtle-01);
-        }
+    tr:hover {
+        background-color: $color;
     }
 }
 
-@mixin vertical-strips() {
+@mixin vertical-strips () {
     td:nth-child(odd) {
         background-color: rgba(255, 255, 255, 0.5);
     }
@@ -52,10 +34,10 @@
 }
 
 table, tbody, tr, td {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    border-spacing: 0;
+    //margin: 0;
+    //padding: 0;
+    //border: 0;
+    //border-spacing: 0;
 
     @include productive-motion();
 }
@@ -74,10 +56,7 @@ table, tbody, tr, td {
     will-change: opacity;
     display: inline-flex;
     @include productive-motion();
-}
 
-span.active {
-    width: 100%;
 }
 
 .hidden {
@@ -123,16 +102,11 @@ span.active {
 
 table.component {
     width: 100%;
-    background-color: var(--global-background-table);
 
     .caption {
         text-align: left;
 
         padding: 0.25rem 0.5rem 0.5rem;
-
-        border: var(--global-border-subtle-00) solid 1.0px;
-
-        border-bottom: var(--global-background-table-header) solid 1.0px;;
     }
 
     .text {
@@ -140,9 +114,8 @@ table.component {
     }
 
     td {
-        padding-left: 1.0rem;
-        padding-right: 1.0rem;
-        border-bottom: var(--global-border-subtle-00) solid 1.0px;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
     }
 
     td:first-of-type {
@@ -152,21 +125,14 @@ table.component {
         padding-left: 0.35rem;
         padding-right: 0.35rem;
 
-        border-left: var(--global-border-subtle-00) solid 1.0px;
-
         svg {
             width: 32px;
             max-width: 32px;
         }
     }
 
-    td:last-of-type {
-        border-right: var(--global-border-subtle-00) solid 1.0px;
-    }
-
     thead:first-of-type {
         background-color: var(--global-background-table-header);
-        font-weight: 600;
     }
 
     &.hover {
@@ -178,6 +144,7 @@ table.component {
     }
 
     .row {
+        border: 1px solid purple;
     }
 
     .cell {
@@ -194,13 +161,5 @@ table.component {
         display: flex;
         margin-left: 0;
         margin-right: auto;
-
-        & + input[type=checkbox] {
-            display: none;
-        }
     }
-}
-
-.hide {
-    display: none;
 }

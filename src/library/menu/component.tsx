@@ -4,13 +4,16 @@ import { Navigator } from ".";
 import { External } from ".";
 import { Content } from ".";
 import { Divider } from ".";
+import { TagModal } from ".";
 import { Vertex } from ".";
 import { Global } from ".";
 import { Panel } from ".";
 import { Item } from ".";
 import { List } from ".";
+import { Tag } from ".";
 
 import "./index.scss";
+import React from "react";
 
 /***
  * Consider Adding breakpoint (@media (min-width: 1320px)) for Menu Panels
@@ -55,6 +58,8 @@ export module Component {
                     </Content>
                 </Panel>
                 <Item title={ "MDX" } reload={ false } overwrite={"/documentation"}/>
+                <Tag title={"Test"}/>
+                <TagModal/>
             </Navigator>
         ) : (
             <Navigator>

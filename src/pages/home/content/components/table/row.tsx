@@ -9,7 +9,7 @@ export const Row = (properties: Component.properties) => {
     }, properties.className );
 
     return (
-        <tr className={classes}>
+        <tr /* className={classes} */>
             {
                 ( children ) ? children : null
             }

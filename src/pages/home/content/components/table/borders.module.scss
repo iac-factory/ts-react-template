@@ -20,9 +20,6 @@
     @include hover();
 
     thead {
-        text-align: left;
-        vertical-align: middle;
-
         tr:first-of-type:hover {
             background-color: var(--global-background-table-header-hover);
         }
@@ -37,6 +34,60 @@
     tfoot {
         tr:hover {
             background-color: var(--global-background-hover-subtle-01);
+        }
+    }
+}
+
+@mixin apply-borders () {
+    .caption {
+        border: var(--global-border-strong-01) solid 1.0px;
+        border-bottom: unset;
+    }
+
+    td {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        border-right: var(--global-border-subtle-00) solid 1.0px;
+        border-bottom: var(--global-border-subtle-00) solid 1.0px;
+        &:first-of-type {
+            border-left: var(--global-border-strong-01) solid 1.0px;
+        }
+        &:last-of-type {
+            border-right: var(--global-border-strong-01) solid 1.0px;
+        }
+    }
+
+    thead {
+        tr {
+            td {
+                border-top: var(--global-border-strong-01) solid 1.0px;
+                border-right: var(--global-border-strong-01) solid 1.0px;
+                border-bottom: var(--global-border-strong-01) solid 1.0px;
+            }
+
+            td:first-of-type {
+                border-left: var(--global-border-strong-01) solid 1.0px;
+            }
+
+            td:last-of-type {
+                border-right: var(--global-border-strong-01) solid 1.0px;
+            }
+        }
+    }
+
+    tfoot {
+        tr {
+            td {
+                border-bottom: var(--global-border-strong-01) solid 1.0px;
+            }
+
+            td:first-of-type {
+                border-left: var(--global-border-strong-01) solid 1.0px;
+            }
+
+            td:last-of-type {
+                border-right: var(--global-border-strong-01) solid 1.0px;
+            }
         }
     }
 }
@@ -130,9 +181,8 @@ table.component {
 
         padding: 0.25rem 0.5rem 0.5rem;
 
-        border: var(--global-border-subtle-00) solid 1.0px;
-
-        border-bottom: var(--global-background-table-header) solid 1.0px;;
+        border: var(--global-border-strong-01) solid 1.0px;
+        border-bottom: unset;
     }
 
     .text {
@@ -140,9 +190,8 @@ table.component {
     }
 
     td {
-        padding-left: 1.0rem;
-        padding-right: 1.0rem;
-        border-bottom: var(--global-border-subtle-00) solid 1.0px;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
     }
 
     td:first-of-type {
@@ -152,21 +201,14 @@ table.component {
         padding-left: 0.35rem;
         padding-right: 0.35rem;
 
-        border-left: var(--global-border-subtle-00) solid 1.0px;
-
         svg {
             width: 32px;
             max-width: 32px;
         }
     }
 
-    td:last-of-type {
-        border-right: var(--global-border-subtle-00) solid 1.0px;
-    }
-
     thead:first-of-type {
         background-color: var(--global-background-table-header);
-        font-weight: 600;
     }
 
     &.hover {
@@ -199,6 +241,8 @@ table.component {
             display: none;
         }
     }
+
+    @include apply-borders();
 }
 
 .hide {

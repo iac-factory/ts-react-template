@@ -14,6 +14,9 @@ export { FW } from "./panel";
 
 export * from "./use-external-click-detection";
 
-export { Authorization } from "../../authorization"
+export { Authorization } from "../../authorization";
+
+export { Tag } from "../../components";
+export { TagModal } from "../../components";
 
 export { Menu } from "./component";

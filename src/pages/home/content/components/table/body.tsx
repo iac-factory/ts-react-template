@@ -2,7 +2,7 @@ export const Body = (properties: Component.properties) => {
     const { children } = properties;
 
     return (
-        <tbody>
+        <tbody {... properties}>
             {
                 ( children ) ? children : null
             }
@@ -21,6 +21,7 @@ module Component {
 
     export type properties = JSX.IntrinsicAttributes & React.HTMLAttributes<{}> & Element & {
         /*** [Properties] */
+        scope?: string
     }
 }
 

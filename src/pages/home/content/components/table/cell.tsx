@@ -11,30 +11,40 @@ const UUID = () => {
 };
 
 export const Cell = ( properties: Component.properties ) => {
+    const { identifier } = properties ?? UUID();
+
     const { children } = properties ?? null;
     const { icon } = properties ?? null;
     const { span } = properties ?? null;
+    const { floater } = properties ?? null;
 
     const classes = CX( {}, properties.className );
 
     const content = React.useDeferredValue( children );
 
     return (
-        <td className={ classes } rowSpan={ span ?? 1 }>
+        <td className={ classes } rowSpan={ span ?? 1 } id={ identifier }>
             <div className={ styles.cell }>
-                <div style={ { float: "left", display: "flex" } }>
+                <div style={ {
+                    float: "left",
+                    display: "flex"
+                } }>
                     {
                         ( icon ) ? icon : null
                     }
-                    <span className={styles.text}>
+                    <span className={ styles.text }>
                         {
                             ( children ) ? content : null
                         }
                     </span>
                 </div>
-                <div style={ { float: "right" } } className={styles.text}>
-                    { "Test" }
-                </div>
+                {
+                    ( floater ) ? (
+                        <div style={ { float: "right" } } className={ styles.text }>
+                            { "Test" }
+                        </div>
+                    ) : ( <></> )
+                }
             </div>
         </td>
     );
@@ -55,6 +65,9 @@ module Component {
         icon?: JSX.Element
         content?: string
         span?: number;
+        floater?: JSX.Element;
+
+        identifier?: string;
     }
 }
 

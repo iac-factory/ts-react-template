@@ -7,22 +7,34 @@ import CXS from "classnames/bind";
 const CX = CXS.bind( styles );
 
 export const Check = ( properties: Component.properties ) => {
+    const { identifier } = properties;
+
     const classes = CX( {
         [ styles.checkbox ]: true
     }, properties.className );
+
+    const identifiers = {
+        input: [ identifier, "input" ].join( "-" ),
+        cell: [ identifier, "cell" ].join( "-" )
+    };
 
     const { toolbar } = properties;
 
     const check = React.useState( properties.initial ?? false );
 
     const handleClick = () => {
+        const checkbox = document.getElementById( identifiers.input ) as HTMLInputElement;
+
         check[ 1 ]( !check[ 0 ] );
-        toolbar[ 1 ]( check[ 0 ] );
+        toolbar[ 1 ]( checkbox.checked );
     };
 
     return (
-        <td>
-            <div className={ classes } onClick={ handleClick } { ... { ... properties, ... { toolbar: (toolbar) ? "true" : "false" } } }>
+        <td id={ identifiers.cell }>
+            <div className={ classes } onClick={ handleClick } { ...{ ...properties, ...{ toolbar: ( toolbar ) ? "true" : "false" } } }>
+                <input id={ identifiers.input } type={ "checkbox" } className={ styles.hide } checked={ check[ 0 ] } onChange={ ( event ) => {
+                    event.target.checked = !check[ 0 ];
+                } }/>
                 {
                     ( check[ 0 ] ) ? ( <Icons.Checked.Checkbox/> ) : ( <Icons.Checkbox/> )
                 }
@@ -42,6 +54,7 @@ module Component {
     }
 
     export type properties = JSX.IntrinsicAttributes & React.HTMLAttributes<{}> & Element & {
+        identifier: string;
         initial?: boolean;
         minimal?: boolean;
         toolbar: [ { count: number; }, React.Dispatch<boolean> ];
