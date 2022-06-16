@@ -16,7 +16,6 @@ export * from "./use-external-click-detection";
 
 export { Authorization } from "../../authorization";
 
-export { Tag } from "../../components";
-export { TagModal } from "../../components";
+export { Modal } from "../../components";
 
 export { Menu } from "./component";

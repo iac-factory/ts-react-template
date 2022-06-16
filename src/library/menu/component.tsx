@@ -4,13 +4,12 @@ import { Navigator } from ".";
 import { External } from ".";
 import { Content } from ".";
 import { Divider } from ".";
-import { TagModal } from ".";
+import { Modal } from ".";
 import { Vertex } from ".";
 import { Global } from ".";
 import { Panel } from ".";
 import { Item } from ".";
 import { List } from ".";
-import { Tag } from ".";
 
 import "./index.scss";
 import React from "react";
@@ -58,8 +57,7 @@ export module Component {
                     </Content>
                 </Panel>
                 <Item title={ "MDX" } reload={ false } overwrite={"/documentation"}/>
-                <Tag title={"Test"}/>
-                <TagModal/>
+                <Modal/>
             </Navigator>
         ) : (
             <Navigator>
