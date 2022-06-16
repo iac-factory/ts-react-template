@@ -17,12 +17,12 @@ export const Check = ( properties: Component.properties ) => {
 
     const handleClick = () => {
         check[ 1 ]( !check[ 0 ] );
-        toolbar[1](check[0]);
+        toolbar[ 1 ]( check[ 0 ] );
     };
 
     return (
         <td>
-            <div className={ classes } onClick={ handleClick } { ...properties }>
+            <div className={ classes } onClick={ handleClick } { ... { ... properties, ... { toolbar: (toolbar) ? "true" : "false" } } }>
                 {
                     ( check[ 0 ] ) ? ( <Icons.Checked.Checkbox/> ) : ( <Icons.Checkbox/> )
                 }
@@ -44,7 +44,7 @@ module Component {
     export type properties = JSX.IntrinsicAttributes & React.HTMLAttributes<{}> & Element & {
         initial?: boolean;
         minimal?: boolean;
-        toolbar: [{ count: number; }, React.Dispatch<boolean>];
+        toolbar: [ { count: number; }, React.Dispatch<boolean> ];
     }
 }
 

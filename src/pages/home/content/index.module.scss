@@ -1,10 +1,10 @@
 @mixin enable-selection() {
-    -webkit-user-select: text; /* Safari */
-    -khtml-user-select:  text; /* Konqueror HTML */
-    -moz-user-select:    text; /* Old versions of Firefox */
-    -ms-user-select:     text; /* Internet Explorer/Edge */
+    -webkit-user-select: auto; /* Safari */
+    -khtml-user-select:  auto; /* Konqueror HTML */
+    -moz-user-select:    auto; /* Old versions of Firefox */
+    -ms-user-select:     auto; /* Internet Explorer/Edge */
 
-    user-select:         text;
+    user-select:         auto;
 }
 
 @mixin disable-selection() {
@@ -25,8 +25,7 @@
 }
 
 .content {
-    margin-top: 1.0rem;
-    @include disable-selection();
+    // @include disable-selection();
 
     code {
         @include enable-selection();
@@ -59,6 +58,7 @@
     }
 
     p {
+        line-height: 1.35rem;
         code {
             @include inline-code();
         }
@@ -75,7 +75,7 @@
         margin-top:       0.75rem;
         margin-bottom:    0.75rem;
 
-        line-height:      1.315rem;
+        line-height:      1.435rem;
     }
 
     a {}

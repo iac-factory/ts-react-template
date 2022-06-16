@@ -4,7 +4,7 @@ import { ReactComponent as Fill } from "./checkbox-checked-filled.svg";
 export module Checked {
     export const Checkbox = () => {
         return (
-            <Baseline fill={"white"}/>
+            <Baseline fill={"white"} height={32} width={32}/>
         );
     };
 

@@ -17,17 +17,24 @@ export const Cell = ( properties: Component.properties ) => {
 
     const classes = CX( {}, properties.className );
 
+    const content = React.useDeferredValue( children );
+
     return (
         <td className={ classes } rowSpan={ span ?? 1 }>
             <div className={ styles.cell }>
-                <>
+                <div style={ { float: "left", display: "flex" } }>
                     {
                         ( icon ) ? icon : null
                     }
-                    {
-                        ( children ) ? children : null
-                    }
-                </>
+                    <span className={styles.text}>
+                        {
+                            ( children ) ? content : null
+                        }
+                    </span>
+                </div>
+                <div style={ { float: "right" } } className={styles.text}>
+                    { "Test" }
+                </div>
             </div>
         </td>
     );

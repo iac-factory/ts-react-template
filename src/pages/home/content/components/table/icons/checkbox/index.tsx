@@ -1,11 +1,11 @@
-import { ReactComponent as Base } from "./checkbox.svg";
+import { ReactComponent as Baseline } from "./checkbox.svg";
 
 export * from "./indeterminate";
 export * from "./checked";
 
 export const Checkbox = () => {
     return (
-        <Base fill={"white"}/>
+        <Baseline fill={"white"} height={24} width={24}/>
     );
 };
 

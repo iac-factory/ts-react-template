@@ -60,14 +60,14 @@ export const Table = ( properties: Component.properties ) => {
     const toolbar = React.useReducer(reducer, { count: 0 });
 
     const Icon = () => (
-        <Add size={16}/>
+        <Add size={16} style={{ height: "auto" }}/>
     );
 
     // React.useEffect( Columns, [] );
 
     return (
         <Wrapper className={ classes } id={ Identifier } toolbar={toolbar}>
-            <Header>
+            <Header scope={"column"}>
                 <Row>
                     <Check toolbar={toolbar}/>
                     <Cell icon={(<Icon/>)}>

@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 
-import { Spinner, Text, Outlet, Grid, Container } from "..";
+import { Spinner, Text, Outlet, Grid, Container, Responsive } from "..";
 
 import { Menu } from "..";
 import { Footer } from "..";
@@ -27,11 +27,13 @@ export const Shell = ( { children }: { children? } ): JSX.Element => {
         <>
             <Menu/>
             <Container>
-                <Grid>
-                    <Suspense fallback={ ( <Awaitable/> ) }>
-                        <Proxy/>
-                    </Suspense>
-                </Grid>
+                {/*<Responsive>*/ }
+                {/*    <Grid>*/ }
+                <Suspense fallback={ ( <Awaitable/> ) }>
+                    <Proxy/>
+                </Suspense>
+                {/*    </Grid>*/ }
+                {/*</Responsive>*/ }
             </Container>
             <Footer.Component/>
         </>
