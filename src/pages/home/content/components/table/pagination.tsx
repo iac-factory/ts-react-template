@@ -1,31 +1,9 @@
-import styles from "./pagination.module.scss";
+import React from "react";
 import CXS from "classnames/bind";
-
-import React, { FormEvent } from "react";
 
 const CX = CXS.bind( styles );
 
-import { Down } from "./icons";
-
-const Form = (initial: number) => {
-    const Select = document.createElement("select");
-    Select.id = "total-page-items";
-
-    const options = [
-        10, 20, 50, 200
-    ];
-
-    options.forEach((option) => {
-        const Option = document.createElement("option");
-
-        Option.value = String(option);
-        Option.selected = ( parseInt( Option.value ) === initial );
-
-        Select.appendChild(Option);
-    });
-
-    return Select;
-};
+import styles from "./pagination.module.scss";
 
 export const Pagination = ( { total }: Component.properties ) => {
     const classes = {
@@ -44,7 +22,8 @@ export const Pagination = ( { total }: Component.properties ) => {
                 }
                 </span>
                 <select id={ "total-page-items" } value={total[0]} onChange={ (event) => {
-                    console.log(event.target.value);
+                    console.debug("[Debug] [Pagination] Selection Event", event.target.value);
+
                     total[1](parseInt(event.target.value));
                 }}>
                     <option value={"10"} /* selected={(total[0] === 10)} */>

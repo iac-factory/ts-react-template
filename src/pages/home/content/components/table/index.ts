@@ -7,6 +7,8 @@ export * from "./body";
 export * from "./cell";
 export * from "./row";
 export * from "./pagination";
+export * from "./data";
+export * from "./generator";
 
 export * from "./form-handle";
 

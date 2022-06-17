@@ -12,11 +12,7 @@ export const Header = (properties: Component.properties) => {
     );
 };
 
-import type CSS from "csstype";
-
 module Component {
-    type Attribution = CSS.HtmlAttributes;
-
     export interface Element extends React.HTMLAttributes<HTMLTableCellElement> {
         /*** [Attributes] */
     }

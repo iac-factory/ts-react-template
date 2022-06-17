@@ -1,7 +1,7 @@
 import React from "react";
-import { Loading, Defaults } from ".";
-
 import Spinner from "react-spinkit";
+
+import { Loading, Defaults } from ".";
 
 export module User {
     /***
@@ -93,8 +93,7 @@ export module User {
                     { ( {
                             show,
                             hide,
-                            loading,
-                            message
+                            loading
                         } ) => {
                         return (
                             <React.Fragment>

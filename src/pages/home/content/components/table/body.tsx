@@ -12,11 +12,7 @@ export const Body = (properties: Component.properties) => {
     );
 };
 
-import type CSS from "csstype";
-
 module Component {
-    type Attribution = CSS.HtmlAttributes;
-
     interface Element extends React.HTMLAttributes<HTMLTableElement> {
         /*** [Attributes] */
     }

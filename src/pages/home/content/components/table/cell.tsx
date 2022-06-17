@@ -1,8 +1,10 @@
-import styles from "./index.module.scss";
+import React from "react";
 
 import CXS from "classnames/bind";
 
 const CX = CXS.bind( styles );
+
+import styles from "./index.module.scss";
 
 const UUID = () => {
     return {
@@ -50,12 +52,7 @@ export const Cell = ( properties: Component.properties ) => {
     );
 };
 
-import type CSS from "csstype";
-import React from "react";
-
 module Component {
-    type Attribution = CSS.HtmlAttributes;
-
     interface Element extends React.HTMLAttributes<HTMLTableCellElement> {
         /*** [Attributes] */
     }

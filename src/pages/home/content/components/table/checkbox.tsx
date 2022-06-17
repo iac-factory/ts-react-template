@@ -1,4 +1,4 @@
-import styles from "./index.module.scss";
+import React from "react";
 
 import * as Icons from "./icons";
 
@@ -6,9 +6,9 @@ import CXS from "classnames/bind";
 
 const CX = CXS.bind( styles );
 
-export const All = ( properties: Component.header ) => {
-    const { identifier } = properties;
+import styles from "./index.module.scss";
 
+export const All = ( properties: Component.header ) => {
     const classes = CX( {
         [ styles.checkbox ]: true
     }, properties.className );
@@ -18,9 +18,9 @@ export const All = ( properties: Component.header ) => {
     };
 
     return (
-        <td id={ [ identifier, "checkbox-element" ].join( "-" ) }>
+        <td>
             <div className={ classes } onClick={ handleClick }>
-                <input id={ [ identifier, "input" ].join( "-" ) } type={ "checkbox" } className={ styles.hide } checked={ properties.isAllChecked } onChange={ ( event ) => {
+                <input type={ "checkbox" } className={ styles.hide } checked={ properties.isAllChecked } onChange={ ( event ) => {
                     event.target.checked = !properties.isAllChecked;
                 } }/>
                 {
@@ -79,50 +79,7 @@ export const Check = ( properties: Component.properties ) => {
     );
 };
 
-// export const Check = ( properties: Component.properties ) => {
-//     const { identifier } = properties;
-//     const { checkbox } = properties;
-//
-//     const classes = CX( {
-//         [ styles.checkbox ]: true
-//     }, properties.className );
-//
-//     const identifiers = {
-//         input: identifier,
-//         cell: [ identifier, "cell" ].join( "-" )
-//     };
-//
-//     const { toolbar } = properties;
-//
-//     const handleClick = () => {
-//         const checkbox = document.getElementById( identifiers.input ) as HTMLInputElement;
-//
-//         checkbox[ 1 ]( !checkbox[ 0 ] );
-//         toolbar[ 1 ]( checkbox.checked );
-//     };
-//
-//     const dataset = { [ [ "data", User.Dataset ].join( "-" ) ]: crypto.randomUUID() };
-//
-//     return (
-//         <td id={ identifiers.cell }>
-//             <div className={ classes } onClick={ () => checkbox[1](!checkbox[0]) } { ...{ ...properties, ...{ toolbar: ( toolbar ) ? "true" : "false" } } }>
-//                 <Checkbox id={identifiers.input} type={"checkbox"} className={ styles.hide } name={identifiers.input} isChecked={checkbox[0]} handleClick={ ( event ) => {
-//                     event.target.checked = !checkbox[ 0 ];
-//                 } } { ... dataset }/>
-//                 {
-//                     ( checkbox[ 0 ] ) ? ( <Icons.Checked.Checkbox/> ) : ( <Icons.Checkbox/> )
-//                 }
-//             </div>
-//         </td>
-//     );
-// };
-
-import type CSS from "csstype";
-import React from "react";
-
 module Component {
-    type Attribution = CSS.HtmlAttributes;
-
     interface Element extends React.HTMLAttributes<HTMLDivElement> {
         /*** [Attributes] */
     }
@@ -131,21 +88,13 @@ module Component {
         id: string;
         type: string;
         name: string;
-        minimal?: boolean;
-        // isChecked: boolean;
-        // handleCheck: React.Dispatch<boolean>;
+
         checkbox: [ string[], React.Dispatch<React.MouseEvent<HTMLDivElement, MouseEvent>> ];
-        // toolbar: [ { count: number; }, React.Dispatch<boolean> ];
     }
 
     export type header = JSX.IntrinsicAttributes & React.HTMLAttributes<{}> & Element & {
-        identifier: string;
-        initial?: boolean;
-        minimal?: boolean;
         isAllChecked?: boolean;
         handleCheckAll?: React.Dispatch<boolean>;
-        // checkbox: [ boolean, React.Dispatch<boolean> ];
-        // toolbar: [ { count: number; }, React.Dispatch<boolean> ];
     }
 }
 

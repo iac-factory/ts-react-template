@@ -1,11 +1,10 @@
 import React from "react";
 
-import Data from "./data";
-
-import styles from "./index.module.scss";
 import { Toolbar } from "./toolbar";
 
 import { User } from "./form-handle";
+
+import styles from "./index.module.scss";
 
 function Container( { children } ) {
     return (
@@ -26,7 +25,7 @@ export const Tabular = ( properties?: Component.properties ) => {
             <Container>
                 <table { ...{ ...properties, ...{ toolbar: ( toolbar ) ? "true" : "false" } } } width={ width ?? "auto" }>
                     <caption className={ styles.caption }>
-                        <Toolbar active={ toolbar } caption={ "Alien Football Stars" }/>
+                        <Toolbar active={ toolbar } caption={ "Users" }/>
                     </caption>
                     {
                         ( children ) ? children : null

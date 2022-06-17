@@ -3,7 +3,7 @@ import React from "react";
 export const Loading = React.createContext({
     loading: false,
     message: null,
-    show: (message?: string) => {},
+    show: () => {},
     hide: () => {}
 });
 
