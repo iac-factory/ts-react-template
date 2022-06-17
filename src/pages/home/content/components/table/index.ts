@@ -6,5 +6,8 @@ export * from "./checkbox";
 export * from "./body";
 export * from "./cell";
 export * from "./row";
+export * from "./pagination";
+
+export * from "./form-handle";
 
 export { Table as default } from "./component";

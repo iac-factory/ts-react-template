@@ -1,10 +1,15 @@
-- [ Tabs ](https://react-headless-tabs.pierluc.io/#documentation)
-- [ Sidebars ](https://github.com/davidde/sidebars)
-- [Drowndown Menu](https://codepen.io/remilaudanski/pen/gbBGyN)
-- [Login Form](https://codepen.io/fghty/pen/PojKNEG)
-- [500 Error](https://codepen.io/quinlo/pen/aajEyb)
-- [Skeleton Loading](https://freefrontend.com/css-skeleton-loadings/)
-- 
+## Content Philosophies ##
+
+- Has a clear point of view
+- Is simple and logical
+- Builds on solid research, data, and analysis
+- Is intellectually ambitious, expressing a bigger idea
+- Is persuasive, not poetic
+- Is confident, but not boastful
+- Only ever uses figurative language for emphasis
+- Elevates facts and outcomes
+- Engages the thinker by speaking like the thinker
+
 ## Release Tagging ##
 
 **Example**

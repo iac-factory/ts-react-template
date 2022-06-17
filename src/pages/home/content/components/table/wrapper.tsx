@@ -1,8 +1,9 @@
 import React from "react";
 
 import styles from "./index.module.scss";
+import { Toolbar } from "./toolbar";
 
-const CX = CXS.bind( styles );
+import { User } from "./form-handle";
 
 function Container( { children } ) {
     return (
@@ -12,39 +13,6 @@ function Container( { children } ) {
     );
 }
 
-const Toolbar = ( {
-                      active,
-                      caption
-                  } ) => {
-    const classes = CX( {
-        [ styles.toolbar ]: true
-    }, ( active[ 0 ].count > 0 ) ? styles.active : styles.hidden );
-
-    const count = React.useDeferredValue( { value: active[ 0 ].count } );
-
-    React.useEffect( () => {
-        count.value = active[ 0 ].count;
-    }, [ active ] );
-    return (
-        <>
-            <span className={ ( styles.active ) }>{ caption }</span>
-
-            <div className={ classes }>
-                {
-                    ( count.value > 0 ) ? ( count.value )
-                        : (
-                            <data style={ { opacity: 0 } }>
-                                {
-                                    count.value
-                                }
-                            </data>
-                        )
-                }
-            </div>
-        </>
-    );
-};
-
 export default Tabular;
 export const Tabular = ( properties?: Component.properties ) => {
     const { toolbar } = properties;
@@ -52,25 +20,22 @@ export const Tabular = ( properties?: Component.properties ) => {
     const { width } = properties;
 
     return (
-        <Container>
-            <table { ...{ ...properties, ...{ toolbar: ( toolbar ) ? "true" : "false" } } } width={ width ?? "auto" }>
-                <caption className={ styles.caption }>
-                    <Toolbar active={ toolbar } caption={ "Alien Football Stars" }/>
-                </caption>
-                {
-                    ( children ) ? children : null
-                }
-            </table>
-        </Container>
+        <form id={ "form" } onSubmit={ ( event ) => User.Submit( event, properties.loader[ 1 ] ?? undefined ) }>
+            <Container>
+                <table { ...{ ...properties, ...{ toolbar: ( toolbar ) ? "true" : "false" } } } width={ width ?? "auto" }>
+                    <caption className={ styles.caption }>
+                        <Toolbar active={ toolbar } caption={ "Alien Football Stars" }/>
+                    </caption>
+                    {
+                        ( children ) ? children : null
+                    }
+                </table>
+            </Container>
+        </form>
     );
 };
 
-import type CSS from "csstype";
-import CXS from "classnames/bind";
-
 module Component {
-    type Attribution = CSS.HtmlAttributes;
-
     interface Element extends React.HTMLAttributes<HTMLTableElement> {
         /*** [Properties] */
     }
@@ -78,6 +43,7 @@ module Component {
     export type properties = JSX.IntrinsicAttributes & React.HTMLAttributes<{}> & Element & {
         small?: boolean;
         width?: number;
+        loader?: [ boolean, React.Dispatch<boolean> ];
         toolbar: [ { count: number; }, React.Dispatch<boolean> ];
     }
 }

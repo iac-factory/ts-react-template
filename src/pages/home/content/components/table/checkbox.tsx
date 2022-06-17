@@ -6,6 +6,8 @@ import CXS from "classnames/bind";
 
 const CX = CXS.bind( styles );
 
+import { User } from "./form-handle";
+
 export const Check = ( properties: Component.properties ) => {
     const { identifier } = properties;
 
@@ -14,7 +16,7 @@ export const Check = ( properties: Component.properties ) => {
     }, properties.className );
 
     const identifiers = {
-        input: [ identifier, "input" ].join( "-" ),
+        input: identifier,
         cell: [ identifier, "cell" ].join( "-" )
     };
 
@@ -29,10 +31,12 @@ export const Check = ( properties: Component.properties ) => {
         toolbar[ 1 ]( checkbox.checked );
     };
 
+    const dataset = { [ [ "data", User.Dataset ].join( "-" ) ]: crypto.randomUUID() };
+
     return (
         <td id={ identifiers.cell }>
             <div className={ classes } onClick={ handleClick } { ...{ ...properties, ...{ toolbar: ( toolbar ) ? "true" : "false" } } }>
-                <input id={ identifiers.input } type={ "checkbox" } className={ styles.hide } checked={ check[ 0 ] } onChange={ ( event ) => {
+                <input { ... dataset } id={ identifiers.input } type={ "checkbox" } className={ styles.hide } checked={ check[ 0 ] } onChange={ ( event ) => {
                     event.target.checked = !check[ 0 ];
                 } }/>
                 {

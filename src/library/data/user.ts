@@ -1,8 +1,6 @@
 import { faker } from "@faker-js/faker";
 
 export module User {
-    export const dataset = [];
-
     export function seed(entropy: number) {
         faker.seed(entropy);
     }
@@ -26,11 +24,13 @@ export module User {
     }
 
     export function generate(total?: number, entropy?: number): Type[] {
+        const container = [];
+
         void Array.from( { length: total ?? 10 } ).forEach( () => {
-            User.dataset.push( User.create() );
+            container.push( User.create() );
         } );
 
-        return User.dataset;
+        return container;
     }
 
     export interface Type {

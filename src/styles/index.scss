@@ -381,4 +381,15 @@
     --global-overlay: #{$overlay};
     --global-toggle-off: #{$toggle-off};
     --global-shadow: #{$shadow};
+
+    --global-background-button-primary: #{$button-background-primary};
+    --global-background-button-primary-hover: #{$button-background-primary-hover};
+    --global-background-button-primary-active-focus: #{$button-background-primary-active-focus};
+    --global-background-button-primary-active-focus-hover: #{$button-background-primary-active-focus-hover};
+
+    --global-background-button-secondary: #{$button-background-secondary};
+    --global-background-button-secondary-hover: #{$button-background-secondary-hover};
+
+    --global-background-button-tertiary: #{$button-background-tertiary};
+    --global-background-button-danger: #{$button-background-danger};
 }

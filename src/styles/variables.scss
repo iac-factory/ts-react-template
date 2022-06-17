@@ -381,6 +381,17 @@ $tag-background-warm-gray: #565151;
 $tag-color-warm-gray: #e5e0df;
 $tag-hover-warm-gray: #696363;
 
+$button-background-primary: #004bcd;
+$button-background-primary-hover: #003cb4;
+$button-background-primary-active-focus: #00379b;
+$button-background-primary-active-focus-hover: #002d91;
+
+$button-background-secondary: #6f6f6f;
+$button-background-secondary-hover: #474747;
+
+$button-background-tertiary: initial;
+$button-background-danger: #da1e28;
+
 @use "sass:map";
 
 $prefixes-by-browser: ("firefox": moz, "safari": webkit, "ie": ms);

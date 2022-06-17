@@ -5,6 +5,7 @@ import { Header } from ".";
 import { Body } from ".";
 import { Tabular } from ".";
 import { Footer } from ".";
+import { Pagination } from ".";
 
 import React from "react";
 
@@ -41,19 +42,7 @@ const Columns = ( table: string = Identifier ) => {
     }
 };
 
-function reducer( state, check: boolean ) {
-    switch ( check ) {
-        case true:
-            return { count: state.count - 1 };
-        case false:
-            return { count: state.count + 1 };
-        default:
-            throw new Error();
-    }
-}
-
 /*** Complexity Here Cannot be Avoided without Excessive Module Separation */
-/*** Various attempts were made ... */
 export module Generator {
     export interface Input {
         Headers: { identifier: string, cells: { header: string }[], toolbar: [ { count: number; }, React.Dispatch<boolean> ] };
@@ -82,7 +71,7 @@ export module Generator {
         );
     };
 
-    export const Content = ( properties: Input["Body"] ) => {
+    export const Content = ( data, properties: Input["Body"] ) => {
         const Context = ( element ) => {
             return properties.cells.map(
                 ( property, index ) => {
@@ -100,7 +89,7 @@ export module Generator {
         return (
             <Body scope={ "row" }>
                 {
-                    React.useMemo( () => Data, [ Data ] ).map( ( element, index ) => {
+                    data.map( ( element, index ) => {
                         return (
                             <Row key={ index }>
                                 <Check toolbar={ properties.toolbar } identifier={ element.id }/>
@@ -141,11 +130,22 @@ export const Table = ( properties: Component.properties ) => {
         [ styles.vertical ]: properties.vertical ?? false
     } );
 
-    const toolbar = React.useReducer( reducer, { count: 0 } );
+    const [ total, setTotal ] = React.useState( Data.length );
 
-    const Icon = () => (
-        <Add size={ 16 } style={ { height: "auto" } }/>
-    );
+    const hydration = React.useCallback( (total: number) => User.generate( total ), [ ] );
+
+    const users = React.useMemo( () => hydration(total), [ total ] );
+
+    const toolbar = React.useReducer( ( state, check: boolean ) => {
+        switch ( check ) {
+            case true:
+                return { count: state.count - 1 };
+            case false:
+                return { count: state.count + 1 };
+            default:
+                throw new Error();
+        }
+    }, { count: 0 } );
 
     const Headers = Generator.Headers( {
         identifier: "check-all-users",
@@ -158,7 +158,7 @@ export const Table = ( properties: Component.properties ) => {
         ]
     } );
 
-    const Body = Generator.Content( {
+    const Body = Generator.Content( users, {
         toolbar: toolbar,
         cells: [
             {
@@ -191,11 +191,14 @@ export const Table = ( properties: Component.properties ) => {
     } );
 
     return (
-        <Tabular className={ classes } id={ Identifier } toolbar={ toolbar }>
-            { Headers }
-            { Body }
-            { Pager }
-        </Tabular>
+        <>
+            <Tabular className={ classes } id={ Identifier } toolbar={ toolbar }>
+                { Headers }
+                { Body }
+                { Pager }
+            </Tabular>
+            <Pagination total={ [ total, setTotal ] }/>
+        </>
     );
 };
 

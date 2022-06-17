@@ -1,3 +1,5 @@
+import React from "react";
+
 export const Body = (properties: Component.properties) => {
     const { children } = properties;
 

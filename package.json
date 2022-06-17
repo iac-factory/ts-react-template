@@ -26,6 +26,7 @@
         "react-grid-system": "^8.1.5",
         "react-icons": "^4.4.0",
         "react-router-dom": "^6.3.0",
+        "react-spinkit": "^3.0.0",
         "react-syntax-highlighter": "^15.5.0",
         "resize-observer-polyfill": "^1.5.1",
         "xterm": "^4.17.0",
