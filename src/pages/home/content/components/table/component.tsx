@@ -1,6 +1,6 @@
 import { Row } from ".";
 import { Cell } from ".";
-import { Check } from ".";
+import { Check, All } from ".";
 import { Header } from ".";
 import { Body } from ".";
 import { Tabular } from ".";
@@ -10,10 +10,8 @@ import { Pagination } from ".";
 import React from "react";
 
 import styles from "./index.module.scss";
-
+import CXS from "classnames/bind";
 const CX = CXS.bind( styles );
-
-import { Add } from "@carbon/icons-react/lib";
 
 const Identifier = "table";
 
@@ -45,8 +43,12 @@ const Columns = ( table: string = Identifier ) => {
 /*** Complexity Here Cannot be Avoided without Excessive Module Separation */
 export module Generator {
     export interface Input {
-        Headers: { identifier: string, cells: { header: string }[], toolbar: [ { count: number; }, React.Dispatch<boolean> ] };
-        Body: { cells: { title: string, value?: string }[], toolbar: [ { count: number; }, React.Dispatch<boolean> ] };
+        Headers: { identifier: string, cells: { header: string }[], toolbar: [ { count: number; }, React.Dispatch<boolean> ], isAllChecked: boolean, handleCheckAll: React.Dispatch<boolean> };
+        Body: {
+            handleCheck: any;
+            isChecked: any;
+            cells: { title: string, value?: string }[]
+        };
         Footer: { cells: { header: string }[] };
     }
 
@@ -54,7 +56,8 @@ export module Generator {
         return (
             <Header scope={ "column" }>
                 <Row>
-                    <Check toolbar={ properties.toolbar } identifier={ properties.identifier }/>
+                    <All identifier={ properties.identifier } isAllChecked={ properties.isAllChecked } handleCheckAll={ properties.handleCheckAll }/>
+                    {/*<All id={ "check-all" } type={ "checkbox" } name={ "check-all-input" } isAllChecked={ properties.isAllChecked } handleCheckAll={ properties.isAllChecked }/>*/ }
                     {
                         properties.cells.map( ( element, index ) => {
                             return (
@@ -71,29 +74,29 @@ export module Generator {
         );
     };
 
-    export const Content = ( data, properties: Input["Body"] ) => {
-        const Context = ( element ) => {
-            return properties.cells.map(
-                ( property, index ) => {
-                    return (
-                        <Cell identifier={ property.title + "-" + index } key={ index }>
-                            {
-                                element[ ( property.value ) ? property.value : property.title ]
-                            }
-                        </Cell>
-                    );
-                }
-            );
-        };
+    const Context = ( properties: Input["Body"], element ) => {
+        return properties.cells.map(
+            ( property, index ) => {
+                return (
+                    <Cell identifier={ property.title + "-" + index } key={ index }>
+                        {
+                            element[ ( property.value ) ? property.value : property.title ]
+                        }
+                    </Cell>
+                );
+            }
+        );
+    };
 
+    export const Content = ( data: User.Type[], properties: Input["Body"] ) => {
         return (
             <Body scope={ "row" }>
                 {
                     data.map( ( element, index ) => {
                         return (
                             <Row key={ index }>
-                                <Check toolbar={ properties.toolbar } identifier={ element.id }/>
-                                { Context( element ) }
+                                <Check name={ element.name } id={ element.id } type={ "checkbox" } checkbox={ [ properties.isChecked, properties.handleCheck ] }/>
+                                { Context( properties, element ) }
                             </Row>
                         );
                     } )
@@ -132,9 +135,32 @@ export const Table = ( properties: Component.properties ) => {
 
     const [ total, setTotal ] = React.useState( Data.length );
 
-    const hydration = React.useCallback( (total: number) => User.generate( total ), [ ] );
+    const hydration = React.useCallback( ( total: number ) => User.generate( total ), [] );
 
-    const users = React.useMemo( () => hydration(total), [ total ] );
+    const users = React.useMemo( () => hydration( total ), [ total ] );
+
+    const [ isCheckAll, setIsCheckAll ] = React.useState( false );
+    const [ isCheck, setIsCheck ] = React.useState( [] );
+
+    // const [ list, setList ] = React.useState( [] );
+
+    const handleCheck = ( event ) => {
+        const { id } = event.target;
+        const { checked } = event.target;
+
+        setIsCheck( [ ...isCheck, id ] );
+        if ( !checked ) {
+            setIsCheck( isCheck.filter( item => item !== id ) );
+        }
+    };
+
+    const handleSelectAll = e => {
+        setIsCheckAll( !isCheckAll );
+        setIsCheck( users.map( user => user.id ) );
+        if ( isCheckAll ) {
+            setIsCheck( [] );
+        }
+    };
 
     const toolbar = React.useReducer( ( state, check: boolean ) => {
         switch ( check ) {
@@ -150,6 +176,8 @@ export const Table = ( properties: Component.properties ) => {
     const Headers = Generator.Headers( {
         identifier: "check-all-users",
         toolbar: toolbar,
+        isAllChecked: isCheckAll,
+        handleCheckAll: handleSelectAll,
         cells: [
             { header: "Name" },
             { header: "Username" },
@@ -159,7 +187,8 @@ export const Table = ( properties: Component.properties ) => {
     } );
 
     const Body = Generator.Content( users, {
-        toolbar: toolbar,
+        isChecked: isCheck,
+        handleCheck: handleCheck,
         cells: [
             {
                 title: "Name",
@@ -190,6 +219,10 @@ export const Table = ( properties: Component.properties ) => {
         ]
     } );
 
+    // React.useEffect( () => {
+    //     setList( users );
+    // }, [ list ] );
+
     return (
         <>
             <Tabular className={ classes } id={ Identifier } toolbar={ toolbar }>
@@ -202,12 +235,7 @@ export const Table = ( properties: Component.properties ) => {
     );
 };
 
-import type CSS from "csstype";
-import CXS from "classnames/bind";
-
 module Component {
-    type Attribution = CSS.HtmlAttributes;
-
     interface Element extends React.HTMLAttributes<HTMLTableElement> {
         /*** [Attributes] */
     }
@@ -216,6 +244,7 @@ module Component {
         hover?: boolean;
         vertical?: boolean;
         style?: boolean;
+        all?: [ boolean, React.Dispatch<boolean> ]
     }
 }
 

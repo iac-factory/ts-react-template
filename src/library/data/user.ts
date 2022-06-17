@@ -24,6 +24,8 @@ export module User {
     }
 
     export function generate(total?: number, entropy?: number): Type[] {
+        User.seed(entropy ?? 100);
+
         const container = [];
 
         void Array.from( { length: total ?? 10 } ).forEach( () => {
