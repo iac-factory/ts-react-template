@@ -66,7 +66,7 @@ export module Authorization {
             user,
             login,
             logout
-        } as const;
+        };
 
         return (
             <Context.Provider value={ attribution }>
