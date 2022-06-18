@@ -108,8 +108,11 @@ export module Authorization {
 
                     if ( validation.status === 200 ) {
                         const data = await validation.json();
-
-                        setTimeout( () => authorization.login( data.username as string, () => loading[ 1 ]( false ) ), 1000 );
+                        setTimeout( () => {
+                            authorization.login( data.username as string, () => {
+                                loading[ 1 ]( false );
+                            } );
+                        }, 1000 );
                     } else {
                         window.localStorage.clear();
                     }
