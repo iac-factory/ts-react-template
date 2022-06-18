@@ -12,19 +12,19 @@ type Input = { active: [ { count: number; }, React.Dispatch<boolean> ], caption?
 export const Toolbar = ( properties: Input ) => {
     const classes = CX( {
         [ styles.toolbar ]: true
-    }, ( properties.active[ 0 ].count > 0 ) ? styles.active : styles.hidden );
+    }, ( properties.active[ 0 ].count === 0 ) ? styles.active : styles.hidden );
 
     const button = CX( {
         [ tool.right ]: true,
         [ tool.icon ]: true
-    }, ( properties.active[ 0 ].count > 0 ) ? tool.active : tool.disabled );
+    }, ( properties.active[ 0 ].count === 0 ) ? tool.active : tool.disabled );
 
     return (
         <>
             <span className={ ( styles.active ) }>{ properties.caption }</span>
             <div className={ classes }>
                 <div className={ tool.toolbar }>
-                    <button className={ button } disabled={ !( properties.active[ 0 ].count > 0 ) }>
+                    <button className={ button } disabled={ !( properties.active[ 0 ].count === 0 ) }>
                         <Icons.Data className={ tool.icon } height={ 24 } width={ 24 }/> &nbsp;
                     </button>
                 </div>

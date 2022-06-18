@@ -6,7 +6,6 @@ export * from "./strings";
 export * from "./container";
 export * from "./menu";
 export * from "./footer";
-export * from "./storage";
 export * from "./data"
 
 export * from "../components";

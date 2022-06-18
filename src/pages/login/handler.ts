@@ -3,8 +3,6 @@ import { Extractor } from "./extractor";
 import type { Event } from "./form";
 import type { Session } from "./provider";
 
-import { Local, useLocalStorage } from "../../library";
-
 /***
  * Login Form Submit Event Handler
  * ---
@@ -41,11 +39,7 @@ export const Handler = ( event: Event, session: Session ) => {
             const value = await response.text();
 
             ( status === 200 ) && sessionStorage.setItem( process.env[ "REACT_APP_SESSION_STORAGE_JWT_KEY" ], value );
-            ( status === 200 ) && await Local.setItem(process.env["REACT_APP_LOCAL_STORAGE_JWT_KEY"], value, (exception, value) => {
-                if (exception) throw exception;
-
-                console.log("Local Storage JWT Update", { value });
-            });
+            ( status === 200 ) && window.localStorage.setItem( process.env[ "REACT_APP_LOCAL_STORAGE_JWT_KEY" ], value ); //, (exception, value) => {
 
             try {
                 session.authorization.login( username, () => {

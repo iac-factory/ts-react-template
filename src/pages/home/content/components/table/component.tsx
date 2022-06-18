@@ -15,6 +15,14 @@ const CX = CXS.bind( styles );
 
 const Identifier = "table";
 
+enum Sorting {
+    unsorted = "UNSORTED",
+    ascending = "ASCENDING",
+    descending = "DESCENDING"
+}
+
+type Sort = keyof typeof Sorting;
+
 export const Table = ( properties: Component.properties ) => {
     const classes = CX( {
         [ styles.component ]: properties.style ?? true,
@@ -64,11 +72,13 @@ export const Table = ( properties: Component.properties ) => {
         toolbar: Toolbar,
         isAllChecked: isCheckAll,
         handleCheckAll: handleSelectAll,
+        /// filters???
         cells: [
-            { header: "Name" },
-            { header: "Username" },
-            { header: "Email" },
-            { header: "Role" }
+            /// https://www.aleksandrhovhannisyan.com/blog/sorting-ant-design-tables/
+            { header: "Name" /*** filter */ },
+            { header: "Username" /*** filter */ },
+            { header: "Email" /*** filter */ },
+            { header: "Role" /*** filter */ }
         ]
     } );
 

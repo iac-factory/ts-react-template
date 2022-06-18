@@ -3,7 +3,6 @@ import { Outlet, React, useLocation, useNavigate } from ".";
 
 import { Spinner, Text } from "../library";
 
-import { Local, useLocalStorage } from "../library/storage";
 import { useState } from "react";
 
 export module Authorization {
@@ -46,21 +45,17 @@ export module Authorization {
     export const Provider = ( { children }: { children?: React.ReactNode } ) => {
         const [ user, setUser ] = React.useState<User>( null );
 
-        const [ jwt, setJWT ] = useLocalStorage( "JWT", null );
-
         const login = ( username: string, callback: ( () => void ) ) => {
             console.log( "Provider User Login Context", username );
 
-            ( username ) && setUser( {
+            setUser( {
                 username,
                 expiration: "...",
                 uid: "...",
                 name: "..."
             } );
 
-            console.log( user, callback );
-
-            return void callback();
+            void callback();
         };
 
         const logout = ( callback: ( () => void ) ) => {
@@ -70,9 +65,7 @@ export module Authorization {
         const attribution = {
             user,
             login,
-            logout,
-            jwt,
-            setJWT
+            logout
         } as const;
 
         return (
@@ -92,9 +85,9 @@ export module Authorization {
         const authorization = useAuthorization();
         const navigate = useNavigator();
 
-        const jwt = useLocalStorage( "JWT" );
-
         React.useEffect( () => {
+            const jwt = window.localStorage.getItem( process.env[ "REACT_APP_LOCAL_STORAGE_JWT_KEY" ] );
+
             /***
              * Oddly enough, during the same session where a user may lose both context and localstorage,
              * the React.useEffect conditional can still pass. Therefore, it's required to, again, try
@@ -102,28 +95,10 @@ export module Authorization {
              */
 
             const update = async () => {
-                const token: string = await Local.getItem( process.env[ "REACT_APP_LOCAL_STORAGE_JWT_KEY" ], ( exception, value ) => {
-                    if ( exception ) throw exception;
-
-                    /***
-                     * If within the following context, the browser session did derive a JWT. However, if a JWT is present,
-                     * but the user context is not, an API call now needs to be made to attempt to get that information. First
-                     * the user authorization object is checked.
-                     */
-
-                    console.log( "Update Post-Validation (Authorization)", authorization[ 0 ] );
-
-                    ( typeof jwt[ 1 ] !== "string" ) && jwt[ 1 ]( value );
-
-                    console.log( "Update Post-Validation (JWT)", value );
-
-                    return value;
-                } );
-
-                if ( token ) {
+                if ( jwt ) {
                     const input = new URLSearchParams();
 
-                    input.set( "jwt", token );
+                    input.set( "jwt", jwt );
 
                     const validation = await fetch( process.env[ "REACT_APP_API_ENDPOINT" ] + "/authorization", {
                         method: "POST",
@@ -131,35 +106,33 @@ export module Authorization {
                         body: input
                     } );
 
-                    if (validation.status === 200) {
+                    if ( validation.status === 200 ) {
                         const data = await validation.json();
 
-                        setTimeout(() => authorization.login(data.username as string, () => loading[1](false)), 1000);
+                        setTimeout( () => authorization.login( data.username as string, () => loading[ 1 ]( false ) ), 1000 );
                     } else {
-                        void await Local.clear( ( exception ) => {
-                            if ( exception ) throw exception;
-                            navigate( "/login", {
-                                state: { from: location },
-                                replace: true
-                            } );
-                        } );
+                        window.localStorage.clear();
                     }
                 }
             };
 
-            if ( !authorization[ "user" ] && !jwt[ 0 ] ) {
-                // Redirect the user to the /login page, but save the current location that
-                // was attempted; such allows the web-application to send them the user back
-                // to the originally attempted page.
+            const redirect = () => {
+                if ( !( authorization[ "user" ] ) && !( jwt ) ) {
+                    // Redirect the user to the /login page, but save the current location that
+                    // was attempted; such allows the web-application to send them the user back
+                    // to the originally attempted page.
 
-                setTimeout( () => {
-                    navigate( "/login", {
-                        state: { from: location },
-                        replace: true
-                    } );
-                }, 1000 );
-            } else return () => void update();
-        }, [] );
+                    setTimeout( () => {
+                        navigate( "/login", {
+                            state: { from: location },
+                            replace: true
+                        } );
+                    }, 1000 );
+                }
+            };
+
+            return (jwt) ? (() => void update())() : ( () => void redirect())();
+        }, [ ] );
 
         return ( loading[ 0 ] ) ? <Spinner children={ ( <Text input={ "Authorizing ..." }/> ) }/> : ( <Outlet/> );
     };
