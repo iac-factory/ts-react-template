@@ -1,8 +1,6 @@
 import React from "react";
 import Spinner from "react-spinkit";
 
-import { Loading, Defaults } from ".";
-
 export module User {
     /***
      *  Optional Usage for Dataset Name-IDs
@@ -20,10 +18,8 @@ export module User {
      *  const { dataset: { [ User.Dataset ]: user } } = document.getElementById( target );
      *  */
     export const Dataset = "user" as const;
-    export const Submit = async ( event: React.FormEvent<HTMLFormElement>, loading?: React.Dispatch<boolean> ) => {
+    export const Submit = async ( event: React.FormEvent<HTMLFormElement> ) => {
         event.preventDefault();
-
-        (loading) && loading( true );
 
         const form: HTMLFormElement = document.getElementById( "form" ) as HTMLFormElement;
 
@@ -54,8 +50,6 @@ export module User {
 
             users.push( await User.API( user ) );
         }
-
-        (loading) && loading( false );
     };
 
     export const API = ( id: string ) => {
@@ -68,44 +62,24 @@ export module User {
 
     export const Loader = ( { loading } ) => {
         return ( loading ) ? (
-                <div style={
-                    {
-                        display: "flex"
-                    }
-                }>
-                    <Spinner name="pacman" fadeIn="none" color="yellow" style={ {
-                        marginTop: "auto",
-                        marginBottom: "auto",
-                        marginLeft: "auto",
-                        marginRight: "auto"
-                    } }/>
-                </div>
+            <div style={
+                {
+                    display: 'flex',
+                    position: "absolute",
+                    marginLeft: "auto",
+                    width: "100%",
+                    // marginTop: "-40%",
+                    marginBottom: "auto",
+                    marginRight: "auto"
+                }
+            }>
+                <Spinner name="pacman" fadeIn="none" color="yellow" style={ {
+                    marginTop: "auto",
+                    marginBottom: "auto",
+                    marginLeft: "auto",
+                    marginRight: "auto"
+                } }/>
+            </div>
         ) : null;
-    };
-
-    export const Provider = ( {
-
-                                  loading
-                              } ) => {
-        return (
-            <Loading.Provider value={ { ...Defaults.Loading, ...{ loading } } }>
-                <Loading.Consumer>
-                    { ( {
-                            show,
-                            hide,
-                            loading
-                        } ) => {
-                        return (
-                            <React.Fragment>
-                                <Loader loading={ loading } { ...{
-                                    show,
-                                    hide
-                                } } />
-                            </React.Fragment>
-                        );
-                    } }
-                </Loading.Consumer>
-            </Loading.Provider>
-        );
     };
 }

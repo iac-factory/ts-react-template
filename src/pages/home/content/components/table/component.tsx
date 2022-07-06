@@ -49,7 +49,7 @@ export const Table = ( properties: Component.properties ) => {
         }
     };
 
-    const handleSelectAll = (event) => {
+    const handleSelectAll = ( event ) => {
         setIsCheckAll( !isCheckAll );
         setIsCheck( users.map( user => user.id ) );
         if ( isCheckAll ) {
@@ -57,16 +57,26 @@ export const Table = ( properties: Component.properties ) => {
         }
     };
 
-    const Toolbar = React.useReducer( ( state, check: boolean ) => {
-        switch ( check ) {
+    const Toolbar = React.useCallback( () => {
+        const data = React.useCallback(() => new Promise((resolve) => setTimeout(() => resolve(users), 2500)), []);
+
+        switch ( isCheckAll ) {
             case true:
-                return { count: state.count - 1 };
+                return {
+                    users: data,
+                    count: isCheck.length,
+                    rows: isCheck[ 0 ]
+                };
             case false:
-                return { count: state.count + 1 };
+                return {
+                    users: data,
+                    count: isCheck.length,
+                    rows: isCheck[ 0 ]
+                };
             default:
                 throw new Error();
         }
-    }, { count: 0 } );
+    }, [ isCheck, isCheckAll, total, users ] );
 
     const Headers = Generator.Headers( {
         toolbar: Toolbar,

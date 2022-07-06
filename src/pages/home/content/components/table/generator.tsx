@@ -13,7 +13,7 @@ import { Hydration } from ".";
 /*** Complexity Here Cannot be Avoided without Excessive Module Separation */
 export module Generator {
     export interface Input {
-        Headers: { cells: { header: string }[], toolbar: [ { count: number; }, React.Dispatch<boolean> ], isAllChecked: boolean, handleCheckAll: React.Dispatch<boolean> };
+        Headers: { cells: { header: string }[], toolbar: () => { count: number; }, isAllChecked: boolean, handleCheckAll: React.Dispatch<boolean> };
         Body: { handleCheck: ( event: { target: React.HTMLAttributes<HTMLInputElement> & { checked: boolean } } ) => void, isChecked: string[], cells: { title: string, value?: string }[] };
         Footer: { cells: { header: string }[] };
     }

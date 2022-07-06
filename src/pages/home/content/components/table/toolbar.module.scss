@@ -1,5 +1,5 @@
-@mixin productive-motion () {
-    transition: all 215ms cubic-bezier(0.2, 0.2, 0.38, 0.9);
+@mixin productive-motion() {
+    transition: all 100ms cubic-bezier(0.2, 0.2, 0.38, 0.9);
 }
 
 .toolbar {
@@ -7,7 +7,7 @@
     background-color: var(--global-layer-01);
 
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     letter-spacing: 0.16px;
     line-height: 1.285;
     margin: 0;
@@ -90,7 +90,7 @@
         }
 
         &:focus {
-            outline-offset: -2px;
+            outline-offset: -3px;
             outline: 2px solid white;
         }
 
@@ -115,6 +115,9 @@
     }
 
     button.active {
+        outline: rgba(255, 255, 255, 0.5) 1px solid;
+        outline-offset: -2px;
+
         cursor: pointer;
         opacity: 1.0;
         display: inline-flex;
@@ -125,18 +128,36 @@
     }
 
     button.disabled {
+        outline: rgba(255, 255, 255, 0.5) 1px solid;
+        outline-offset: -2px;
+
         cursor: default;
+
+        background: var(--global-text-disabled);
+
+        &:hover {
+            background: var(--global-icon-disabled);
+        }
+
+        svg {
+            fill: var(--global-icon-on-color-disabled);
+        }
     }
 
     button.right {
-        margin-left: auto;
+        margin-right: 0rem;
         align-items: center;
         display: flex;
         min-height: 2.0rem;
         width: auto;
     }
 
+    button.right:not(last-of-type) {
+        // outline: transparent 1px solid;
+    }
+
     button.right:last-of-type {
+        border-right: none;
         margin-right: 0.0rem;
     }
 }

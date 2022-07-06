@@ -45,21 +45,30 @@ export module Authorization {
     export const Provider = ( { children }: { children?: React.ReactNode } ) => {
         const [ user, setUser ] = React.useState<User>( null );
 
-        const login = ( username: string, callback: ( () => void ) ) => {
+        const login = ( username: string, data: {response: any, status: number}, callback: ( () => void ) ) => {
             console.log( "Provider User Login Context", username );
+            console.log( "Provider User Login Context", data );
 
-            setUser( {
-                username,
-                expiration: "...",
-                uid: "...",
-                name: "..."
-            } );
+            if (data.status === 200) {
+                setUser( {
+                    username,
+                    expiration: "...",
+                    uid: "...",
+                    name: "..."
+                } );
+            } else {
+                setUser(null);
+            }
 
             void callback();
         };
 
         const logout = ( callback: ( () => void ) ) => {
-            return void setTimeout( callback, 1000 * 10000 );
+            Authorization.Clear();
+
+            setUser( null );
+
+            (callback) ? callback() : void null;
         };
 
         const attribution = {
@@ -77,65 +86,116 @@ export module Authorization {
         );
     };
 
+    export const JWT = () => {
+        try {
+            return window.localStorage.getItem( process.env[ "REACT_APP_LOCAL_STORAGE_JWT_KEY" ] );
+        } catch ( exception ) {
+            try {
+                return window.sessionStorage.getItem(process.env[ "REACT_APP_SESSION_STORAGE_JWT_KEY" ]);
+            } catch ( exception ) {
+                return null;
+            }
+        }
+    };
+
+    export const Clear = () => {
+        console.debug( "[Debug] Authorization Consumer - Clearing Storage Authorization Context(s)" );
+
+        window.sessionStorage.clear();
+        window.localStorage.clear();
+    };
+
     /*** @see {@link Context} */
     export const Consumer = () => {
         const loading = useState( true );
+
+        const jwt = Authorization.JWT();
 
         const location = useLocation();
         const authorization = useAuthorization();
         const navigate = useNavigator();
 
-        React.useEffect( () => {
-            const jwt = window.localStorage.getItem( process.env[ "REACT_APP_LOCAL_STORAGE_JWT_KEY" ] );
+        console.debug( "[Debug] Consumer Context Entry Point" );
 
-            /***
-             * Oddly enough, during the same session where a user may lose both context and localstorage,
-             * the React.useEffect conditional can still pass. Therefore, it's required to, again, try
-             * and pull from localstorage.
-             */
+        /***
+         * Oddly enough, during the same session where a user may lose both context and localstorage,
+         * the React.useEffect conditional can still pass. Therefore, it's required to, again, try
+         * and pull from localstorage.
+         */
 
-            const update = async () => {
-                if ( jwt ) {
-                    const input = new URLSearchParams();
+        const update = async () => {
+            if ( jwt && loading[0] ) {
+                const input = new URLSearchParams();
 
-                    input.set( "jwt", jwt );
+                input.set( "jwt", jwt );
 
-                    const validation = await fetch( process.env[ "REACT_APP_API_ENDPOINT" ] + "/authorization", {
-                        method: "POST",
-                        mode: "cors",
-                        body: input
-                    } );
+                const validation = await fetch( process.env[ "REACT_APP_API_ENDPOINT" ] + "/authorization", {
+                    method: "POST",
+                    mode: "cors",
+                    body: input
+                } ).catch( ( exception ) => {
+                    loading[1](false);
 
-                    if ( validation.status === 200 ) {
-                        const data = await validation.json();
-                        setTimeout( () => {
-                            authorization.login( data.username as string, () => {
+                    if ( exception instanceof TypeError ) {
+                        return {
+                            status: null,
+                            json: function () {
+                                return JSON.stringify( this );
+                            }
+                        };
+                    } else {
+                        console.warn( "[Warning] Unknown, Uncaught Exception" );
+                        console.warn( exception );
+                        throw exception;
+                    }
+                } );
+
+                if ( ( "status" in validation ) && validation.status === 200 ) {
+                    const data = await validation.json();
+                    setTimeout( () => {
+                        if ("username" in data) {
+                            authorization.login( data.username as string, { response: data, status: validation.status }, () => {
                                 loading[ 1 ]( false );
                             } );
-                        }, 1000 );
-                    } else {
-                        window.localStorage.clear();
-                    }
-                }
-            };
-
-            const redirect = () => {
-                if ( !( authorization[ "user" ] ) && !( jwt ) ) {
-                    // Redirect the user to the /login page, but save the current location that
-                    // was attempted; such allows the web-application to send them the user back
-                    // to the originally attempted page.
-
-                    setTimeout( () => {
-                        navigate( "/login", {
-                            state: { from: location },
-                            replace: true
-                        } );
+                        } else {
+                            authorization.logout();
+                        }
                     }, 1000 );
-                }
-            };
+                } else {
+                    console.warn( "[Warning] Fatal Authorization Attempt" );
 
-            return (jwt) ? (() => void update())() : ( () => void redirect())();
-        }, [ ] );
+                    authorization.logout();
+
+                    throw new Error( "Authorization Failure" );
+                }
+            }
+        };
+
+        /***
+         * Redirect the user to the /login page, but save the current location that
+         * was attempted; such allows the web-application to send them the user back
+         * to the originally attempted page.
+         */
+        const redirect = () => {
+            if ( !( authorization[ "user" ] ) && !( jwt ) ) {
+                setTimeout( () => {
+                    navigate( "/login", {
+                        state: { from: location },
+                        replace: true
+                    } );
+                }, 1000 );
+            } else {
+                authorization.logout();
+            }
+        };
+
+        React.useEffect(() => {
+            if (jwt) {
+                void update();
+            } else {
+                redirect();
+            }
+        });
 
         return ( loading[ 0 ] ) ? <Spinner children={ ( <Text input={ "Authorizing ..." }/> ) }/> : ( <Outlet/> );
     };
@@ -143,8 +203,8 @@ export module Authorization {
     /*** @see {@link Context} */
     export type Context = {
         user: User;
-        login: ( username: string, callback: () => void ) => void;
-        logout: ( callback: VoidFunction ) => void;
+        login: ( username: string, data: { status: number, response: any }, callback: () => void ) => void;
+        logout: ( callback?: VoidFunction ) => void;
     } | null
 
     /*** @see {@link Context} */

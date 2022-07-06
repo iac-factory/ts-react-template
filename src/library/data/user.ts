@@ -6,11 +6,13 @@ export module User {
     }
 
     export function create(): Type {
+        const password = new RegExp("^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{16,}$");
+
         return {
             id: faker.datatype.uuid(),
             email: faker.internet.email(),
             username: faker.internet.userName(),
-            password: faker.internet.password(),
+            password: faker.internet.password(16, true, password),
             login: {
                 date: faker.date.past(),
                 expiration: faker.date.future(),

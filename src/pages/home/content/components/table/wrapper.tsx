@@ -4,6 +4,8 @@ import { Toolbar } from "./toolbar";
 
 import { User } from "./form-handle";
 
+import { Data } from ".";
+
 import styles from "./index.module.scss";
 
 function Container( { children } ) {
@@ -16,24 +18,31 @@ function Container( { children } ) {
 
 export default Tabular;
 export const Tabular = ( properties?: Component.properties ) => {
-    const { toolbar } = properties;
     const { children } = properties;
+    const { toolbar } = properties;
     const { width } = properties;
 
+    const loader = React.useState( {
+        loading: false,
+        title: "Database User(s)"
+    } );
+
     return (
-        <form id={ "form" } onSubmit={ ( event ) => User.Submit( event, properties.loader[ 1 ] ?? undefined ) }>
-            <Container>
-                <table { ...{ ...properties, ...{ toolbar: ( toolbar ) ? "true" : "false" } } } width={ width ?? "auto" }>
-                    <caption className={ styles.caption }>
-                        <Toolbar active={ toolbar } caption={ "Users" }/>
-                    </caption>
-                    {
-                        ( children ) ? children : null
-                    }
-                </table>
-            </Container>
-        </form>
+        <>
+            <form id={ "form" } onSubmit={ ( event ) => User.Submit( event ) }/>
+            <table { ...{ ...properties, ...{ toolbar: ( toolbar ) ? "true" : "false" } } } width={ width ?? "auto" }>
+                <caption className={ styles.caption }>
+                    <Container>
+                        <Toolbar active={toolbar} loader={ loader } caption={ ( loader[ 0 ].loading ) ? "Loading ..." : loader[ 0 ].title }/>
+                    </Container>
+                </caption>
+                {
+                    ( children ) ? children : null
+                }
+            </table>
+        </>
     );
+
 };
 
 module Component {
@@ -45,6 +54,6 @@ module Component {
         small?: boolean;
         width?: number;
         loader?: [ boolean, React.Dispatch<boolean> ];
-        toolbar: [ { count: number; }, React.Dispatch<boolean> ];
+        toolbar: () => { count: number };
     }
 }

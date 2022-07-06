@@ -18,7 +18,7 @@ import type { Session } from "./provider";
  *
  * @constructor
  */
-export const Handler = ( event: Event, session: Session ) => {
+export const Handler = async ( event: Event, session: Session ) => {
     event.preventDefault();
 
     const data = Extractor( event.currentTarget.elements );
@@ -30,31 +30,54 @@ export const Handler = ( event: Event, session: Session ) => {
     input.set( "username", data.username );
     input.set( "password", data.password );
 
-    try {
-        void fetch( process.env[ "REACT_APP_API_ENDPOINT" ] + "/authorization/jwt", {
-            method: "POST",
-            body: input
-        } ).then( async ( response ) => {
-            const status = response.status;
-            const value = await response.text();
+    const clear = () => {
+        console.debug( "[Debug] Authorization Handler - Clearing Storage Authorization Context(s)" );
 
-            ( status === 200 ) && sessionStorage.setItem( process.env[ "REACT_APP_SESSION_STORAGE_JWT_KEY" ], value );
-            ( status === 200 ) && window.localStorage.setItem( process.env[ "REACT_APP_LOCAL_STORAGE_JWT_KEY" ], value ); //, (exception, value) => {
+        window.sessionStorage.clear();
+        window.localStorage.clear();
+    };
 
-            try {
-                session.authorization.login( username, () => {
-                    session.navigate( session.location.state.from ?? "/", { replace: true } );
-                } );
-            } catch ( exception ) {
-                console.debug( "[Debug] Exception Caught in Authorization Handler", exception );
-                session.authorization.login( username, () => {
-                    session.navigate( "/", { replace: false } );
-                } );
-            }
-        } );
-    } catch ( exception ) {
-        console.warn( exception );
-    }
+    await fetch( process.env[ "REACT_APP_API_ENDPOINT" ] + "/authorization/jwt", {
+        method: "POST",
+        body: input
+    } ).then( async ( response ) => {
+        const status = response.status;
+        const value = await response.text();
+
+        if ( status !== 200 ) {
+            const error = new Error( "Authorization-Failure-Exception" );
+            error.name = "Authorization-Failure-Exception";
+        }
+
+        ( status === 200 ) && sessionStorage.setItem( process.env[ "REACT_APP_SESSION_STORAGE_JWT_KEY" ], value );
+        ( status === 200 ) && window.localStorage.setItem( process.env[ "REACT_APP_LOCAL_STORAGE_JWT_KEY" ], value ); //, (exception, value) => {
+
+        try {
+            session.authorization.login( username, { status, response: value }, () => {
+                session.navigate( session.location.state.from ?? "/", { replace: false } );
+            } );
+        } catch ( exception ) {
+            console.debug( "[Debug] Exception Caught in Authorization Handler. See the following output." );
+            console.debug( "[Debug] Authorization Handler Exception" + ":", exception );
+            session.authorization.login( username, { status, response: value }, () => {
+                session.navigate( "/", { replace: false } );
+            } );
+        }
+    } ).catch( ( exception ) => {
+        if ( exception instanceof TypeError ) {
+            console.warn( "[Warning] Caught Network-Error - The Backend API is Down, or the Supporting System(s) are Unresolvable" );
+
+            clear();
+        } else if ( exception.name === "Authorization-Failure-Exception" ) {
+            console.warn( "Failed Authorization Attempt" );
+            clear();
+        } else {
+            console.warn( "[Warning] Unknown, Uncaught Exception" );
+            console.warn( exception );
+
+            clear();
+        }
+    } );
 };
 
 export default Handler;

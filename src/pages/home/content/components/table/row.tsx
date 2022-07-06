@@ -1,4 +1,8 @@
+import React from "react";
 import CXS from "classnames/bind";
+
+import styles from "./index.module.scss";
+
 const CX = CXS.bind( styles );
 
 export const Row = (properties: Component.properties) => {
@@ -9,7 +13,7 @@ export const Row = (properties: Component.properties) => {
     }, properties.className );
 
     return (
-        <tr /* className={classes} */>
+        <tr className={classes}>
             {
                 ( children ) ? children : null
             }
@@ -17,12 +21,7 @@ export const Row = (properties: Component.properties) => {
     );
 };
 
-import type CSS from "csstype";
-import styles from "./index.module.scss";
-
 module Component {
-    type Attribution = CSS.HtmlAttributes;
-
     interface Element extends React.HTMLAttributes<HTMLTableElement> {
         /*** [Attributes] */
     }

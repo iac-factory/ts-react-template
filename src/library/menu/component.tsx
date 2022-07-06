@@ -21,7 +21,9 @@ export module Component {
     export const Menu = () => {
         const authorization = Authorization.useAuthorization();
 
-        return (authorization.user) ? (
+        console.log(authorization);
+
+        return (authorization.user !== null) ? (
             <Navigator>
                 <Global prefix={ process.env["REACT_APP_NAME"] } title={ process.env["REACT_APP_SUFFIX"] } reload={ false }/>
                 <Item title={ "Testing" } reload={ false }/>

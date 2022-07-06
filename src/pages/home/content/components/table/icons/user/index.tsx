@@ -13,4 +13,4 @@ export const Profile = (configuration?: Dimensions) => {
     );
 };
 
-type Dimensions = { height?: number, width?: number, className?: string }
+type Dimensions = { height?: number, width?: number, className?: string, children? }

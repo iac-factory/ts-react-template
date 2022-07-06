@@ -130,7 +130,7 @@ export const Form = () => {
     const session = { location, navigate, authorization };
 
     return (
-        <form id={ "login-form" } onSubmit={(event) => Handler(event, session)}>
+        <form id={ "login-form" } onSubmit={async (event) => Handler(event, session)}>
             <Row justify="center">
                 <Col lg={8} md={8} sm={8}>
                     <Input.Component label={ "Username" } name={ "username" } help={ { text: "Optional Help Context (3)" } } focus={ false }/>
