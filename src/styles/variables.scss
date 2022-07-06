@@ -390,6 +390,12 @@ $button-background-secondary: #6f6f6f;
 $button-background-secondary-hover: #474747;
 
 $button-background-tertiary: initial;
+
+$button-background-ghost: rgba(0, 0, 0, 0.0);
+$button-background-ghost-hover: rgba(65, 65, 65, 0.5);
+$button-background-ghost-active-focus: rgba(50, 50, 50, 0.5);
+$button-background-ghost-active-focus-hover: rgba(25, 25, 25, 0.5);
+
 $button-background-danger: #da1e28;
 
 @use "sass:map";

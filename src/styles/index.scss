@@ -391,5 +391,11 @@
     --global-background-button-secondary-hover: #{$button-background-secondary-hover};
 
     --global-background-button-tertiary: #{$button-background-tertiary};
+
+    --global-background-button-ghost: #{$button-background-ghost};
+    --global-background-button-ghost-hover: #{$button-background-ghost-hover};
+    --global-background-button-ghost-active-focus: #{$button-background-ghost-active-focus};
+    --global-background-button-ghost-active-focus-hover: #{$button-background-ghost-active-focus-hover};
+
     --global-background-button-danger: #{$button-background-danger};
 }

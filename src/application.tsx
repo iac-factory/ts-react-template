@@ -13,6 +13,7 @@ export const Application = () => {
     const Home = Router.Dynamic( async () => import("./pages/home") );
     const Testing = Router.Dynamic( async () => import("./pages/testing") );
     const Documentation = Router.Dynamic( async () => import("./pages/documentation") );
+    const VCS = Router.Dynamic( async () => import("./pages/vcs") );
 
     const Development = Router.Dynamic( async () => import("./pages/development") );
 
@@ -24,8 +25,11 @@ export const Application = () => {
                         <Router.Route element={ ( <Home/> ) } index/>
                         <Router.Route element={ ( <Testing/> ) } path={ "/testing" }/>
                         <Router.Route element={ ( <Documentation/> ) } path={ "/documentation" }/>
+                        <Router.Route element={ ( <VCS/> ) } path={ "/version-control" }/>
 
-                        <Router.Route path={ "*" } element={ ( <Login/> ) }/>
+                        {/*** @experimental /*/}
+                        <Router.Route path={ "*" } element={ ( <Home/> ) }/>
+                        {/* <Router.Route path={ "*" } element={ ( <Login/> ) }/> */}
                     </Router.Route>
                 </Router.Route>
                 <Router.Route element={ ( <Shell/> ) }>

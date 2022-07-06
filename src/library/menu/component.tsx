@@ -59,6 +59,7 @@ export module Component {
                     </Content>
                 </Panel>
                 <Item title={ "MDX" } reload={ false } overwrite={"/documentation"}/>
+                <Item title={ "VCS" } reload={ false } overwrite={"/version-control"}/>
                 <Modal/>
             </Navigator>
         ) : (

@@ -4,8 +4,6 @@ import { Toolbar } from "./toolbar";
 
 import { User } from "./form-handle";
 
-import { Data } from ".";
-
 import styles from "./index.module.scss";
 
 function Container( { children } ) {
@@ -25,7 +23,7 @@ export const Tabular = ( properties?: Component.properties ) => {
     const { width } = properties;
 
     const loader = React.useState( {
-        loading: false,
+        loading: true,
         title: "Database User(s)"
     } );
 

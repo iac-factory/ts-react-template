@@ -1,0 +1,250 @@
+.component {
+}
+
+@mixin productive-motion() {
+    // transition: all 150ms cubic-bezier(0.2, 0.2, 0.38, 0.9);
+    transition: all 100ms cubic-bezier(.2, 0, .38, .9);
+}
+
+@mixin hover() {
+    tr {
+        will-change: background;
+
+        td {
+            will-change: background;
+        }
+    }
+}
+
+@mixin apply-hover($color: var(--global-background-hover)) {
+    @include hover();
+
+    thead {
+        tr:first-of-type:hover {
+            background-color: var(--global-background-table-header-hover);
+        }
+    }
+
+    tbody {
+        tr:hover {
+            background-color: var(--global-background-hover-subtle-01);
+        }
+    }
+
+    tfoot {
+        tr:hover {
+            background-color: var(--global-background-hover-subtle-01);
+        }
+    }
+}
+
+@mixin apply-borders () {
+    .caption {
+        border: var(--global-border-strong-01) solid 1.0px;
+        border-bottom: unset;
+    }
+
+    td {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        border-right: var(--global-border-subtle-00) solid 1.0px;
+        border-bottom: var(--global-border-subtle-00) solid 1.0px;
+        &:first-of-type {
+            border-left: var(--global-border-strong-01) solid 1.0px;
+        }
+        &:last-of-type {
+            border-right: var(--global-border-strong-01) solid 1.0px;
+        }
+    }
+
+    thead {
+        tr {
+            td {
+                border-top: var(--global-border-strong-01) solid 1.0px;
+                border-right: var(--global-border-strong-01) solid 1.0px;
+                border-bottom: var(--global-border-strong-01) solid 1.0px;
+            }
+
+            td:first-of-type {
+                border-left: var(--global-border-strong-01) solid 1.0px;
+            }
+
+            td:last-of-type {
+                border-right: var(--global-border-strong-01) solid 1.0px;
+            }
+        }
+    }
+
+    tfoot {
+        tr {
+            td {
+                border-bottom: var(--global-border-strong-01) solid 1.0px;
+            }
+
+            td:first-of-type {
+                border-left: var(--global-border-strong-01) solid 1.0px;
+            }
+
+            td:last-of-type {
+                border-right: var(--global-border-strong-01) solid 1.0px;
+            }
+        }
+    }
+}
+
+@mixin vertical-strips() {
+    td:nth-child(odd) {
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    td:nth-child(even) {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+}
+
+table, tbody, tr, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-spacing: 0;
+
+    @include productive-motion();
+}
+
+.toolbar {
+    width: 100%;
+    display: inline-flex;
+    height: auto;
+
+    will-change: opacity;
+    @include productive-motion();
+}
+
+.active {
+    opacity: 1.0;
+    will-change: opacity;
+    display: inline-flex;
+    @include productive-motion();
+}
+
+span.active {
+    width: 100%;
+}
+
+.hidden {
+    opacity: 0.0;
+    will-change: opacity;
+    display: inline-flex;
+    @include productive-motion();
+}
+
+.container {
+    background: var(--global-background-table);
+    overflow-x: auto;
+}
+
+.modal {
+    max-width: 400px;
+    min-height: 200px;
+    padding: 10px;
+    background-color: whitesmoke;
+    position: fixed;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: -250px;
+    transition: top 0.5s ease-out;
+    z-index: 1;
+
+    .mheader {
+        font-size: 20px;
+        text-align: center;
+        padding-bottom: 20px;
+        font-weight: bold;
+    }
+
+    .btnbox {
+        text-align: center;
+    }
+
+    button {
+        padding: 10px;
+    }
+}
+
+table.component {
+    width: 100%;
+    background-color: var(--global-background-table);
+
+    .caption {
+        text-align: left;
+
+        padding: 0.25rem 0.5rem 0.5rem;
+
+        border: var(--global-border-strong-01) solid 1.0px;
+        border-bottom: unset;
+    }
+
+    .text {
+        font-size: 16px;
+    }
+
+    td {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    td:first-of-type {
+        width: 32px;
+        max-width: 32px;
+
+        padding-left: 0.35rem;
+        padding-right: 0.35rem;
+
+        svg {
+            width: 32px;
+            max-width: 32px;
+        }
+    }
+
+    thead:first-of-type {
+        background-color: var(--global-background-table-header);
+    }
+
+    &.hover {
+        @include apply-hover();
+    }
+
+    &.vertical {
+        @include vertical-strips();
+    }
+
+    .row {
+    }
+
+    .cell {
+        display: block;
+        width: 100%;
+        cursor: crosshair;
+    }
+
+    .checkbox {
+        &:hover {
+            cursor: pointer;
+        }
+
+        display: flex;
+        margin-left: 0;
+        margin-right: auto;
+
+        & + input[type=checkbox] {
+            display: none;
+        }
+    }
+
+    @include apply-borders();
+}
+
+.hide {
+    display: none;
+}

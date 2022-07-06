@@ -146,7 +146,7 @@ export const Table = ( properties: Component.properties ) => {
                 { Body }
                 { Pager }
             </Tabular>
-            <Pagination total={ [ total, setTotal ] } selected={isCheck.length}/>
+            <Pagination total={ [ total, setTotal ]} selected={isCheck.length} />
         </>
     );
 };
