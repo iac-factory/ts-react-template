@@ -9,7 +9,9 @@ const CX = CXS.bind( styles );
 import styles from "./index.module.scss";
 import tool from "./toolbar.module.scss";
 
-import { Data } from ".";
+import type { Type } from ".";
+
+type Data = Type.Repository[];
 
 type Input = { active: () => { count: number, users?: () => Promise<Data>, rows?: string }, caption?: string, loader: [ { loading: boolean, title: string }, React.Dispatch<{ loading: boolean, title: string }> ] };
 export const Toolbar = ( properties: Input ) => {

@@ -4,18 +4,16 @@ import { Authorization } from "./authorization";
 
 import { Shell } from "./library";
 
-const { Provider } = Authorization;
-const { Consumer } = Authorization;
-
-import { Login } from "./pages/login";
+const Login = Router.Dynamic( () => import("./pages/login") );
+const Home = Router.Dynamic( () => import("./pages/home") );
+const Testing = Router.Dynamic( () => import("./pages/testing") );
+const Documentation = Router.Dynamic( () => import("./pages/documentation") );
+const VCS = Router.Dynamic( () => import("./pages/vcs") );
+const Development = Router.Dynamic( () => import("./pages/development") );
 
 export const Application = () => {
-    const Home = Router.Dynamic( async () => import("./pages/home") );
-    const Testing = Router.Dynamic( async () => import("./pages/testing") );
-    const Documentation = Router.Dynamic( async () => import("./pages/documentation") );
-    const VCS = Router.Dynamic( async () => import("./pages/vcs") );
-
-    const Development = Router.Dynamic( async () => import("./pages/development") );
+    const { Provider } = Authorization;
+    const { Consumer } = Authorization;
 
     return (
         <Provider>
@@ -33,7 +31,7 @@ export const Application = () => {
                     </Router.Route>
                 </Router.Route>
                 <Router.Route element={ ( <Shell/> ) }>
-                    <Router.Route element={ <Login/> } path="/login"/>
+                    <Router.Route element={ (<Login/>) } path={ "/login" }/>
                     <Router.Route element={ ( <Development/> ) } path={ "/development" }/>
                 </Router.Route>
             </Router.Routes>

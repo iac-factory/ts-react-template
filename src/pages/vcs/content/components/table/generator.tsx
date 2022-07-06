@@ -9,7 +9,9 @@ import { Cell } from ".";
 import { Body } from ".";
 import { Footer } from ".";
 
-import { Hydration } from ".";
+import type { Type } from ".";
+
+type Data = Type.Enumeration;
 
 /*** Complexity Here Cannot be Avoided without Excessive Module Separation */
 export module Generator {
@@ -40,13 +42,13 @@ export module Generator {
         );
     };
 
-    const Context = ( properties: Input["Body"], element: Hydration.Type ) => {
+    const Context = ( properties: Input["Body"], element: Data ) => {
         return properties.cells.map(
             ( property, index ) => {
                 return (
                     <Cell identifier={ property.title + "-" + index } key={ index }>
                         {
-                            element[ ( property.value ) ? property.value : property.title ]
+                            element[ "name" ]
                         }
                     </Cell>
                 );
@@ -54,22 +56,21 @@ export module Generator {
         );
     };
 
-    export const Content = ( data: Hydration.Type[], properties: Input["Body"] ) => {
+    export const Content = ( data: Type.Enumeration[], properties: Input["Body"] ) => {
         return (
             <Body scope={ "row" }>
                 {
                     data.map( ( element, index ) => {
                         const { name } = element;
-                        const { id } = element;
                         const { type } = { type: "checkbox" };
 
                         return (
                             <Row key={ index }>
-                                <Check name={ name } id={ id } type={ type } checkbox={ [ properties.isChecked, properties.handleCheck as React.Dispatch<any> ] }/>
+                                <Check name={ name } id={ String( element.id ) } type={ type } checkbox={ [ properties.isChecked, properties.handleCheck as React.Dispatch<any> ] }/>
                                 { Context( properties, element ) }
-                                <Informational isActive={true} handleActive={() => {
-                                    console.log(data[index]);
-                                }}/>
+                                <Informational isActive={ true } handleActive={ () => {
+                                    console.log( data[ index ] );
+                                } }/>
                             </Row>
                         );
                     } )

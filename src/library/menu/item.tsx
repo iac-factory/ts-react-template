@@ -4,7 +4,7 @@ import { Strings } from "..";
 import styles from "./index.module.scss";
 export module Component {
     export const Item = ( input: Input ) => {
-        const Path = ( input.paths ) ? Strings.Formalize( input.title, ( typeof input.paths !== "string" ) ? input.paths.join() : input.paths ) : Strings.Formalize( input.title );
+        const Path = ( input.paths ) ? Strings.Normalize( input.title, ( typeof input.paths !== "string" ) ? input.paths.join() : input.paths ) : Strings.Normalize( input.title );
 
         return (
             <li>

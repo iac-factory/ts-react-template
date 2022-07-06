@@ -1,4 +1,4 @@
-export * from "./component";
+export * from "./table";
 export * from "./header";
 export * from "./wrapper";
 export * from "./footer";
@@ -11,5 +11,3 @@ export * from "./data";
 export * from "./generator";
 
 export * from "./form-handle";
-
-export { Table as default } from "./component";

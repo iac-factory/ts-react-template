@@ -5,16 +5,23 @@ const CX = CXS.bind( styles );
 
 import styles from "./pagination.module.scss";
 
-export const Pagination = ( { total, selected }: Component.properties ) => {
+export const Pagination = ( {
+                                total,
+                                selected
+                            }: Component.properties ) => {
     const classes = {
         component: CX( {}, styles.pagination ),
         left: CX( {}, styles.left ),
         right: CX( {}, styles.right ),
         total: CX( {}, styles.total ),
         selected: CX( {
-            [styles.active]: ( selected > 0 ),
-            [styles.disabled]: ( !(selected) || selected === 0 )
-        }, styles.selected )
+            [ styles.active ]: ( selected > 0 ),
+            [ styles.disabled ]: ( !( selected ) || selected === 0 )
+        }, styles.selected ),
+        number: CX( {
+            [ styles.active ]: ( selected > 0 ),
+            [ styles.disabled ]: ( !( selected ) || selected === 0 )
+        }, styles.number )
     };
 
 
@@ -26,25 +33,27 @@ export const Pagination = ( { total, selected }: Component.properties ) => {
                     [ "Total Page Item(s)" + ":" ].join( " " )
                 }
                 </span>
-                <select id={ "total-page-items" } value={total[0]} onChange={ (event) => {
-                    console.debug("[Debug] [Pagination] Selection Event", event.target.value);
+                <select id={ "total-page-items" } value={ total[ 0 ] } onChange={ ( event ) => {
+                    console.debug( "[Debug] [Pagination] Selection Event", event.target.value );
 
-                    total[1](parseInt(event.target.value));
-                }}>
-                    <option value={"10"} /* selected={(total[0] === 10)} */>
+                    total[ 1 ]( parseInt( event.target.value ) );
+                } }>
+                    <option value={ "10" } /* selected={(total[0] === 10)} */>
                         10
                     </option>
-                    <option value={"20"} /* selected={(total[0] === 20)} */>
+                    <option value={ "20" } /* selected={(total[0] === 20)} */>
                         25
                     </option>
-                    <option value={"50"} /* selected={(total[0] === 50)} */>
+                    <option value={ "50" } /* selected={(total[0] === 50)} */>
                         50
                     </option>
                 </select>
                 <span className={ classes.selected }>
-                    {
-                        selected
-                    }
+                    <span className={ classes.number }>
+                        {
+                            selected
+                        }
+                    </span>
                     &nbsp;
                     {
                         "Item(s) Selected"

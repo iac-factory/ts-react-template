@@ -23,8 +23,8 @@ export const Tabular = ( properties?: Component.properties ) => {
     const { width } = properties;
 
     const loader = React.useState( {
-        loading: true,
-        title: "Database User(s)"
+        loading: false,
+        title: "Project(s) Overview"
     } );
 
     return (

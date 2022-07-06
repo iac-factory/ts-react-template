@@ -9,23 +9,26 @@
  *
  */
 
-function formalize( input: string, ...inputs: string[] | undefined | null ): string {
+export function normalize( input: string, ...inputs: string[] | undefined | null ): string {
     const Input = ( inputs ) ? [ input, [ ...inputs ].join(" ") ].join(" ") : input;
-    const Root = String("/" + Input.toString()[ 0 ].toLowerCase() + Input.toString().slice(1)).trim();
+    const upper = Upper(input);
+    const Root = (!(upper)) ? String("/" + Input.toString()[ 0 ].toLowerCase() + Input.toString().slice(1)).trim() : input.trim();
 
-    const URI = Root.split(" ").map(( $ ) => {
-        return $.toString().toLowerCase()
-    }).join("/").split("_").map(( $ ) => {
-        return $.toString().toLowerCase()
-    }).join("/").split("-").map(( $ ) => {
-        return $.toString().toLowerCase()
-    }).join("/");
+    const URI = (Upper(input)) ? Root.split(" ").map(( partial ) => {
+        return partial.toString().toLowerCase()
+    }).join("/").split("_").map(( partial ) => {
+        return partial.toString().toLowerCase()
+    }).join("/").split("-").map(( partial ) => {
+        return partial.toString().toLowerCase()
+    }).join("/") : input;
 
     console.debug("[Debug] (Pathing-Normalization)", Root, URI);
 
     return ( inputs.length > 0 ) ? URI : Root;
 }
 
-export { formalize };
+export function Upper(input: string) {
+    return /^[A-Z]*$/.test(input);
+}
 
-export default formalize;
+export default normalize;

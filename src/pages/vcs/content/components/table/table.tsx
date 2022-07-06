@@ -1,11 +1,8 @@
 import React from "react";
 
-import { Tabular } from ".";
+import { Tabular, Type } from ".";
 import { Pagination } from ".";
 import { Generator } from ".";
-
-import { Data } from ".";
-import { Hydration } from ".";
 
 import CXS from "classnames/bind";
 
@@ -38,11 +35,35 @@ export const Table = ( properties: Component.properties ) => {
         [ styles.vertical ]: properties.vertical ?? false
     } );
 
-    const [ total, setTotal ] = React.useState( Data.length );
+    const [ total, setTotal ] = React.useState( 10 );
+    const [ page, setPage ] = React.useState( 0 );
+    const [ loading, setLoading ] = React.useState( true );
 
-    const hydration = React.useCallback( ( total: number ) => Hydration.generate( total ), [] );
+    const hydration = React.useCallback( () => {
+        const data: Type.Enumeration[] = [];
 
-    const users = React.useMemo( () => hydration( total ), [ total ] );
+        const input = new URLSearchParams();
+
+        input.set( "page", String(page) );
+        input.set( "total", String(total) );
+
+        void fetch( [ process.env[ "REACT_APP_API_ENDPOINT" ], "github", "organization", "repositories", "tabular" ].join( "/" ), {
+            method: "POST",
+            cache: "default",
+            body: input
+        } ).then( async ( response ) => {
+            const repositories = await response.json();
+            repositories.forEach( ( repository ) => {
+                data.push( repository );
+            } );
+
+            setLoading( false );
+        } );
+
+        return data;
+    }, [ page, total ] );
+
+    const repositories = React.useMemo( hydration, [ hydration ] );
 
     const [ isCheckAll, setIsCheckAll ] = React.useState( false );
     const [ isCheck, setIsCheck ] = React.useState( [] );
@@ -59,32 +80,43 @@ export const Table = ( properties: Component.properties ) => {
 
     const handleSelectAll = ( event ) => {
         setIsCheckAll( !isCheckAll );
-        setIsCheck( users.map( user => user.id ) );
+        setIsCheck( repositories.map( ( repository ) => {
+            return String( repository.id );
+        } ) );
         if ( isCheckAll ) {
             setIsCheck( [] );
         }
     };
 
     const Toolbar = React.useCallback( () => {
-        const data = React.useCallback(() => new Promise((resolve) => setTimeout(() => resolve(users), 2500)), []);
-
         switch ( isCheckAll ) {
             case true:
                 return {
-                    users: data,
+                    repositories: repositories,
                     count: isCheck.length,
                     rows: isCheck[ 0 ]
                 };
             case false:
                 return {
-                    users: data,
+                    repositories: repositories,
                     count: isCheck.length,
                     rows: isCheck[ 0 ]
                 };
             default:
                 throw new Error();
         }
-    }, [ isCheck, isCheckAll, total, users ] );
+    }, [ isCheck, isCheckAll, repositories ] );
+
+    const Pager = Generator.Pager( {
+        cells: [
+            { header: "" },
+            { header: "-" },
+            { header: "-" },
+            { header: "-" },
+            { header: "-" },
+            { header: "-" }
+        ]
+    } );
 
     const Headers = Generator.Headers( {
         toolbar: Toolbar,
@@ -101,11 +133,7 @@ export const Table = ( properties: Component.properties ) => {
         ]
     } );
 
-    function handleOverflow () {
-        console.log("HELLO");
-    }
-
-    const Body = Generator.Content( users, {
+    const Content = Generator.Content( repositories, {
         isChecked: isCheck,
         handleCheck: handleCheck,
         cells: [
@@ -128,28 +156,18 @@ export const Table = ( properties: Component.properties ) => {
         ]
     } );
 
-    const Pager = Generator.Pager( {
-        cells: [
-            { header: "" },
-            { header: "-" },
-            { header: "-" },
-            { header: "-" },
-            { header: "-" },
-            { header: "-" }
-        ]
-    } );
-
-    return (
+    return ( loading ) ? null : (
         <>
             <Tabular className={ classes } id={ Identifier } toolbar={ Toolbar }>
                 { Headers }
-                { Body }
+                { Content }
                 { Pager }
             </Tabular>
-            <Pagination total={ [ total, setTotal ]} selected={isCheck.length} />
+            <Pagination total={ [ total, setTotal ] } selected={ isCheck.length }/>
         </>
     );
 };
+
 
 module Component {
     interface Element extends React.HTMLAttributes<HTMLTableElement> {
